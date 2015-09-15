@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+		 
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>formhistory@yahoo.com</em:id>
+		<em:version>1.4.0.4.1-signed</em:version>
+		<em:type>2</em:type>
+		<!-- Unpack false will break reading install.rdf in FhcRdfExtensionHandler.js -->
+		<em:unpack>true</em:unpack>
+		
+		<!-- Target Application this extension can install into. -->
+		<em:targetApplication>
+			<!-- Firefox -->
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>22.0</em:minVersion>
+				<em:maxVersion>41.0</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		<em:targetApplication>
+			<!-- SeaMonkey -->
+			<Description>
+				<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+				<em:minVersion>2.19</em:minVersion>
+				<em:maxVersion>2.38</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		<!-- Flock (version 3.* based on google chrome) -->
+		<em:targetApplication>
+			<Description>
+				<em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
+				<em:minVersion>2.*.*</em:minVersion>
+				<em:maxVersion>2.*.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+
+		<!-- if no locale match, revert to these defaults (en-US) (keep before Localized MetaData) -->
+		<em:name>Form History Control</em:name>
+		<em:description>Manage Form History (view, edit, delete, clean-up, export/import)</em:description>
+
+		<!-- Localized MetaData -->
+		<em:localized>
+			<Description>
+				<em:locale>nl</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Onderhoud de formulier historie entries (inzien, verwijderen, aanpassen, exporteren/importeren)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>cs</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Správa historie formulářů (zobrazení, úprava, mazání, čištění, export/import)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>da</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Håndter formularhistorik (vis, rediger, slet, ryd op, eksporter/importer)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>de</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Formulareinträge verwalten (Anzeigen, Bearbeiten, Löschen, bereinigen, exportieren/importieren)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>es-ES</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Administrar Historial de formularios (ver, editar, eliminar, borrar selectivamente, exportar/importar)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>fr</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Gestion de l'historique de formulaire (affichage, édition, suppression, nettoyage, export/import)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>pt-BR</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Gerencia o histórico de formulários (visualiza, edita, apaga, limpa, exporta/importa)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>ru</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Управление записями истории форм (просмотр, редактирование, удаление, экспорт/импорт)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>sv-SE</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Hantera formulärhistorik (visa, redigera, ta bort, sanera, exportera/importera)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>tr</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Form Geçmişi Düzenleme (göster, düzenle, sil, temizle, içe/dışa aktar)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>zh-CN</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>管理表单历史（查看、编辑、删除、清理、导入/导出）</em:description>
+			</Description>
+		</em:localized>
+
+		<!-- UNFINISHED LOCALES WITH DESCRIPTION -->
+		<em:localized>
+			<Description>
+				<em:locale>bg-BG</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Управление на Формата за историята (преглннд, редактирае, изтриване, почистване, изнасяне/внасяне)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>hu</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Mezőkbe írt szövegek kezelése (megtekintés, szerkesztés, törlés, exportálás/importálás)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>it</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Gestione della cronologia moduli (visualizzazione, modifica, cancellazione, pulizia, esportazione, importazione)</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>sk-SK</em:locale>
+				<em:name>Form History Control</em:name>
+				<em:description>Spravovanie údajov histórie formulárov (zobraziť, upraviť, vymazať, exportovať/importovať)</em:description>
+			</Description>
+		</em:localized>
+		
+	<!-- UNFINISHED DESCRIPTION LOCALES
+	-->
+
+		<!-- Creator -->
+		<em:creator>Stephan Mahieu</em:creator>
+		<em:homepageURL>http://www.formhistory.blogspot.com</em:homepageURL>
+		<!-- Contributors -->
+		<em:contributor>Mark James [Menu-icons][http://www.famfamfam.com/lab/icons/silk/]</em:contributor>
+		<em:contributor>BabelZilla team [www.babelzilla.org][http://www.babelzilla.org]</em:contributor>
+		<em:translator>Stanislav Horáček [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=14422] (cs)</em:translator>
+		<em:translator>Jørgen [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=7215] (da)</em:translator>
+		<em:translator>HorstS [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=12281] (de)</em:translator>
+		<em:translator>Stephan Mahieu [Home][http://www.formhistory.blogspot.com] (en-US)</em:translator>
+		<em:translator>urko [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=247] (es-ES)</em:translator>
+		<em:translator>Goofy [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=13] (fr)</em:translator>
+		<em:translator>Jojaba [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=155] (fr)</em:translator>
+		<em:translator>nico@nc [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=3331] (fr)</em:translator>
+		<em:translator>Stephan Mahieu [Home][http://www.formhistory.blogspot.com] (nl)</em:translator>
+		<em:translator>Marcelo Ghelman [ghelman.net][http://ghelman.net/] (pt-BR)</em:translator>
+		<em:translator>Headly [Mozilla user][https://addons.mozilla.org/firefox/user/Headly/] (ru)</em:translator>
+		<em:translator>Sinan Kaan Yerli [skyerli.org][http://skyerli.org] (tr)</em:translator>
+		<em:translator>fang5566 [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=353] (zh-CN)</em:translator>
+		<em:translator>techlivezheng [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=17904] (zh-CN)</em:translator>
+
+<!-- unfinished contributions - - >
+		<em:translator>ExaFlop [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=11291] (bg-BG)</em:translator>
+		<em:translator>Gusztin Rudolf [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=12288] (hu)</em:translator>
+		<em:translator>Underpass [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=1046] (it)</em:translator>
+		<em:translator>Jozef Gaal [www.mayday.sk][www.mayday.sk] (sk-SK)</em:translator>
+		<em:translator>Mikael Hiort af Ornäs [BabelZilla][http://www.babelzilla.org/forum/index.php?showuser=12983] (sv-SE)</em:translator>
+-->
+
+		<!-- Front End Integration Hooks (used by Extension Manager)-->
+		<em:optionsURL>chrome://formhistory/content/FhcPreferences.xul</em:optionsURL>
+		<em:aboutURL>chrome://formhistory/content/AboutFHC.xul</em:aboutURL>
+		<em:iconURL>chrome://formhistory/skin/fh_icon_big.png</em:iconURL>
+	</Description>
+</RDF>

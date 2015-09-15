@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="exportCSVDialog"
+        title="&fhexportdlg.title;"
+        buttons="cancel,accept"
+        buttonlabelaccept="&fhexportdlg.button.export;"
+        ondialogaccept="return FhcExportCSVDialog.onOkay();"
+        onload="FhcExportCSVDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcExportCSVDialog.js"/>
+
+  <vbox class="box-padded">
+    <description id="descriptionExport" class="description">&fhexportcsvdlg.description;:</description>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <radiogroup id="historyRadiogroup" orient="horizontal">
+            <radio id="allhist" label="&fhimportexportdlg.radio.entries.all;" selected="true"/>
+            <radio id="selectedhist" label="&fhimportexportdlg.radio.entries.selected;"/>
+            <radio id="searchhist" label="&fhimportexportdlg.radio.entries.search;"/>
+          </radiogroup>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <spacer flex="1" style="height: 16px;"/>
+        </row>
+        <row>
+          <hbox>
+            <vbox style="margin-left: 2px">
+              <image style="width: 16px; height: 16px" flex="0"
+                    src="chrome://formhistory/skin/warning16.png"
+                    tooltiptext="&fhexportcsvdlg.alert;"/>
+              <spacer flex="1"/>
+            </vbox>
+            <description style="width: 450px; margin-top: 5px; margin-left: 2px;"
+                        tooltiptext="&fhexportcsvdlg.alert;">
+                        &fhexportcsvdlg.alert;
+            </description>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+
+  </vbox>
+</dialog>

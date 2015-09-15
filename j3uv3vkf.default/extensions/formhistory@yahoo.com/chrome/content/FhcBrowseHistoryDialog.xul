@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/places.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="browsehistoryDialog"
+        title="&fhbrowsehistorydlg.windowtitle;"
+        buttons="accept"
+        style="width:48em; height:40em"
+        onload="FhcBrowseHistoryDialog.init();"
+        onunload="FhcBrowseHistoryDialog.destroy()"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcBrowseHistoryDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDateHandler.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js"/>
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle" src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <vbox class="box-padded" flex="1">
+    
+    <hbox class="buttonrow" flex="0">
+      <button label="+ &fhbrowsehistorydlg.older.label;" oncommand="FhcBrowseHistoryDialog.getOlder(true)"/>
+      <button label="+ &fhbrowsehistorydlg.newer.label;" oncommand="FhcBrowseHistoryDialog.getNewer()"/>
+
+      <!-- navigation: does not work 
+      <button label="&lt;&lt;" oncommand=""/>
+      <button label="&browsehistorywindow.report.gocurrent;" oncommand="FhcBrowseHistoryDialog.scrollIntoView('current')"/>
+      <button label="&gt;&gt;" oncommand=""/>
+      -->
+      <spacer flex="1"/>
+      <button id="titleButton" label="&browsehistorywindow.report.showtitle;"
+              type="checkbox" checked="true"
+              oncommand="FhcBrowseHistoryDialog.toggleRows(this, 'title')"/>
+      <button id="hostButton" label="&browsehistorywindow.report.showhost;"
+              type="checkbox" checked="true"
+              oncommand="FhcBrowseHistoryDialog.toggleRows(this, 'host')"/>
+      <button id="urlButton" label="&browsehistorywindow.report.showurl;"
+              type="checkbox"
+              oncommand="FhcBrowseHistoryDialog.toggleRows(this, 'url')"/>
+    </hbox>
+    
+    <scrollbox id="content" flex="1" orient="vertical">
+      <vbox id="newer"/>
+      <vbox id="current" class="box current">
+        <label id="datetime" class="datetime"/>
+        <grid>
+          <columns>
+            <column/>
+            <column/>
+          </columns>
+          <rows>
+            <row>
+              <label id="fieldnamelabel" class="field" value="&browsehistorywindow.report.fieldnamelabel;"/>
+              <label id="fieldname" class="value"/>
+            </row>
+            <row>
+              <label id="valuelabel" class="field" value="&browsehistorywindow.report.valuelabel;"/>
+              <label id="fieldvalue" class="value"/>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+      <vbox id="older"/>
+    </scrollbox>
+
+    <!-- hidden template -->
+    <vbox id="placetemplate" hidden="true">
+      <hbox>
+        <label name="datetime" class="datetime" value="empty"/>
+        <label class="fuzzyage" value="empty"/>
+      </hbox>
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row class="titlerow">
+            <label id="titlelabel" class="place" value="&browsehistorywindow.report.titlelabel;"/>
+            <label class="value placetitle"/>
+          </row>
+          <row class="hostrow">
+            <label id="hostlabel" class="place" value="&browsehistorywindow.report.hostlabel;"/>
+            <label class="value placehost"/>
+          </row>
+          <row class="urlrow">
+            <label id="urllabel" class="place" value="&browsehistorywindow.report.urllabel;"/>
+            <label class="value placeurl"/>
+          </row>
+        </rows>
+      </grid>
+    </vbox>
+    
+  </vbox>
+</dialog>

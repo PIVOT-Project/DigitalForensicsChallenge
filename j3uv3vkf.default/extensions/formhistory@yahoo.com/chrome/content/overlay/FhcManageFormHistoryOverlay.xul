@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<overlay id="FhcManageFormHistoryOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://formhistory/content/overlay/FhcManageFormHistoryOverlay.js" />
+  
+  <!-- script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" / -->
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+</overlay>

@@ -1,0 +1,40 @@
+/* Default tree skin, suitable for standard OS color theme */
+treechildren::-moz-tree-row(CustomDefault) {
+  background-color: #F0F0F0;
+}
+treechildren::-moz-tree-row(CustomDefault, odd) {
+  background-color: #F6F6F6;
+}
+treechildren::-moz-tree-row(CustomDefault, selected) {
+  background-color: #C0C0C0;
+}
+treechildren::-moz-tree-row(CustomDefault, odd, selected) {
+  background-color: #BABABA;
+}
+treechildren::-moz-tree-row(CustomDefault, hover) {
+  background-color: #D3E8ED;
+}
+treechildren::-moz-tree-row(CustomDefault, hover, selected) {
+  background-color: #8AA8B8;
+}
+
+
+/* Dark tree skin, suitable for dark (light text on dark BG) OS theme */
+treechildren::-moz-tree-row(CustomDark) {
+  background-color: #515151;
+}
+treechildren::-moz-tree-row(CustomDark, odd) {
+  background-color: #565656;
+}
+treechildren::-moz-tree-row(CustomDark, selected) {
+  background-color: #808080;
+}
+treechildren::-moz-tree-row(CustomDark, odd, selected) {
+  background-color: #7A7A7A;
+}
+treechildren::-moz-tree-row(CustomDark, hover) {
+  background-color: #63787D;
+}
+treechildren::-moz-tree-row(CustomDark, hover, selected) {
+  background-color: #6A8898;
+}

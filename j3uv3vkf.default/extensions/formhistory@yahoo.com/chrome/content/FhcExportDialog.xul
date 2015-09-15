@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="exportDialog"
+        title="&fhexportdlg.title;"
+        buttons="cancel,accept"
+        buttonlabelaccept="&fhexportdlg.button.export;"
+        ondialogaccept="return FhcExportDialog.onOkay();"
+        onload="FhcExportDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcExportDialog.js"/>
+
+  <hbox>
+    <label id="errorMessageNoSelection" hidden="true" class="errormessage"
+           value="&fhexportdlg.label.exporterrornone;"/>
+    <label value=""/>
+  </hbox>
+  
+  <vbox class="box-padded">
+    <description id="descriptionExport" class="description">&fhexportdlg.description;:</description>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="history" label="&fhimportexportdlg.checkbox.entries;" oncommand="FhcExportDialog.setChoices()" persist="checked"/>
+          <radiogroup id="historyRadiogroup" orient="horizontal" disabled="true">
+            <radio id="allhist" label="&fhimportexportdlg.radio.entries.all;" selected="true"/>
+            <radio id="selectedhist" label="&fhimportexportdlg.radio.entries.selected;"/>
+            <radio id="searchhist" label="&fhimportexportdlg.radio.entries.search;"/>
+          </radiogroup>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="multiline" label="&fhimportexportdlg.checkbox.editorhistory;" oncommand="FhcExportDialog.setChoices()" persist="checked"/>
+          <radiogroup id="multilineRadiogroup" orient="horizontal" disabled="true">
+            <radio id="allmulti" label="&fhimportexportdlg.radio.entries.all;" selected="true"/>
+            <radio id="selectedmulti" label="&fhimportexportdlg.radio.entries.selected;"/>
+            <radio id="searchmulti" label="&fhimportexportdlg.radio.entries.search;"/>
+          </radiogroup>
+        </row>
+        <row>
+          <checkbox id="cfgmulti" label="&fhimportexportdlg.checkbox.editorhistoryprefs;" persist="checked"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="cfgcustsave" label="&fhimportexportdlg.checkbox.customsaveprefs;" persist="checked"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="regexp" label="&fhimportexportdlg.checkbox.regularexpressions;" oncommand="FhcExportDialog.setChoices()" persist="checked"/>
+          <!-- radiogroup id="regexpRadiogroup" orient="horizontal" disabled="true">
+            <radio id="allregexp" label="All" selected="true"/>
+            <radio id="customregexp" label="User defined"/>
+            <radio id="builtinregexp" label="Built in"/>
+          </radiogroup -->
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="keys" label="&fhimportexportdlg.checkbox.keybordshortcuts;" oncommand="FhcExportDialog.setChoices()" persist="checked"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row>
+          <checkbox id="cleanup" label="&fhimportexportdlg.checkbox.cleanupconfig;" oncommand="FhcExportDialog.setChoices()" persist="checked"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+      </rows>
+    </grid>
+
+  </vbox>
+</dialog>

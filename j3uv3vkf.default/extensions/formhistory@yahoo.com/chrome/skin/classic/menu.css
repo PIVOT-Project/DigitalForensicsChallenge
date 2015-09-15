@@ -1,0 +1,143 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#formhistctrl-toolbarbutton {
+  list-style-image: url('fh_icon_24.png');
+}
+#formhistctrl-toolbarbutton[savestate='nosave'] {
+  list-style-image: url('fh_icon_24_nosave.png');
+}
+#formhistctrl-toolbarbutton[savestate='dosave'] {
+  list-style-image: url('fh_icon_24_dosave.png');
+}
+#formhistctrl-toolbarbutton[savestate='neversave'] {
+  list-style-image: url('fh_icon_24_neversave.png');
+}
+
+/* Icons (32x32) for menu panel (Australis) */
+#formhistctrl-toolbarbutton[cui-areatype="menu-panel"] {
+  list-style-image: url('fh_icon_32.png');
+  -moz-image-region: rect(32px 32px 64px 0px);
+}
+#formhistctrl-toolbarbutton[cui-areatype="menu-panel"][savestate='nosave'] {
+  list-style-image: url('fh_icon_32_nosave.png');
+  -moz-image-region: rect(32px 32px 64px 0px);
+}
+#formhistctrl-toolbarbutton[cui-areatype="menu-panel"][savestate='dosave'] {
+  list-style-image: url('fh_icon_32_dosave.png');
+  -moz-image-region: rect(32px 32px 64px 0px);
+}
+#formhistctrl-toolbarbutton[cui-areatype="menu-panel"][savestate='neversave']{
+  list-style-image: url('fh_icon_32_neversave.png');
+  -moz-image-region: rect(32px 32px 64px 0px);
+}
+
+/* Gray icons (32x32) for customization palette (Australis) */
+toolbarpaletteitem[place="palette"] > #formhistctrl-toolbarbutton {
+  list-style-image: url('fh_icon_32.png');
+  -moz-image-region: rect(0px 32px 32px 0px);
+}
+toolbarpaletteitem[place="palette"] > #formhistctrl-toolbarbutton[savestate='nosave'] {
+  list-style-image: url('fh_icon_32_nosave.png');
+  -moz-image-region: rect(0px 32px 32px 0px);
+}
+toolbarpaletteitem[place="palette"] > #formhistctrl-toolbarbutton[savestate='dosave'] {
+  list-style-image: url('fh_icon_32_dosave.png');
+  -moz-image-region: rect(0px 32px 32px 0px);
+}
+toolbarpaletteitem[place="palette"] > #formhistctrl-toolbarbutton[savestate='neversave']{
+  list-style-image: url('fh_icon_32_neversave.png');
+  -moz-image-region: rect(0px 32px 32px 0px);
+}
+
+toolbarpaletteitem[place="palette"] > #formhistctrl-toolbarbutton dropmarker {
+  display: none !important;
+}
+
+toolbar[iconsize="small"] #formhistctrl-toolbarbutton {
+  list-style-image: url('fh_icon.png');
+}
+toolbar[iconsize="small"] #formhistctrl-toolbarbutton[savestate='nosave'] {
+  list-style-image: url('fh_icon_nosave.png');
+}
+toolbar[iconsize="small"] #formhistctrl-toolbarbutton[savestate='dosave'] {
+  list-style-image: url('fh_icon_dosave.png');
+}
+toolbar[iconsize="small"] #formhistctrl-toolbarbutton[savestate='neversave'] {
+  list-style-image: url('fh_icon_neversave.png');
+}
+
+/* SeaMonkey expects the icon to be rather large, add margin */
+#mail-toolbox #formhistctrl-toolbarbutton .toolbarbutton-icon {
+  margin-top: 5px;
+}
+
+
+#formhistctrl-statusbarmenu {
+  list-style-image: url('fh_icon.png');
+}
+#formhistctrl-statusbarmenu[savestate='nosave'] {
+  list-style-image: url('fh_icon_nosave.png');
+}
+#formhistctrl-statusbarmenu[savestate='dosave'] {
+  list-style-image: url('fh_icon_dosave.png');
+}
+#formhistctrl-statusbarmenu[savestate='neversave'] {
+  list-style-image: url('fh_icon_neversave.png');
+}
+
+
+.fh_menu_formhistory         {list-style-image: url('fh_icon.png')}
+
+.fh_menuitem_manager         {list-style-image: url('manage.png')}
+
+.fh_menuitem_deletethisvalue {list-style-image: url('delete.png')}
+.fh_menuitem_deletethisfield {list-style-image: url('delete.png')}
+.fh_menuitem_managethisfield {list-style-image: url('edit.png')}
+.fh_menuitem_restorethisfield{list-style-image: url('restore.png')}
+
+.fh_menuitem_fillmostrecent  {list-style-image: url('filltextfield.png')}
+.fh_menuitem_fillmostused    {list-style-image: url('filltextfield.png')}
+.fh_menuitem_clearfields     {list-style-image: url('emptytextfield.png')}
+
+.fh_menuitem_showfields      {list-style-image: url('showfields.png')}
+.fh_menuitem_savefield       {list-style-image: url('disk.png')}
+.fh_menuitem_savepage        {list-style-image: url('disk_multiple.png')}
+
+.fh_menuitem_cleanupnow      {list-style-image: url('delete.png')}
+
+.fh_menuitem_insert          {list-style-image: url('insert.png')}
+.fh_menuitem_edit            {list-style-image: url('edit.png')}
+.fh_menuitem_delete          {list-style-image: url('delete.png')}
+.fh_menuitem_deletename      {list-style-image: url('deleteallwith.png')}
+.fh_menuitem_deletevalue     {list-style-image: url('deleteallwith.png')}
+
+.fh_menuitem_copyclip        {list-style-image: url('copy.png')}
+
+.fh_menuitem_selectall       {list-style-image: url('selectall.png')}
+.fh_menuitem_selectnone      {list-style-image: url('selectnone.png')}
+.fh_menuitem_selectinvert    {list-style-image: url('selectinvert.png')}
+
+.fh_menuitem_addcleanup      {list-style-image: url('insert.png')}
+
+.fh_menuitem_reload          {list-style-image: url('refresh.png')}
+
+.fh_menuitem_options         {list-style-image: url('options.png')}
+
+.fh_menuitem_help            {list-style-image: url('help.png')}
+.fh_menuitem_releasenotes    {list-style-image: url('releasenotes.png')}
+.fh_menuitem_about           {list-style-image: url('about.png')}
+
+.fh_menuitem_export          {list-style-image: url('export.png')}
+.fh_menuitem_import          {list-style-image: url('import.png')}
+
+.fh_menuitem_close           {list-style-image: url('close.png')}
+
+.fh_menuitem_regexp_title    {list-style-image: url('regexp.png')}
+.fh_menuitem_manageregexp    {list-style-image: url('options.png')}
+.fh_menuitem_addregexp       {list-style-image: url('insert.png')}
+
+.fh_menuitem_link            {list-style-image: url('link.png')}
+.fh_menuitem_copy            {list-style-image: url('copy.png')}
+
+.fh_submenu                  {list-style-image: url('submenu.png')}

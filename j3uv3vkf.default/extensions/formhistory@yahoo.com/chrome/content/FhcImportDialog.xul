@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="importDialog"
+        title="&fhimportdlg.title;"
+        style="width: 40em"
+        buttons="cancel,accept"
+        buttonlabelaccept="&fhimportdlg.button.import;"
+        ondialogaccept="return FhcImportDialog.onOkay();"
+        onload="FhcImportDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcImportDialog.js"/>
+
+  <hbox>
+    <label id="errorMessageNoSelection" hidden="true" class="errormessage"
+           value="&fhimportdlg.label.importerrornone;"/>
+    <label value=""/>
+  </hbox>
+  
+  <vbox class="box-padded">
+    <description id="descriptionExport" class="description">&fhimportdlg.description;:</description>
+
+    <grid>
+      <columns>
+        <column/>
+        <column/>
+        <column/>
+      </columns>
+      <rows>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="history" label="&fhimportexportdlg.checkbox.entries;" persist="checked"/>
+          <label id="historyItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="multiline" label="&fhimportexportdlg.checkbox.editorhistory;" persist="checked"/>
+          <label id="multilineItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <row align="baseline">
+          <checkbox id="multilineprefs" label="&fhimportexportdlg.checkbox.editorhistoryprefs;" persist="checked"/>
+          <label id="multilineprefsItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="custsaveprefs" label="&fhimportexportdlg.checkbox.customsaveprefs;" persist="checked"/>
+          <label id="custsaveprefsItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>        
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="regexp" label="&fhimportexportdlg.checkbox.regularexpressions;" persist="checked"/>
+          <label id="regexpItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="keys" label="&fhimportexportdlg.checkbox.keybordshortcuts;" persist="checked"/>
+          <label id="keysItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <checkbox id="cleanup" label="&fhimportexportdlg.checkbox.cleanupconfig;" persist="checked"/>
+          <label id="cleanupItems" value="" style="text-align: right"/>
+          <label value="&fhimportexportdlg.label.items;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+      </rows>
+    </grid>
+
+  </vbox>
+</dialog>

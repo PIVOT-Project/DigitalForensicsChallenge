@@ -1,0 +1,411 @@
+<!ENTITY fhwin.window.title "Form Geçmişi Denetimi">
+<!ENTITY historywindow.notification.moreinfo "(daha fazlası)">
+<!ENTITY fhwin.historytab.formhistory "Geçmişi Göster">
+<!ENTITY fhwin.historytab.formhistory.accesskey "w">
+<!ENTITY fhwin.historytab.cleanup "Temizle">
+<!ENTITY fhwin.historytab.cleanup.accesskey "U">
+<!ENTITY fhwin.historytab.multiline "Düzenleyici Geçmişi">
+<!ENTITY fhwin.filter.label "Ara">
+<!ENTITY fhwin.filter.tooltip "Alanadı ya da değeri girilen arama-metniyle eşleşen geçmiş öğeleri ara">
+<!ENTITY fhwin.filter.accesskey "s">
+<!ENTITY fhwin.filter.advancedsearch "İleri Arama">
+<!ENTITY fhwin.filter.simplesearch "Basit Arama">
+<!ENTITY fhwin.advancedfilter.fromto.from.label "buradan">
+<!ENTITY fhwin.advancedfilter.fromto.to.label "buraya">
+<!ENTITY fhwin.advancedfilter.enterdatetime.tooltip "Tarih ve zaman girin">
+<!ENTITY fhwin.advancedfilter.host.label "Sunucu">
+<!ENTITY fhwin.menuitem.regexpsearch.title "Düzenli Deyimler">
+<!ENTITY fhwin.menuitem.regexpsearch.tooltip "Öntanımlanmış Düzenli Deyimler arasından seç">
+<!ENTITY fhwin.menuitem.regexpsearch.manage "Düzenle...">
+<!ENTITY fhwin.menuitem.urlmenu.tooltip "Bağlantılar menüsü">
+<!ENTITY fhwin.menuitem.urlmenu.openurl "Bağlantı Aç">
+<!ENTITY fhwin.menuitem.urlmenu.openurlnoparam "Parametresiz Bağlantı Aç">
+<!ENTITY fhwin.menuitem.urlmenu.openurlhost "Sunucuyu Aç">
+<!ENTITY fhwin.menuitem.urlmenu.openurlcopy "Bağlantı konumunu kopyala">
+<!ENTITY fhwin.checkbox.matchcase.label "Büyük/Küçük eşle">
+<!ENTITY fhwin.checkbox.matchcase.accesskey "m">
+<!ENTITY fhwin.treeview.label "Bu alanlardaki Form Geçmişi öğeleri bilgisayarınızda saklanıyor">
+<!ENTITY fhwin.treeview.column.description.label "Tanım">
+<!ENTITY fhwin.treeview.column.name.label "Alan-adı">
+<!ENTITY fhwin.treeview.column.value.label "Değer">
+<!ENTITY fhwin.treeview.column.used.label "Kullanım Sayısı">
+<!ENTITY fhwin.treeview.column.first.label "İlk Kullanım">
+<!ENTITY fhwin.treeview.column.last.label "Son Kullanım">
+<!ENTITY fhwin.treeview.column.agefirst.label "İlk Kullanım Yaşı">
+<!ENTITY fhwin.treeview.column.agelast.label "Son Kullanım Yaşı">
+<!ENTITY fhwin.treeview.column.guessed.tooltip "çapraz referansıyla ağ gezgini-geçmişinde toplanan bilgi, büyük olasılıkla yanlış">
+<!ENTITY fhwin.treeview.column.guessedhost.label "Sunucu (en iyi öngörü)">
+<!ENTITY fhwin.treeview.column.guessedurl.label "URL (en iyi öngörü)">
+<!ENTITY fhwin.treeview.column.guessedpagetitle.label "Sayfa başlığı (en iyi öngörü)">
+<!ENTITY fhwin.treeview.column.index.label "Dizin">
+<!ENTITY fhwin.treeview.cleanuppreview.label "Temizleme kriteriyle eşleşen öğeleri önizle">
+<!ENTITY fhwin.treeview.closecleanuppreview.tooltip "Önizlemeyi kapat">
+<!ENTITY fhwin.checkbox.searchpageonly.label "Yalnızca seçili sayfayı göster">
+<!ENTITY fhwin.checkbox.searchpageonly.tooltip "Yalnızca, gösterilen seçili HTML sayfasının form-alanlarıyla eşleşen FormGeçmişi girdilerini göster">
+<!ENTITY fhwin.checkbox.searchpageonly.accesskey "p">
+<!ENTITY fhwin.checkbox.searchfieldonly.label "Yalnızca seçili alanı göster">
+<!ENTITY fhwin.checkbox.searchfieldonly.tooltip "Yalnızca, odaklanmış seçili form-alanı adıyla eşleşen FormGeçmişi girdilerini göster">
+<!ENTITY fhwin.checkbox.searchfieldonly.accesskey "n">
+<!ENTITY fhwin.checkbox.searchcleanuponly.label "Yalnızca temizleme kriteriyle eşleşenleri göster">
+<!ENTITY fhwin.checkbox.searchcleanuponly.tooltip "Yalnızca temizlik kriteriyle eşleşen formgeçmişi girdilerini göster">
+<!ENTITY fhwin.checkbox.searchcleanuponly.accesskey "o">
+<!ENTITY fhwin.button.clear.label "Temizle">
+<!ENTITY fhwin.button.clear.accesskey "I">
+<!ENTITY fhwin.button.remove.label "Kaldır">
+<!ENTITY fhwin.button.remove.accesskey "r">
+<!ENTITY fhwin.button.removeall.label "Hepsini Kaldır">
+<!ENTITY fhwin.button.removeall.accesskey "a">
+<!ENTITY fhwin.button.cleanup.label "Temizlik">
+<!ENTITY fhwin.button.cleanup.accesskey "a">
+<!ENTITY fhwin.button.add.label "Ekle">
+<!ENTITY fhwin.button.add.accesskey "i">
+<!ENTITY fhwin.button.edit.label "Düzenle">
+<!ENTITY fhwin.button.edit.accesskey "d">
+<!ENTITY fhwin.button.view.label "Görünüm">
+<!ENTITY fhwin.button.closepreview.label "Önizlemeyi Kapat">
+<!ENTITY fhwin.button.close.label "Kapat">
+<!ENTITY fhwin.button.close.accesskey "c">
+<!ENTITY fhwin.menu.file.label "Dosya">
+<!ENTITY fhwin.menu.file.accesskey "f">
+<!ENTITY fhwin.menu.edit.label "Düzenle">
+<!ENTITY fhwin.menu.edit.accesskey "e">
+<!ENTITY fhwin.menu.view.label "Görünüm">
+<!ENTITY fhwin.menu.view.accesskey "v">
+<!ENTITY fhwin.menu.tools.label "Araçlar">
+<!ENTITY fhwin.menu.tools.accesskey "t">
+<!ENTITY fhwin.menu.help.label "Yardım">
+<!ENTITY fhwin.menu.help.accesskey "h">
+<!ENTITY fhwin.menuitem.insert.label "Yeni Ekle">
+<!ENTITY fhwin.menuitem.insert.accelkey "N">
+<!ENTITY fhwin.menuitem.edit.label "Düzenle">
+<!ENTITY fhwin.menuitem.edit.accelkey "E">
+<!ENTITY fhwin.menuitem.delete.label "Sil">
+<!ENTITY fhwin.menuitem.deleteallname.label "Aynı adlıların tümünü sil">
+<!ENTITY fhwin.menuitem.deleteallvalue.label "Aynı değerlilerin tümünü sil">
+<!ENTITY fhwin.menuitem.selectall.label "Tümünü Seç">
+<!ENTITY fhwin.menuitem.selectall.accelkey "A">
+<!ENTITY fhwin.menuitem.selectnone.label "Seçimi Kaldır">
+<!ENTITY fhwin.menuitem.selectinvert.label "Seçimi Tersine Çevir">
+<!ENTITY fhwin.menuitem.addcleanup.label "Temizlik kriteri olarak ekle">
+<!ENTITY fhwin.menuitem.addprotect.label "Koruma kriteri olarak ekle">
+<!ENTITY fhwin.menuitem.exportmanager.label "Dışa Aktar">
+<!ENTITY fhwin.menuitem.importmanager.label "İçe Aktar">
+<!ENTITY fhwin.menuitem.exportcsv.label "Tüm Geçmişi CSV biçiminde Dışa Aktar">
+<!ENTITY fhwin.menuitem.reloadview.label "Yeniden Yükle">
+<!ENTITY fhwin.menuitem.close.label "Kapat">
+<!ENTITY fhwin.menuitem.options.label "Seçenekler">
+<!ENTITY fhwin.menuitem.options.accelkey "O">
+<!ENTITY fhwin.menuitem.help.label "İçerik Yardımı">
+<!ENTITY fhwin.menuitem.releasenotes.label "Yazılım Sürümü Notları">
+<!ENTITY fhwin.menuitem.about.label "Form History Control Hakkında">
+<!ENTITY fhwin.cleanup.menuitem.exportcfg.label "Düzenlemeleri Dışa Aktar">
+<!ENTITY fhwin.cleanup.menuitem.importcfg.label "Düzenlemeleri İçe Aktar">
+<!ENTITY fhwin.cleanup.label "İstenmeyen formgeçmişi girdilerini kaldırma kriteri">
+<!ENTITY fhwin.cleanup.showoptions "Seçenekleri göster">
+<!ENTITY fhwin.cleanup.hideoptions "Seçenekleri sakla">
+<!ENTITY fhwin.cleanup.timeusage.group.caption "Zaman/Kullanım kriteri">
+<!ENTITY fhwin.cleanup.checkbox.daysused.label "Geçmişte kullanılmayan tüm Form Geçmişi girdilerini kaldır">
+<!ENTITY fhwin.cleanup.checkbox.daysused.label2 "gün">
+<!ENTITY fhwin.cleanup.checkbox.daysused.accesskey "m">
+<!ENTITY fhwin.cleanup.checkbox.timesused.label "Tüm Form Geçmişi girdilerinden bu kadardan az kullanılanları çıkart:">
+<!ENTITY fhwin.cleanup.checkbox.timesused.label2 "kez">
+<!ENTITY fhwin.cleanup.checkbox.timesused.accesskey "o">
+<!ENTITY fhwin.cleanup.automaticcleanup.group.caption "Otomatik Temizlik">
+<!ENTITY fhwin.cleanup.namevalue.group.caption "Ad/Değer kriteri">
+<!ENTITY fhwin.cleanup.tab.cleanup.label "Temizlik">
+<!ENTITY fhwin.cleanup.tab.cleanup.accesskey "I">
+<!ENTITY fhwin.cleanup.tab.protect.label "Asla Temizleme">
+<!ENTITY fhwin.cleanup.tab.protect.accesskey "N">
+<!ENTITY fhwin.cleanup.treeviewprotect.label "Ad/Değer ikilileriyle eşleşen Form Geçmişi girdilerini Asla Kaldırma">
+<!ENTITY fhwin.cleanup.treeview.label "Ad/Değer ikilileriyle eşleşen Form Geçmişi girdilerini Kaldır">
+<!ENTITY fhwin.cleanup.treeview.column.nameexact.label "Tam Ad">
+<!ENTITY fhwin.cleanup.treeview.column.namecase.label "Harfli Ad">
+<!ENTITY fhwin.cleanup.treeview.column.nameregexp.label "DüzenliDeyim Adı">
+<!ENTITY fhwin.cleanup.treeview.column.valueexact.label "Tam Değer">
+<!ENTITY fhwin.cleanup.treeview.column.valuecase.label "Harfli Değer">
+<!ENTITY fhwin.cleanup.treeview.column.valueregexp.label "DüzenliDeyim Değeri">
+<!ENTITY fhwin.cleanup.button.cleanupall.label "Eşleşen Tüm girdileri Temizle">
+<!ENTITY fhwin.cleanup.button.cleanupall.accesskey "A">
+<!ENTITY fhwin.cleanup.button.preview.label "Eşleşen girdileri önizle">
+<!ENTITY fhwin.cleanup.button.preview.accesskey "P">
+<!ENTITY fhwin.multiline.label "Otomatik kaydedilen düzenleme alanlarının yedeği">
+<!ENTITY fhwin.multiline.treeview.column.firstsaved.label "İlk Kaydedilen">
+<!ENTITY fhwin.multiline.treeview.column.agefirstsaved.label "İlk Kaydedilenin Yaşı">
+<!ENTITY fhwin.multiline.treeview.column.lastsaved.label "Son Kaydedilen">
+<!ENTITY fhwin.multiline.treeview.column.agelastsaved.label "Son Kaydedilenin Yaşı">
+<!ENTITY fhwin.multiline.treeview.column.fieldid.label "Alan No'su">
+<!ENTITY fhwin.multiline.treeview.column.fieldformid.label "Form No'su">
+<!ENTITY fhwin.multiline.treeview.column.fieldname.label "Alan-adı">
+<!ENTITY fhwin.multiline.treeview.column.content.label "İçerik">
+<!ENTITY fhwin.multiline.treeview.column.type.label "Tür">
+<!ENTITY fhwin.multiline.treeview.column.host.label "Sunucu">
+<!ENTITY fhwin.multiline.treeview.column.url.label "URL">
+<!ENTITY fhwin.multiline.checkbox.searchhostonly.label "Yalnızca güncel sunucuyu göster">
+<!ENTITY fhmnuovl.menu.main.manager.label "Form Geçmişi">
+<!ENTITY fhmnuovl.menuitem.manager.label "Form Geçmişi Denetimi">
+<!ENTITY fhmnuovl.menuitem.deletevaluethis.label "Bu alanın güncel değerini sil">
+<!ENTITY fhmnuovl.menuitem.deletethis.label "Bu alanın tüm geçmişini sil">
+<!ENTITY fhmnuovl.menuitem.restorethis.label "Düzenleme alanını geri getir">
+<!ENTITY fhmnuovl.menuitem.managethis.label "Bu alanın girdilerini düzenle">
+<!ENTITY fhmnuovl.menuitem.fillmostrecent.label "Alanları en güncel değerlerle doldur">
+<!ENTITY fhmnuovl.menuitem.fillmostused.label "Alanları en sık kullanılanlarla doldur">
+<!ENTITY fhmnuovl.menuitem.clearfields.label "Doldurulan alanları temizle">
+<!ENTITY fhmnuovl.menuitem.showformfields.label "Sayfadaki alanadlarını göster">
+<!ENTITY fhmnuovl.menuitem.savethisfield.label "Bu alandaki güncel değeri kaydet">
+<!ENTITY fhmnuovl.menuitem.savethispage.label "Tüm alanlardaki değerleri kaydet">
+<!ENTITY fhmnuovl.menuitem.cleanupnow.label "Form Geçmişini Şimdi Temizle">
+<!ENTITY fhmnuovl.menuitem.options.label "Seçenekler">
+<!ENTITY fhentrydlg.windowtitle "Formgeçmişini Düzenle">
+<!ENTITY fhentrydlg.edit.description "Var olan formgeçmişi girdisini düzenle">
+<!ENTITY fhentrydlg.editmultiple.description "Çoklu formgeçmişi girdilerini düzenle">
+<!ENTITY fhentrydlg.add.description "Yeni formgeçmişi girdisi ekle">
+<!ENTITY fhentrydlg.fieldname.label "Alanadı">
+<!ENTITY fhentrydlg.value.label "Değer">
+<!ENTITY fhentrydlg.timesused.label "Kaçkez kullanıldı">
+<!ENTITY fhentrydlg.firstused.label "İlk kullanım">
+<!ENTITY fhentrydlg.firstusedhistory.img.tooltip "Bu formalanı ilk gönderildiği zaman yakınındaki ağ gezgini geçmişini göster">
+<!ENTITY fhentrydlg.lastused.label "Son kullanım">
+<!ENTITY fhentrydlg.lastusedhistory.img.tooltip "Bu formalanı son gönderildiği zaman yakınındaki ağ gezgini geçmişini göster">
+<!ENTITY fhentrydlg.place.group.caption "Enson Uğranılan Sayfa">
+<!ENTITY fhentrydlg.pagetitle.label "Başlık">
+<!ENTITY fhentrydlg.host.label "Sunucu">
+<!ENTITY fhentrydlg.url.label "URL">
+<!ENTITY fhentrydlg.blankfielderror.label "Herhangi bir alanı boş bırakma">
+<!ENTITY fhentrydlg.existerror.label "Bu ad ve değer ile bir formgeçmişi maddesi var">
+<!ENTITY fhentrydlg.timesusederror.label "Kaçkez Kullanıldı için yalnızca sayısal değerlere izin verilir">
+<!ENTITY fhcriteriadlg.windowtitle "Temizlik Kriterini Düzenle">
+<!ENTITY fhcriteriadlg.edit.description "Var olan temizlik kriterini düzenle">
+<!ENTITY fhcriteriadlg.add.description "Yeni bir temizlik kriteri ekle">
+<!ENTITY fhcriteriapdlg.windowtitle "Koruma Kriterini Düzenle">
+<!ENTITY fhcriteriapdlg.edit.description "Var olan koruma kriterini düzenle">
+<!ENTITY fhcriteriapdlg.add.description "Yeni bir koruma kriteri ekle">
+<!ENTITY fhcriteriadlg.description.label "Tanım">
+<!ENTITY fhcriteriadlg.fieldname.label "Alanadı">
+<!ENTITY fhcriteriadlg.value.label "Değer">
+<!ENTITY fhcriteriadlg.matchexact.label "Tam Eşleştir">
+<!ENTITY fhcriteriadlg.matchcase.label "Harf duyarlı">
+<!ENTITY fhcriteriadlg.namevaluefieldsemptyerror.label "Alanadı ve Değer alanlarını boş bırakma">
+<!ENTITY fhcriteriadlg.existerror.label "Bu özelliklerde bir kriter zaten var">
+<!ENTITY fhcregexpdlg.windowtitle "Düzenli Deyimleri Yönet">
+<!ENTITY fhcregexpdlg.edit.description "Düzenli değimleri düzenle">
+<!ENTITY fhcregexpdlg.add.description "Düzenli deyim ekle">
+<!ENTITY fhcregexpdlg.description.label "Tanım">
+<!ENTITY fhcregexpdlg.category.label "Kategori">
+<!ENTITY fhcregexpdlg.regexp.label "Düzenli Deyim">
+<!ENTITY fhcregexpdlg.matchcase.label "Harf duyarlı">
+<!ENTITY fhcregexpdlg.usefor.label "Deyim bunun için kullan">
+<!ENTITY fhcregexpdlg.useforname.radiolabel "Alanadları">
+<!ENTITY fhcregexpdlg.useforvalue.radiolabel "Alandeğerleri">
+<!ENTITY fhcregexpdlg.useforboth.radiolabel "Herikisi">
+<!ENTITY fhcregexpdlg.emptyerror.label "Tanım ya da Düzenli Deyim alanlarını boş bırakma">
+<!ENTITY fhcregexpdlg.existerror.label "Bu özelliklerde bir deyim zaten var">
+<!ENTITY fhdatetimedlg.windowtitle "Tarih ve Zaman">
+<!ENTITY fhdatetimedlg.description "Tarih ve zamanı ayarlar">
+<!ENTITY fhdatetimedlg.date.label "Tarih">
+<!ENTITY fhdatetimedlg.time.label "Zaman">
+<!ENTITY fhdatetimedlg.setzerotime.tooltip "Zamanı 0:00:00'a ayarla">
+<!ENTITY fhbrowsehistorydlg.windowtitle "Form Alanı için Geçmişe Gözat">
+<!ENTITY fhbrowsehistorydlg.older.label "Eskisi">
+<!ENTITY fhbrowsehistorydlg.older.tooltip "Daha fazla eski geçmiş getir">
+<!ENTITY fhbrowsehistorydlg.newer.label "Yeni">
+<!ENTITY fhbrowsehistorydlg.newer.tooltip "Daha fazla yeni geçmiş getir">
+<!ENTITY fhcmultilinedlg.windowtitle "Kaydedilen düzenleme metni">
+<!ENTITY fhcmultilinedlg.button.copytoclipboard "Taşıma panosuna kopyala">
+<!ENTITY fhcmultilinedlg.viewtab.htmlview "HTML görünümü">
+<!ENTITY fhcmultilinedlg.viewtab.textview "Düz metin">
+<!ENTITY fhcmultilinedlg.button.showdetails "Ayrıntılar">
+<!ENTITY fhcmultilinedlg.button.hidedetails "Ayrıntıları sakla">
+<!ENTITY fhcmultilinedlg.checkbox.hideimages "Görüntüleri sakla">
+<!ENTITY fhcmultilinelistdlg.windowtitle "Dışlama Listesini Yönet">
+<!ENTITY fhcmultilinelistdlg.label.blacklist "Aşağıdaki sunucuların düzenleme alanı geçmişini hatırlama">
+<!ENTITY fhcmultilinelistdlg.label.whitelist "Yalnızca aşağıdaki sunucuların düzenleme alanı geçmişini hatırla">
+<!ENTITY fhcmultilinelistdlg.button.addcurrenthost "Güncel sunucuyu ekle">
+<!ENTITY fhcmanagefhclistdlg.windowtitle "Form Geçmişi Hatırlamayı Yönet">
+<!ENTITY fhcmanagefhclistdlg.label.blacklist "Sıralanan kriterlere uyan sayfaların form geçmişini hatırlama">
+<!ENTITY fhcmanagefhclistdlg.label.whitelist "Yalnızca sıralanan kriterlere uyan sayfaların form geçmişini hatırla">
+<!ENTITY fhcmanagefhclistdlg.treeview.column.page.label "Sayfa süzgeci">
+<!ENTITY fhcmanagefhclistdlg.button.addcurrentpage "Şu anki sayfayı ekle">
+<!ENTITY fhprefs.window.title "Form Geçmiş Denetimi Tercihleri">
+<!ENTITY fhprefs.prefpane.multiline.label "Düzenleme alanları">
+<!ENTITY fhprefs.multilineinfo.tooltip "Form History Control, bir sorun çıktığında güvenli kurtarma için siz yazdıkça düzenleme alanlarını güvenle kaydeder">
+<!ENTITY fhprefs.checkbox.multilineenable "Otomatik düzenleme alanlarının ve çoklu metin alanlarının otomatik yedeklemesini etkinleştir">
+<!ENTITY fhprefs.tab.multiline.configuration "Yapılandırma">
+<!ENTITY fhprefs.tab.multiline.exceptions "Dışlamalar">
+<!ENTITY fhprefs.tab.multiline.privacy "Gizlilik">
+<!ENTITY fhprefs.group.multilineversion.caption "Sürüm denetimi">
+<!ENTITY fhprefs.group.multilinecleanup.caption "Temizlik">
+<!ENTITY fhprefs.group.multilineexceptions.caption "Temizlik">
+<!ENTITY fhprefs.label.multilinesaveolder "Kaydedilen son sürün bu değerden daha eskiyse yeni bir sürüm kaydet:">
+<!ENTITY fhprefs.label.multilinesavelength "İçerik boyundaki değişiklik bu değerden daha çoksa yeni bir sürüm kaydet:">
+<!ENTITY fhprefs.label.multilinecleanup "Sürümler bu değerden daha eskiyse sil:">
+<!ENTITY fhprefs.multilinesavewarning.tooltip "Uyarı: düzenli temizlik yapmadan birçok sürüm kaydedilirse veritabanı boyu büyük çapta artacaktır!">
+<!ENTITY fhprefs.label.multilinelist.never "hiç">
+<!ENTITY fhprefs.label.multilinelist.minute "dakika">
+<!ENTITY fhprefs.label.multilinelist.minutes "dakika">
+<!ENTITY fhprefs.label.multilinelist.hour "saat">
+<!ENTITY fhprefs.label.multilinelist.hours "saat">
+<!ENTITY fhprefs.label.multilinelist.day "gün">
+<!ENTITY fhprefs.label.multilinelist.days "günler">
+<!ENTITY fhprefs.label.multilinelist.week "hafta">
+<!ENTITY fhprefs.label.multilinelist.weeks "haftalar">
+<!ENTITY fhprefs.label.multilinelist.month "ay">
+<!ENTITY fhprefs.label.multilinelist.months "aylar">
+<!ENTITY fhprefs.label.multilinelist.characters "karakterler">
+<!ENTITY fhprefs.radio.multilinenoexception "Dışlama yok">
+<!ENTITY fhprefs.radio.multilinewhitelist "Yalnızca sıralanan sunucular için etkinleştirildi">
+<!ENTITY fhprefs.radio.multilineblacklist "Sıralanan sunucular dışında her zaman etkin">
+<!ENTITY fhprefs.button.managelist "Dışlama listesini yönet">
+<!ENTITY fhprefs.checkbox.multilinesavealways "Yazarken, Özel Gezinme kipinde bile düzenleyici alanlarının yedeğini kaydet">
+<!ENTITY fhprefs.checkbox.multilinesanitizehtmlpreview "HTML önizlemesi için tüm görüntüleri otomatik indirme">
+<!ENTITY fhprefs.checkbox.multilinesaveencrypted "Veritabanındaki düzenleyici alanlarının içeriklerini şifrele">
+<!ENTITY fhprefs.prefpane.manageformhistory.label "Geçmişi Düzenle">
+<!ENTITY fhprefs.group.managefhc.caption "Form geçmişi ne zaman kaydedilecek">
+<!ENTITY fhprefs.manageformhistory.tooltip "Form History Control, belirtilen siteler için 'Form Geçmişini Hatırla' özelliği özelleştirme seçeneğini sunar. Böylece bu sitelere uğradığınızda otomatik olarak açıp kapatabilir.">
+<!ENTITY fhprefs.manageformhistory.global.tooltip "Genel gizlilik seçeneği 'Form Geçmişini Hatırla' seçilmişse kullanılabilir.">
+<!ENTITY fhprefs.radio.managefhcnoexception "Genel Tercihleri kullan (her zaman kaydedilir)">
+<!ENTITY fhprefs.radio.managefhcwhitelist "Geçmişi, yalnızca dışlama listesindeki sayfalar için kaydet">
+<!ENTITY fhprefs.radio.managefhcblacklist "Dışlama listesi dışındaki sayfalar için geçmişi her zaman kaydet">
+<!ENTITY fhprefs.prefpane.miscellaneous.label "Çeşitli">
+<!ENTITY fhprefs.group.preferences.caption "Tercihler">
+<!ENTITY fhprefs.checkbox.searchCaseSensitive.label "Harfe duyarlı arıyor">
+<!ENTITY fhprefs.checkbox.hideLoginmanagedFields.label "Firefox'un Giriş Düzenleyicisinin düzenlediği geçmiş öğelerini sakla">
+<!ENTITY fhprefs.checkbox.hideLoginmanagedFields.tooltip "Giriş yöneticisinde listelenen alanadlarını güncel alanda/sayfada sakla. Tüm geçmiş görüntülenirken, giriş yöntecisinde listelenen tüm (büyük olasılıkla çok fazlası) alanadları gizlenir.">
+<!ENTITY fhprefs.group.warnings.caption "Uyarıları Göster">
+<!ENTITY fhprefs.checkbox.warnOnDeleteOne.label "Tek bir öğe silmeden önce uyar">
+<!ENTITY fhprefs.checkbox.warnOnDeleteMultiple.label "Çoklu öğe silmeden önce uyar">
+<!ENTITY fhprefs.group.historyview.caption "Geçmiş görünümü">
+<!ENTITY fhprefs.textbox.exclusions.label "Formalanlarını görünümden dışla">
+<!ENTITY fhprefs.textbox.exclusions.tooltip "Virgülle ayrılmış alanadları listesi">
+<!ENTITY fhprefs.prefpane.manualsave.label "Elle Kaydet">
+<!ENTITY fhprefs.label.manualsaveinfoicon.label "'Form geçmşişini anımsa' kapatılmışsa ve formgeçmişini elle kaydetmek istersen bu seçeneği kullan.">
+<!ENTITY fhprefs.checkbox.manualsave.label "Formgeçmişini elle kaydetmeme izin ver">
+<!ENTITY fhprefs.checkbox.manualsave.tooltip "Tek ya da çoklu alanlarda, formgeçmişini elle kaydetmek için bu seçeneği etkinleştirmek ek klavye kısayolları ve menü maddeleri ekler">
+<!ENTITY fhprefs.prefpane.keybindings.label "Klavye kısayolları">
+<!ENTITY fhprefs.keybindinginfo.label "Değiştirmek istediğiniz bağlayıcı metin-kutusunu seçin ve istenilen tuş dizisini girin. Değişim anında işleme alınır.">
+<!ENTITY fhprefs.keybindinginfo.tooltip "Ağ gezgini ya da diğer eklentilerce kullanılan tuş dizilerini yeni tuş dizisinde kullanmamaya dikkat edin, ya dizi çalışmayabilir ya da beklenmeyen sonuçları tetitleyebilir.">
+<!ENTITY fhprefs.button.keybindingdisable.label "etkinsizleştir">
+<!ENTITY fhprefs.prefpane.display.label "Göster">
+<!ENTITY fhprefs.group.formhistoryitemsview.caption "Form Geçmişi Maddleri Görünümü">
+<!ENTITY fhprefs.checkbox.useCustomDateTimeFormat.label "Özel bir tarih/zaman formatı kullan">
+<!ENTITY fhprefs.checkbox.defaultSearchCurrentPageChecked.label "Varsayılan gösterim seçeneği 'Yalnızca güncel sayfayı göster'">
+<!ENTITY fhprefs.group.taskbar.caption "Görev çubuğu">
+<!ENTITY fhprefs.checkbox.showtaskbaricon.label "Simgeyi görev çubuğunda göster">
+<!ENTITY fhprefs.group.toolbar.caption "Araç çubuğu">
+<!ENTITY fhprefs.label.showtoolbaricon.label "FormGeçmişi simgesini eklemek için araç çubuğunun Özelleştir.. seçeneğini kullan.">
+<!ENTITY fhprefs.image.showtoolbaricon.tooltiptext "Ağ gezgininin araç çubuğunda sağ-tuşla ve Özellesştir.. seç. FormGeçmişini, simgesyi araç çubuğuna sürükleyerek ekleyebilirsin.">
+<!ENTITY fhprefs.group.showmenu.caption "Menü">
+<!ENTITY fhprefs.checkbox.hidetoolsmenuitem.label "Araçlar menü maddesini gizle">
+<!ENTITY fhprefs.checkbox.hideappmenuitem.label "Uygulama menü maddesini gizle">
+<!ENTITY fhprefs.checkbox.hidecontextmenuitem.label "İçerik menü maddesini gizle">
+<!ENTITY fhprefs.group.treeskin.caption "Zemin renkler listesi">
+<!ENTITY fhprefs.label.treeskin.label "Listelerini okunabilirliğini iyileştir">
+<!ENTITY fhprefs.image.treeskin.tooltiptext "Okunabilirliği iyileştirmek için bu seçeneklerden birisini seç (genellikle koyu OS temalarında kullanılır)">
+<!ENTITY fhprefs.radio.treeskin.auto.label "Otomatik">
+<!ENTITY fhprefs.radio.treeskin.light.label "Açık">
+<!ENTITY fhprefs.radio.treeskin.dark.label "Koyu">
+<!ENTITY fhprefs.radio.treeskin.none.label "Hiçbiri">
+<!ENTITY fhprefs.prefpane.quickfill.label "Hızlı Doldurma">
+<!ENTITY fhprefs.quickfillinfo.label "Seçenek olarak, en güncel ya da en sık kullanılan değerlerle doldurulmuş girişalanlarının hepsini işaretle.">
+<!ENTITY fhprefs.group.quickfill.caption "Hızlı-Doldurulmuş Form Alanları Belirteci">
+<!ENTITY fhprefs.checkbox.quickfillbgcolor.label "Zemin rengini değiştir">
+<!ENTITY fhprefs.checkbox.quickfillbordercolor.label "Kenra rengini değiştir">
+<!ENTITY fhprefs.checkbox.quickfillborderwidth.label "Kenar kalınlığını değiştir">
+<!ENTITY fhprefs.textbox.quickfillpreviewtest.label "Deneme">
+<!ENTITY fhprefs.textbox.quickfillpreviewtext "Önizleme">
+<!ENTITY fhprefs.prefpane.importexport.label "İçi/Dışa Aktar">
+<!ENTITY fhprefs.group.csvexport.caption "CSV biçimli dışa aktar">
+<!ENTITY fhprefs.textbox.csvexportseparator.label "Değer ayracı">
+<!ENTITY fhprefs.textbox.csvexportquote.label "Değerleri bununla çevrele">
+<!ENTITY fhprefs.textbox.csvexportescape.label "bu önek ile değerleri kaçır">
+<!ENTITY fhprefs.group.configexport.caption "Düzenlemeti İçe/Dışa Aktar">
+<!ENTITY fhprefs.checkbox.configexportXmlIsoDate.label "Tarihleri ISO biçiminde dışa aktar">
+<!ENTITY fhprefs.prefpane.cleanup.label "Temizlik">
+<!ENTITY fhprefs.checkbox.cleanupshutdown.label "Ağ gezgini kapandığında Temizlik Uygula">
+<!ENTITY fhprefs.checkbox.cleanuptabclose.label "Ağ gezgini sekmesi kapandığında Temizlik Uygula">
+<!ENTITY fhprefs.button.cleanupnow.label "Şimdi Temizle">
+<!ENTITY fhprefs.prefpane.search.label "Ara">
+<!ENTITY fhprefs.label.search.manage "İleri Aramada kullanılan Düzenli Arama Deyimlerini Düzenle">
+<!ENTITY fhprefs.checkbox.names.label "Adlar">
+<!ENTITY fhprefs.checkbox.names.tooltip "Alanadları için düzenli arama deyimlerini göster">
+<!ENTITY fhprefs.checkbox.values.label "Değerler">
+<!ENTITY fhprefs.checkbox.values.tooltip "Alandeğerleri için düzenli arama deyimlerini göster">
+<!ENTITY fhprefs.treeview.column.description.label "Tanım">
+<!ENTITY fhprefs.treeview.column.category.label "Kategori">
+<!ENTITY fhprefs.treeview.column.regexp.label "Deyim">
+<!ENTITY fhprefs.treeview.column.case.label "Harf Durumu">
+<!ENTITY fhprefs.treeview.column.usefor.label "Ad/Değer">
+<!ENTITY fhprefs.treeview.column.index.label "Dizin">
+<!ENTITY fhprefs.prefpane.information.label "Bilgi">
+<!ENTITY fhprefs.group.information.fhdatabase.caption "Form-Geçmişi Veritabanı">
+<!ENTITY fhprefs.group.information.cudatabase.caption "Temizlik Veritabanı">
+<!ENTITY fhprefs.textbox.information.filepath.label "Yol">
+<!ENTITY fhprefs.textbox.information.filesize.label "Boyut">
+<!ENTITY fhprefs.textbox.information.databaserows.label "Satırlar">
+<!ENTITY fhprefs.button.information.createnew.label "Yeni Üret">
+<!ENTITY fhprefs.button.information.createnew.tooltip "Yeni boş bir düzenleme veritabanı üret, tüm veri kaybolacak">
+<!ENTITY fhprefs.button.information.recover.label "Üret ve Kurtar">
+<!ENTITY fhprefs.button.information.recover.tooltip "Yeni bir düzenleme veritabanı üret, var olan veri olabildiğince saklanacak">
+<!ENTITY fhprefs.button.information.restoreregexp.label "DüzenliDeyimleri Geriyükle">
+<!ENTITY fhprefs.button.information.restoreregexp.tooltip "Öntanımlı Düzenli Deyimleri (ileri arama) geri yükle">
+<!ENTITY fhpref.tooltiplabel.dateformat.showhelp "Daha fazla bilgi için buraya tıklayın">
+<!ENTITY fhpref.tooltiplabel.dateformat.description "Var olan tarih/zaman tanımlamaları:">
+<!ENTITY fhpref.tooltiplabel.dateformat.descriptorcolumn "Tarih Tanımlayıcısı">
+<!ENTITY fhpref.tooltiplabel.dateformat.descriptioncolumn "Tanım">
+<!ENTITY fhpref.tooltiplabel.dateformat.examplescolumn "Örnekler">
+<!ENTITY fhpref.tooltiplabel.dateformat.year "Yıl">
+<!ENTITY fhpref.tooltiplabel.dateformat.month "Ay (Yıl içinde)">
+<!ENTITY fhpref.tooltiplabel.dateformat.day "Gün (Ay içinde)">
+<!ENTITY fhpref.tooltiplabel.dateformat.hour24 "Saat (Gün içinde)">
+<!ENTITY fhpref.tooltiplabel.dateformat.hour12 "Saat (sabah/öğle)">
+<!ENTITY fhpref.tooltiplabel.dateformat.ampm "sabah/öğle işareti">
+<!ENTITY fhpref.tooltiplabel.dateformat.minute "Dakika (saat içinde)">
+<!ENTITY fhpref.tooltiplabel.dateformat.second "Saniye (dakika içinde)">
+<!ENTITY fhpref.tooltiplabel.dateformat.millisec "Milisaniye">
+<!ENTITY fhprefovl.privacy.button.showhistory.label "Geçmişi Göster">
+<!ENTITY fhprefovl.privacy.button.showhistory.accesskey "o">
+<!ENTITY fhprefovl.privacy.checkbox.managebyfhc.label "Form History Control'un form geçmişini yönetmesine izin ver">
+<!ENTITY fhprefovl.privacy.checkbox.managebyfhc.tooltip "Form geçmişisinin kaydedilip kaydedilmeyeceğinin Form History Control eklentisiyle denetlenmesi">
+<!ENTITY fhprefovl.privacy.button.rememberoptions.label "Ayarlar">
+<!ENTITY fhabout.label.description "Tanım">
+<!ENTITY fhabout.label.creator "Yaratıcı">
+<!ENTITY fhabout.label.homepage "Ana sayfaya uğra">
+<!ENTITY fhabout.label.contributors "Katkıda bulunanlar">
+<!ENTITY fhabout.label.translators "Çevirmenler">
+<!ENTITY browsehistorywindow.report.gocurrent "Güncel">
+<!ENTITY browsehistorywindow.report.showurl "URL Göster">
+<!ENTITY browsehistorywindow.report.showtitle "Başlık Göster">
+<!ENTITY browsehistorywindow.report.showhost "Sunucu Göster">
+<!ENTITY browsehistorywindow.report.fieldnamelabel "Alanadı">
+<!ENTITY browsehistorywindow.report.valuelabel "Değer">
+<!ENTITY browsehistorywindow.report.titlelabel "Başlık">
+<!ENTITY browsehistorywindow.report.hostlabel "Sunucu">
+<!ENTITY browsehistorywindow.report.urllabel "URL">
+<!ENTITY fhexportcsvdlg.description "Form Geçmişinin Tümünü CSV (Virgülle ayrılmış) Biçiminde Dışa Aktar">
+<!ENTITY fhexportcsvdlg.alert "Uyarı: CSV dışa aktarımı, içe aktarmada kullanılamaz!">
+<!ENTITY fhexportdlg.title "Dışa aktarma yöneticisi">
+<!ENTITY fhexportdlg.description "Dışa aktarılacak veri türünü seçin">
+<!ENTITY fhexportdlg.button.export "Dışa aktar">
+<!ENTITY fhexportdlg.label.exporterrornone "Seçili birşey yok, dışa aktarılacak bir şey yok.">
+<!ENTITY fhimportdlg.title "İçe aktarma yöneticisi">
+<!ENTITY fhimportdlg.description "İçe aktarılacak veri türünü seçin">
+<!ENTITY fhimportdlg.button.import "İçe aktar">
+<!ENTITY fhimportdlg.label.importerrornone "Seçili birşey yok, içe aktarılacak bir şey yok.">
+<!ENTITY fhimportexportdlg.checkbox.entries "Form geçmişi girdileri">
+<!ENTITY fhimportexportdlg.label.items "kalemler">
+<!ENTITY fhimportexportdlg.radio.entries.all "Tümü">
+<!ENTITY fhimportexportdlg.radio.entries.selected "Seçili">
+<!ENTITY fhimportexportdlg.radio.entries.search "Arama sonuçları">
+<!ENTITY fhimportexportdlg.checkbox.editorhistory "Düzenleyici geçmişi">
+<!ENTITY fhimportexportdlg.checkbox.editorhistoryprefs "Düzenleyici geçmişinin tercihleri">
+<!ENTITY fhimportexportdlg.checkbox.editorhistoryexceptions "Düzenleyici geçmişinin dışlama listesi">
+<!ENTITY fhimportexportdlg.checkbox.customsaveprefs "Geçmiş tercihlerini kaydet">
+<!ENTITY fhimportexportdlg.checkbox.customsaveexceptions "Geçmiş dışlama listesini kaydet">
+<!ENTITY fhimportexportdlg.checkbox.regularexpressions "Kurallı Anlatımlar">
+<!ENTITY fhimportexportdlg.checkbox.keybordshortcuts "Klavya kısayolları">
+<!ENTITY fhimportexportdlg.checkbox.cleanupconfig "Yapılandırmayı temizle">
+<!ENTITY fhimportstatusdlg.title "Durumu içe aktar">
+<!ENTITY fhimportstatusdlg.label.total "Toplam">
+<!ENTITY fhimportstatusdlg.label.imported "İçe aktarıldı">
+<!ENTITY fhimportstatusdlg.label.identical "Özdeş">
+<!ENTITY fhimportstatusdlg.label.error "Hata">
+<!ENTITY fhcnotimplemented.label "henüz uyarlanmadı!">

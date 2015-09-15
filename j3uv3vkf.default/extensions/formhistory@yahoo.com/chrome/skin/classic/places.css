@@ -1,0 +1,69 @@
+
+#content{
+  overflow: auto;
+  border-width: 2px;
+  border-style: groove;
+  color: #000000;
+}
+
+.box {
+  padding: 4px;
+  margin: 10px 12px 10px 6px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.current {
+  background: #ffcccc;
+  border-color: #b00000;
+}
+
+.newer {
+  background: #ccccff;
+  border-color: #0000b0;
+  margin-left: 26px;
+}
+
+.older {
+  background: #ccffcc;
+  border-color: #00a000;
+  margin-left: 26px;
+}
+
+.buttonrow {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: smaller;
+}
+
+.field {
+  text-align: right;
+  font-weight: bold;
+  color: #606060;
+}
+
+.place {
+  text-align: right;
+  font-weight: bold;
+  color: #606060;
+}
+
+.value {
+  overflow: hidden;
+}
+
+.fuzzyage {
+  overflow: hidden;
+  font-style: italic;
+  padding-left: 10px;
+}
+
+.datetime {
+  padding-bottom: 2px;
+  font-style: italic;
+  font-weight: bold;
+}

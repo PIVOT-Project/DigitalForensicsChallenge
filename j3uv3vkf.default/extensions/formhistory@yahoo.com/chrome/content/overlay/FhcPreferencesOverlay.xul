@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<overlay id="formhistoryPreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/overlay/FhcPreferencesOverlay.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js" />
+  
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle" src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <prefpane id="panePrivacy">
+    <preferences>
+      <preference id="extensions.formhistory.manageFormhistoryByFHC"
+                  name="extensions.formhistory.manageFormhistoryByFHC"
+                  type="bool" />
+    </preferences>
+    <groupbox id="historyGroup">
+      <vbox insertafter="rememberForms" id="preferencesFormHistoryControlBox" hidden="true">
+        <hbox id="preferencesFormHistoryControlBoxInnerHbox">
+          <button id="preferencesFormHistoryControlButton"
+                  label="&fhprefovl.privacy.button.showhistory.label;..."
+                  accesskey="&fhprefovl.privacy.button.showhistory.accesskey;"
+                  oncommand="FhcShowDialog.doShowFormHistoryControl();" />
+        </hbox>
+        <hbox>
+          <checkbox class="indent" flex="1" style="padding-top:0"
+                    id="preferencesFormHistoryControlCheckboxManage"
+                    preference="extensions.formhistory.manageFormhistoryByFHC"
+                    label="&fhprefovl.privacy.checkbox.managebyfhc.label;"
+                    tooltiptext="&fhprefovl.privacy.checkbox.managebyfhc.tooltip;"/>
+          <button id="preferencesFormHistoryControlSettingsButton"
+                  label="&fhprefovl.privacy.button.rememberoptions.label;..."
+                  oncommand="FhcShowDialog.doShowFhcOptions('managehistory')" />
+        </hbox>
+      </vbox>
+    </groupbox>
+  </prefpane>
+</overlay>

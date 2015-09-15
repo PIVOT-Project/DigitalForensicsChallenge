@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="dateTimeDialog"
+        title="&fhdatetimedlg.windowtitle;"
+        buttons="cancel,accept"
+        style="width:40em;"
+        ondialogaccept="return FhcDateTimeDialog.onFhcOK();"
+        onload="FhcDateTimeDialog.initFhcDateTimeDialog();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcDateTimeDialog.js"/>
+
+  <vbox class="box-padded">
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <vbox>
+          <description class="description">&fhdatetimedlg.description;</description>
+          <spacer height="16" />
+        </vbox>
+        <row align="center">
+          <label value="&fhdatetimedlg.date.label;" control="date"/>
+          <datepicker id="date" type="popup" class="fhc_dropmarker" />
+        </row>
+        <row align="center">
+          <label value="&fhdatetimedlg.time.label;" control="time"/>
+          <hbox>
+            <timepicker id="time"/>
+            <vbox>
+              <spacer flex="1"/>
+              <image src="chrome://formhistory/skin/calendar_delete.png"
+                     class="image_icon" flex="0"
+                     tooltiptext="&fhdatetimedlg.setzerotime.tooltip;"
+                     onclick="FhcDateTimeDialog.setZeroTime()"/>
+              <spacer flex="1"/>
+            </vbox>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+  </vbox>
+</dialog>

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="importStatusDialog"
+        title="&fhimportstatusdlg.title;"
+        style=""
+        buttons="accept"
+        ondialogaccept="return FhcImportStatusDialog.onOkay();"
+        onload="FhcImportStatusDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcImportStatusDialog.js"/>
+
+  <vbox class="box-padded">
+    <spacer height="10"/>
+    <grid>
+      <columns>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+      </columns>
+      <rows>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <description id="descriptionExport" class="description">&fhimportstatusdlg.title;:</description>
+          <label value="&fhimportstatusdlg.label.total;" style="text-align: right"/>
+          <label value="&fhimportstatusdlg.label.imported;" style="text-align: right"/>
+          <label value="&fhimportstatusdlg.label.identical;" style="text-align: right"/>
+          <label value="&fhimportstatusdlg.label.error;" style="text-align: right"/>
+          <label value="" style="text-align: center;"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.entries;" />
+          <label id="total-history" value="-" style="text-align: right"/>
+          <label id="import-history" value="-" style="text-align: right"/>
+          <label id="skipped-history" value="-" style="text-align: right"/>
+          <label id="error-history" value="-" style="text-align: right"/>
+          <image id="status-history"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.editorhistory;"/>
+          <label id="total-multiline" value="-" style="text-align: right"/>
+          <label id="import-multiline" value="-" style="text-align: right"/>
+          <label id="skipped-multiline" value="-" style="text-align: right"/>
+          <label id="error-multiline" value="-" style="text-align: right"/>
+          <image id="status-multiline"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.editorhistoryprefs;"/>
+          <label id="total-multilinecfg" value="-" style="text-align: right"/>
+          <label id="import-multilinecfg" value="-" style="text-align: right"/>
+          <label id="skipped-multilinecfg" value="-" style="text-align: right"/>
+          <label id="error-multilinecfg" value="-" style="text-align: right"/>
+          <image id="status-multilinecfg"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.editorhistoryexceptions;"/>
+          <label id="total-multilineexc" value="-" style="text-align: right"/>
+          <label id="import-multilineexc" value="-" style="text-align: right"/>
+          <label id="skipped-multilineexc" value="-" style="text-align: right"/>
+          <label id="error-multilineexc" value="-" style="text-align: right"/>
+          <image id="status-multilineexc"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.customsaveprefs;"/>
+          <label id="total-customsavecfg" value="-" style="text-align: right"/>
+          <label id="import-customsavecfg" value="-" style="text-align: right"/>
+          <label id="skipped-customsavecfg" value="-" style="text-align: right"/>
+          <label id="error-customsavecfg" value="-" style="text-align: right"/>
+          <image id="status-customsavecfg"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.customsaveexceptions;"/>
+          <label id="total-customsaveexc" value="-" style="text-align: right"/>
+          <label id="import-customsaveexc" value="-" style="text-align: right"/>
+          <label id="skipped-customsaveexc" value="-" style="text-align: right"/>
+          <label id="error-customsaveexc" value="-" style="text-align: right"/>
+          <image id="status-customsaveexc"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.regularexpressions;"/>
+          <label id="total-regexp" value="-" style="text-align: right"/>
+          <label id="import-regexp" value="-" style="text-align: right"/>
+          <label id="skipped-regexp" value="-" style="text-align: right"/>
+          <label id="error-regexp" value="-" style="text-align: right"/>
+          <image id="status-regexp"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.keybordshortcuts;"/>
+          <label id="total-keys" value="-" style="text-align: right"/>
+          <label id="import-keys" value="-" style="text-align: right"/>
+          <label id="skipped-keys" value="-" style="text-align: right"/>
+          <label id="error-keys" value="-" style="text-align: right"/>
+          <image id="status-keys"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhimportexportdlg.checkbox.cleanupconfig;"/>
+          <label id="total-cleanup" value="-" style="text-align: right"/>
+          <label id="import-cleanup" value="-" style="text-align: right"/>
+          <label id="skipped-cleanup" value="-" style="text-align: right"/>
+          <label id="error-cleanup" value="-" style="text-align: right"/>
+          <image id="status-cleanup" flex="0"/>
+        </row>
+        <separator class="groove" orient="horizontal" flex="1" height="2" style="margin:0;padding:0"/>
+      </rows>
+    </grid>
+  </vbox>
+</dialog>

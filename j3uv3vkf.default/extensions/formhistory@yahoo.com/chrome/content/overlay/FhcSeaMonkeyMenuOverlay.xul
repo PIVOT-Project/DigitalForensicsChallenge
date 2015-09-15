@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<overlay id="overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <script type="application/x-javascript" src="chrome://formhistory/content/overlay/FhcContextMenu.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDateHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcCleanupFilter.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcKeyBindings.js" />
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle" src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <stringbundleset id="stringbundlesetKeys">
+    <stringbundle id="formhistory.stringbundle.keys" src="chrome://formhistory/locale/keybinding.properties"/>
+  </stringbundleset>
+
+  <menupopup id="taskPopup">
+    <menu id="formhistctrl_tools_menu" class="menu-iconic fh_menu_formhistory"
+          label="&fhmnuovl.menu.main.manager.label;">
+      <menupopup>
+        <menuitem id="formhistctrl_menuitem_manager"
+                  class="menuitem-iconic fh_menuitem_manager"
+                  label="&fhmnuovl.menuitem.manager.label;"
+                  command="fhc_cmd_ShowFormHistoryControl"/>
+        <menuseparator id="formhistctrl_tools_sep"/>
+        <menuitem id="formhistctrl_menuitem_options"
+                  class="menuitem-iconic fh_menuitem_options"
+                  label="&fhmnuovl.menuitem.options.label;"
+                  command="fhc_cmd_ShowFhcOptions"/>
+      </menupopup>
+    </menu> 
+  </menupopup>
+
+  <popup id="contentAreaContextMenu">
+    <menuseparator id="formhistory-sep"/>
+    <menu id="formhistctrl_context_menu" class="menu-iconic fh_menu_formhistory"
+          label="&fhmnuovl.menu.main.manager.label;">
+      <menupopup>
+        <menuitem id="formhistctrl_context_menuitem_manager"
+                  class="menuitem-iconic fh_menuitem_manager"
+                  label="&fhmnuovl.menuitem.manager.label;"
+                  command="fhc_cmd_ShowFormHistoryControl"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_context_menuitem_managefield"
+                  class="menuitem-iconic fh_menuitem_managethisfield"
+                  label="&fhmnuovl.menuitem.managethis.label;"
+                  command="fhc_cmd_ManageThisField"/>
+        <menuitem id="formhistctrl_context_menuitem_deletevalue"
+                  class="menuitem-iconic fh_menuitem_deletethisvalue"
+                  label="&fhmnuovl.menuitem.deletevaluethis.label;"
+                  command="fhc_cmd_DeleteValueThisField" />
+        <menuitem id="formhistctrl_context_menuitem_delete"
+                  class="menuitem-iconic fh_menuitem_deletethisfield"
+                  label="&fhmnuovl.menuitem.deletethis.label;"
+                  command="fhc_cmd_DeleteEntriesThisField"/>
+        <menu id="formhistctrl_restore_submenu"
+              class="menu-iconic fh_menuitem_restorethisfield"
+              label="Restore this field">
+          <menupopup>
+            <!-- Items are dynamically added here -->
+          </menupopup>
+        </menu>
+        <menuseparator/>
+        <menuitem id="formhistctrl_context_menuitem_fillmostrecent"
+                  class="menuitem-iconic fh_menuitem_fillmostrecent"
+                  label="&fhmnuovl.menuitem.fillmostrecent.label;"
+                  command="fhc_cmd_FillFormFieldsRecent"/>
+        <menuitem id="formhistctrl_context_menuitem_fillmostused"
+                  class="menuitem-iconic fh_menuitem_fillmostused"
+                  label="&fhmnuovl.menuitem.fillmostused.label;"
+                  command="fhc_cmd_FillFormFieldsUsed"/>
+        <menuitem id="formhistctrl_context_menuitem_clearfields"
+                  class="menuitem-iconic fh_menuitem_clearfields"
+                  label="&fhmnuovl.menuitem.clearfields.label;"
+                  command="fhc_cmd_ClearFilledFormFields"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_context_menuitem_showfields"
+                  class="menuitem-iconic fh_menuitem_showfields"
+                  label="&fhmnuovl.menuitem.showformfields.label;"
+                  command="fhc_cmd_ShowFormFields"/>
+        <menuitem id="formhistctrl_context_menuitem_savefield"
+                  class="menuitem-iconic fh_menuitem_savefield"
+                  label="&fhmnuovl.menuitem.savethisfield.label;"
+                  command="fhc_cmd_SaveThisField"/>
+        <menuitem id="formhistctrl_context_menuitem_savepage"
+                  class="menuitem-iconic fh_menuitem_savepage"
+                  label="&fhmnuovl.menuitem.savethispage.label;"
+                  command="fhc_cmd_SaveThisPage"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_context_menuitem_cleanupnow"
+                  class="menuitem-iconic fh_menuitem_cleanupnow"
+                  label="&fhmnuovl.menuitem.cleanupnow.label;"
+                  command="fhc_cmd_CleanupFormhistoryNow"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_menuitem_options"
+                  class="menuitem-iconic fh_menuitem_options"
+                  label="&fhmnuovl.menuitem.options.label;"
+                  command="fhc_cmd_ShowFhcOptions"/>
+      </menupopup>
+    </menu> 
+  </popup>
+  
+  <statusbar id="status-bar">
+    <statusbarpanel id="formhistctrl-statusbarmenu"
+                    class="statusbarpanel-menu-iconic"
+                    tooltiptext="&fhmnuovl.menuitem.manager.label;"
+                    contextMenu="formhistory@yahoo.com.statusbarRightClickMenu"
+                    context=""
+                    persist="hidden">
+      <menupopup id="formhistctrl-statusbarmenu-popup">
+        <menuitem id="formhistctrl_sbmenuitem_manager"
+                  class="menuitem-iconic fh_menuitem_manager"
+                  label="&fhmnuovl.menuitem.manager.label;"
+                  command="fhc_cmd_ShowFormHistoryControl"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_sbmenuitem_fillmostrecent"
+                  class="menuitem-iconic fh_menuitem_fillmostrecent"
+                  label="&fhmnuovl.menuitem.fillmostrecent.label;"
+                  command="fhc_cmd_FillFormFieldsRecent"/>
+        <menuitem id="formhistctrl_sbmenuitem_fillmostused"
+                  class="menuitem-iconic fh_menuitem_fillmostused"
+                  label="&fhmnuovl.menuitem.fillmostused.label;"
+                  command="fhc_cmd_FillFormFieldsUsed"/>
+        <menuitem id="formhistctrl_sbmenuitem_clearfields"
+                  class="menuitem-iconic fh_menuitem_clearfields"
+                  label="&fhmnuovl.menuitem.clearfields.label;"
+                  command="fhc_cmd_ClearFilledFormFields"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_sbmenuitem_showfields"
+                  class="menuitem-iconic fh_menuitem_showfields"
+                  label="&fhmnuovl.menuitem.showformfields.label;"
+                  command="fhc_cmd_ShowFormFields"/>
+        <menuitem id="formhistctrl_sbmenuitem_savepage"
+                  class="menuitem-iconic fh_menuitem_savepage"
+                  label="&fhmnuovl.menuitem.savethispage.label;"
+                  command="fhc_cmd_SaveThisPage"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_sbmenuitem_cleanupnow"
+                  class="menuitem-iconic fh_menuitem_cleanupnow"
+                  label="&fhmnuovl.menuitem.cleanupnow.label;"
+                  command="fhc_cmd_CleanupFormhistoryNow"/>
+      </menupopup>
+    </statusbarpanel>
+  </statusbar>
+
+  <popupset>
+    <menupopup id ="formhistory@yahoo.com.statusbarRightClickMenu">
+      <menuitem id="formhistctrl_sbmenuitem_options"
+                class="menuitem-iconic fh_menuitem_options"
+                label="&fhmnuovl.menuitem.options.label;"
+                command="fhc_cmd_ShowFhcOptions"/>
+      <menuitem id="formhistctrl_about"
+                class="menuitem-iconic fh_menuitem_about"
+                label="&fhwin.menuitem.about.label;"
+                command="fhc_cmd_ShowFhcAbout"/>
+    </menupopup>
+  </popupset>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="formhistctrl-toolbarbutton"
+                   class="toolbarbutton-1 chromeclass-toolbar-additional custombutton"
+                   type="menu"
+                   context=""
+                   label="&fhmnuovl.menu.main.manager.label;"
+                   tooltiptext="&fhmnuovl.menuitem.manager.label;"
+                   orient="horizontal">
+      <menupopup id="formhistctrl-toolbarmenu-popup">
+        <menuitem id="formhistctrl_tbmenuitem_manager"
+                  class="menuitem-iconic fh_menuitem_manager"
+                  label="&fhmnuovl.menuitem.manager.label;"
+                  command="fhc_cmd_ShowFormHistoryControl"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_tbmenuitem_fillmostrecent"
+                  class="menuitem-iconic fh_menuitem_fillmostrecent"
+                  label="&fhmnuovl.menuitem.fillmostrecent.label;"
+                  command="fhc_cmd_FillFormFieldsRecent"/>
+        <menuitem id="formhistctrl_tbmenuitem_fillmostused"
+                  class="menuitem-iconic fh_menuitem_fillmostused"
+                  label="&fhmnuovl.menuitem.fillmostused.label;"
+                  command="fhc_cmd_FillFormFieldsUsed"/>
+        <menuitem id="formhistctrl_tbmenuitem_clearfields"
+                  class="menuitem-iconic fh_menuitem_clearfields"
+                  label="&fhmnuovl.menuitem.clearfields.label;"
+                  command="fhc_cmd_ClearFilledFormFields"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_tbmenuitem_showfields"
+                  class="menuitem-iconic fh_menuitem_showfields"
+                  label="&fhmnuovl.menuitem.showformfields.label;"
+                  command="fhc_cmd_ShowFormFields"/>
+        <menuitem id="formhistctrl_tbmenuitem_savepage"
+                  class="menuitem-iconic fh_menuitem_savepage"
+                  label="&fhmnuovl.menuitem.savethispage.label;"
+                  command="fhc_cmd_SaveThisPage"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_tbmenuitem_cleanupnow"
+                  class="menuitem-iconic fh_menuitem_cleanupnow"
+                  label="&fhmnuovl.menuitem.cleanupnow.label;"
+                  command="fhc_cmd_CleanupFormhistoryNow"/>
+        <menuseparator/>
+        <menuitem id="formhistctrl_tbmenuitem_options"
+                  class="menuitem-iconic fh_menuitem_options"
+                  label="&fhmnuovl.menuitem.options.label;"
+                  command="fhc_cmd_ShowFhcOptions"/>
+      </menupopup>
+  	</toolbarbutton>
+  </toolbarpalette>
+
+  <keyset id="mainKeyset">
+    <key id="fhc_key_ShowFormHistoryControl" key="" command="fhc_cmd_ShowFormHistoryControl"/>
+    <key id="fhc_key_ManageThisField"        key="" command="fhc_cmd_ManageThisField"/>
+    <key id="fhc_key_DeleteValueThisField"   key="" command="fhc_cmd_DeleteValueThisField"/>
+    <key id="fhc_key_DeleteEntriesThisField" key="" command="fhc_cmd_DeleteEntriesThisField"/>
+    <key id="fhc_key_FillFormFieldsRecent"   key="" command="fhc_cmd_FillFormFieldsRecent"/>
+    <key id="fhc_key_FillFormFieldsUsed"     key="" command="fhc_cmd_FillFormFieldsUsed"/>
+    <key id="fhc_key_ClearFilledFormFields"  key="" command="fhc_cmd_ClearFilledFormFields"/>
+    <key id="fhc_key_ShowFormFields"         key="" command="fhc_cmd_ShowFormFields"/>
+    <key id="fhc_key_SaveThisField"          key="" command="fhc_cmd_SaveThisField"/>
+    <key id="fhc_key_SaveThisPage"           key="" command="fhc_cmd_SaveThisPage"/>
+    <key id="fhc_key_CleanupFormhistoryNow"  key="" command="fhc_cmd_CleanupFormhistoryNow"/>
+  </keyset>
+
+  <commandset>
+    <command id="fhc_cmd_ShowFormHistoryControl" oncommand="FhcShowDialog.doShowFormHistoryControl()"/>
+    <command id="fhc_cmd_ShowFhcOptions"         oncommand="FhcShowDialog.doShowFhcOptions()"/>
+    <command id="fhc_cmd_ShowFhcAbout"           oncommand="FhcShowDialog.doShowFhcAbout()"/>
+    <command id="fhc_cmd_ManageThisField"        oncommand="FhcShowDialog.doShowFormHistoryControl({searchField:true})"/>
+    <command id="fhc_cmd_DeleteValueThisField"   oncommand="FhcContextMenu.menuDeleteValueThisField()"/>
+    <command id="fhc_cmd_DeleteEntriesThisField" oncommand="FhcContextMenu.menuDeleteEntriesThisField()"/>
+    <command id="fhc_cmd_FillFormFieldsRecent"   oncommand="FhcContextMenu.menuFillFormFieldsRecent()"/>
+    <command id="fhc_cmd_FillFormFieldsUsed"     oncommand="FhcContextMenu.menuFillFormFieldsUsed()"/>
+    <command id="fhc_cmd_ClearFilledFormFields"  oncommand="FhcContextMenu.menuClearFilledFormFields()"/>
+    <command id="fhc_cmd_ShowFormFields"         oncommand="FhcContextMenu.menuShowFormFields()"/>
+    <command id="fhc_cmd_SaveThisField"          oncommand="FhcContextMenu.menuSaveThisField()"/>
+    <command id="fhc_cmd_SaveThisPage"           oncommand="FhcContextMenu.menuSaveThisPage()"/>
+    <command id="fhc_cmd_CleanupFormhistoryNow"  oncommand="FhcContextMenu.cleanupFormhistoryNow()"/>
+  </commandset>
+</overlay>

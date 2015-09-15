@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="criteriaDialogv2"
+        title="&fhcriteriadlg.windowtitle;"
+        buttons="cancel,accept"
+        style="width:48em; height:16em"
+        ondialogaccept="return FhcCriteriaDialog.onFhcOK();"
+        onload="FhcCriteriaDialog.initFhcCriteriaDialog();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcCriteriaDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPredefinedRegexp.js" />
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle"
+                  src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <menupopup id="regexp-namelist-menu">
+    <menuitem id="regexp-title-item" class="menuitem-iconic fh_menuitem_regexp_title"
+              tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+              label="&fhwin.menuitem.regexpsearch.title;:" disabled="true"/>
+    <menuseparator id="s1"/>
+  </menupopup>
+
+  <menupopup id="regexp-list-menu">
+    <menuitem id="regexp-title-item" class="menuitem-iconic fh_menuitem_regexp_title"
+              tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+              label="&fhwin.menuitem.regexpsearch.title;:" disabled="true"/>
+    <menuseparator id="s2"/>
+  </menupopup>
+
+  <vbox class="box-padded">
+    <tooltip id="name-tip" orient="vertical" class="tooltip-regexstatus">
+      <label value="RegExp Status:" class="tooltip-regexstatus-label"/>
+      <label id="name-errmsg" class="tooltip-regexmessage-label"/>
+    </tooltip>
+    <tooltip id="value-tip" orient="vertical" class="tooltip-regexstatus">
+      <label value="RegExp Status:" class="tooltip-regexstatus-label"/>
+      <label id="value-errmsg" class="tooltip-regexmessage-label"/>
+    </tooltip>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+        <column/>
+        <column/>
+        <column flex="3"/>
+      </columns>
+      <rows>
+				<description id="descriptionAdd" style="display:none" class="description">
+                     &fhcriteriadlg.add.description;</description>
+				<description id="descriptionEdit" style="display:none" class="description">
+                     &fhcriteriadlg.edit.description;</description>
+        <hbox>
+          <label id="errorMessageBlank" hidden="true" class="errormessage"
+                 value="&fhcriteriadlg.namevaluefieldsemptyerror.label;"/>
+          <label id="errorMessageExist" hidden="true" class="errormessage"
+                 value="&fhcriteriadlg.existerror.label;"/>
+          <label value=""/>
+        </hbox>
+        <row align="center">
+          <label    control="description"
+                    value="&fhcriteriadlg.description.label;"/>
+          <textbox  id="description" tabindex="1"/>
+        </row>
+        <row align="center">
+          <label    control="name"
+                    value="&fhcriteriadlg.fieldname.label;"/>
+          <textbox  id="name" tooltip="name-tip" tabindex="2"
+                    oninput="FhcCriteriaDialog.onFhcInput(this);"/>
+          <label    id="name-state" value="" tooltip="name-tip" class="invalidregexp"/>
+          <vbox>
+            <spacer flex="1"/>
+            <image src="chrome://formhistory/skin/regexp.png"
+                   class="image_icon"
+                   tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+                   onclick="FhcCriteriaDialog.showRegExpMenu('name')"/>
+            <spacer flex="1"/>
+          </vbox>
+          <hbox>
+            <checkbox id="nameExact" checked="true" disabled="true" tabindex="3" flex="1"
+                      label="&fhcriteriadlg.matchexact.label;"/>
+            <checkbox id="nameCase" checked="true" disabled="true" tabindex="4" flex="1"
+                      label="&fhcriteriadlg.matchcase.label;"/>
+            <checkbox id="nameRegex" checked="true" disabled="true" tabindex="5" flex="1"
+                      label="RegExp" oncommand="FhcCriteriaDialog.toggleRegexpCheckbox(this)"/>
+          </hbox>
+        </row>
+        <row align="center">
+          <label    control="value"
+                    value="&fhcriteriadlg.value.label;" />
+          <textbox  id="value" tooltip="value-tip" tabindex="6"
+                    oninput="FhcCriteriaDialog.onFhcInput(this);"/>
+          <label    id="value-state" value="" tooltip="value-tip" class="invalidregexp"/>
+          <vbox>
+            <spacer flex="1"/>
+            <image src="chrome://formhistory/skin/regexp.png"
+                   class="image_icon"
+                   tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+                   onclick="FhcCriteriaDialog.showRegExpMenu('value')"/>
+            <spacer flex="1"/>
+          </vbox>
+          <hbox>
+            <checkbox id="valueExact" checked="true" disabled="true" tabindex="7" flex="1"
+                      label="&fhcriteriadlg.matchexact.label;"/>
+            <checkbox id="valueCase" checked="true" disabled="true" tabindex="8" flex="1"
+                      label="&fhcriteriadlg.matchcase.label;"/>
+            <checkbox id="valueRegex" checked="true" disabled="true" tabindex="9" flex="1"
+                      label="RegExp" oncommand="FhcCriteriaDialog.toggleRegexpCheckbox(this)"/>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+  </vbox>
+</dialog>

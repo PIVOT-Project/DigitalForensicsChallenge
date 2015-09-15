@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/treerows.css" type="text/css"?>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="managefhcListDialog"
+        title="&fhcmanagefhclistdlg.windowtitle;"
+        style="width:48em; height:40em; padding: 14px 6px 4px 6px"
+        onload="FhcManageFhcListDialog.init()"
+        onunload="FhcManageFhcListDialog.destroy()"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcManageFhcListDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  
+  <keyset>
+    <key id="delete-key"
+         keycode="VK_DELETE" modifiers=""
+         oncommand="FhcManageFhcListDialog.deleteItem()"/>
+    <key id="selectall-key"
+         key="&fhwin.menuitem.selectall.accelkey;"
+         modifiers="accel"
+         oncommand="FhcManageFhcListDialog.selectAll()"/>
+    <key id="selectnone-key"
+         key="-" modifiers="accel"
+         oncommand="FhcManageFhcListDialog.selectNone()"/>
+  </keyset>
+  
+  <menupopup id="hostPopup">
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDelete" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="FhcManageFhcListDialog.deleteItem()"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="FhcManageFhcListDialog.selectAll()"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="FhcManageFhcListDialog.selectNone()"/>
+  </menupopup>
+
+  <label id="blacklist" hidden="true" value="&fhcmanagefhclistdlg.label.blacklist;:"/>
+  <label id="whitelist" hidden="true" value="&fhcmanagefhclistdlg.label.whitelist;:"/>
+  <tree id="customsaveTree" alternatingbackground="true"
+        flex="1" 
+        editable="true" hidecolumnpicker="true"
+        context="hostPopup"
+        oncontextmenu="FhcManageFhcListDialog.menuPopup(event)"
+        onselect="FhcManageFhcListDialog.treeSelect(event)">
+    <treecols>
+      <treecol id="hostCol" flex="3"
+               label="&fhcmanagefhclistdlg.treeview.column.page.label;"
+               onclick="FhcManageFhcListDialog.sort(this);"
+               persist="sortDirection"/>
+      <treecol id="indexCol" hidden="true" class="numericColumn"
+               ignoreincolumnpicker="true"
+               label="hiddenIndex"
+               onclick="FhcManageFhcListDialog.sort(this);"
+               persist="sortDirection"/>
+    </treecols>
+    <treechildren/>
+  </tree>
+
+  <groupbox>
+    <caption label="&fhwin.button.edit.label;"/>
+    <hbox align="baseline" flex="1">
+      <label value="&fhcmanagefhclistdlg.treeview.column.page.label;"/>
+      <textbox id="host" flex="1" oninput="FhcManageFhcListDialog.initEditButtons()"/>
+    </hbox>
+    <hbox flex="1">
+      <button id="deleteHost" crop="right"
+              oncommand="FhcManageFhcListDialog.deleteItem()"
+              label="&fhwin.button.remove.label;"
+              accesskey="&fhwin.button.remove.accesskey;"/>
+      <button id="updateHost" crop="right"
+              oncommand="FhcManageFhcListDialog.updateItem()"
+              label="&fhwin.button.edit.label;"
+              accesskey="&fhwin.button.edit.accesskey;"/>
+      <button id="addHost" crop="right"
+              oncommand="FhcManageFhcListDialog.addItem()"
+              label="&fhwin.button.add.label;"
+              accesskey="&fhwin.button.add.accesskey;"/>
+	  <spacer flex="1"/>
+    </hbox>
+  </groupbox>  
+  
+  <hbox>
+    <spacer flex="1"/>
+      <button id="addCurrentHost" crop="right"
+              oncommand="FhcManageFhcListDialog.addCurrentHost()"
+              label="&fhcmultilinelistdlg.button.addcurrenthost;"/>
+      <button id="addCurrentPage" crop="right"
+              oncommand="FhcManageFhcListDialog.addCurrentPage()"
+              label="&fhcmanagefhclistdlg.button.addcurrentpage;"/>
+    <button id="close" icon="close"
+            label="&fhwin.button.close.label;"
+            accesskey="&fhwin.button.close.accesskey;"
+            oncommand="window.close();return;"/>
+  </hbox>
+</window>

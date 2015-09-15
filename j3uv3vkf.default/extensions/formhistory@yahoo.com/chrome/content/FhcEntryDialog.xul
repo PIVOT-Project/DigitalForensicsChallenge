@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="entryDialogv3"
+        title="&fhentrydlg.windowtitle;"
+        buttons="cancel,accept"
+        style="width:40em;"
+        ondialogaccept="return FhcEntryDialog.onOkay();"
+        onload="FhcEntryDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcEntryDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+
+  <menupopup id="open-url-menu">
+    <!-- Re-use labels also used in HistoryWindowControl -->
+    <menuitem id="open-url" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurl;"
+              oncommand="FhcEntryDialog.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-noparam" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlnoparam;"
+              oncommand="FhcEntryDialog.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-host" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlhost;"
+              oncommand="FhcEntryDialog.openURLMenu(this, 'url')"/>
+    <menuseparator id="url-sep"/>
+    <menuitem id="copy-url" class="menuitem-iconic fh_menuitem_copy"
+              label="&fhwin.menuitem.urlmenu.openurlcopy;"
+              oncommand="FhcEntryDialog.openURLMenu(this, 'copy')"/>
+  </menupopup>
+
+  <vbox class="box-padded">
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <description id="descriptionAdd" style="display:none" class="description">
+             &fhentrydlg.add.description;</description>
+        <description id="descriptionEdit" style="display:none" class="description">
+             &fhentrydlg.edit.description;</description>
+        <description id="descriptionMultiple" style="display:none" class="description">
+             &fhentrydlg.editmultiple.description;</description>
+        <hbox>
+          <label id="errorMessageBlank" hidden="true" class="errormessage"
+                 value="&fhentrydlg.blankfielderror.label;"/>
+          <label id="errorMessageExist" hidden="true" class="errormessage"
+                 value="&fhentrydlg.existerror.label;"/>
+          <label id="errorMessageTimesUsed" hidden="true" class="errormessage"
+                 value="&fhentrydlg.timesusederror.label;"/>
+          <label value=""/>
+        </hbox>
+        <row align="baseline">
+          <label value="&fhentrydlg.fieldname.label;" control="name"/>
+          <textbox id="name" oninput="FhcEntryDialog.onInput();"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhentrydlg.value.label;" control="value"/>
+          <textbox id="value" oninput="FhcEntryDialog.onInput();"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhentrydlg.timesused.label;" control="used"/>
+          <textbox id="used" oninput="FhcEntryDialog.onInput();"/>
+        </row>
+        <row align="baseline">
+          <label value="&fhentrydlg.firstused.label;" control="first"/>
+          <hbox>
+            <textbox id="first" disabled="true" flex="1"/>
+            <vbox id="placefirstbutton">
+              <spacer flex="1"/>
+              <image src="chrome://formhistory/skin/browsehistory.png"
+                     class="image_icon"
+                     tooltiptext="&fhentrydlg.firstusedhistory.img.tooltip;"
+                     onclick="FhcEntryDialog.showBrowsingHistory('first')"/>
+              <spacer flex="1"/>
+            </vbox>
+          </hbox>
+        </row>
+        <row align="baseline">
+          <label value="&fhentrydlg.lastused.label;" control="last"/>
+          <hbox>
+            <textbox id="last" disabled="true" flex="1"/>
+            <vbox id="placelastbutton">
+              <spacer flex="1"/>
+              <image src="chrome://formhistory/skin/browsehistory.png"
+                     class="image_icon"
+                     tooltiptext="&fhentrydlg.lastusedhistory.img.tooltip;"
+                     onclick="FhcEntryDialog.showBrowsingHistory('last')"/>
+              <spacer flex="1"/>
+            </vbox>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+    <groupbox id="placegroup">
+      <caption id="placegroupcaption" label="&fhentrydlg.place.group.caption;"/>
+      <grid>
+        <columns>
+          <column/>
+          <column flex="1"/>
+        </columns>
+        <rows>
+          <row align="baseline">
+            <label value="&fhentrydlg.pagetitle.label;" control="pagetitle"/>
+            <hbox>
+              <textbox id="pagetitle" disabled="true" class="placeinfo" flex="1"/>
+              <hbox class="image_icon"/>
+            </hbox>
+          </row>
+          <row align="baseline">
+            <label value="&fhentrydlg.host.label;" control="host"/>
+            <hbox>
+              <textbox id="host" disabled="true" class="placeinfo" flex="1"/>
+              <hbox class="image_icon"/>
+            </hbox>
+          </row>
+          <row align="baseline">
+            <label value="&fhentrydlg.url.label;" control="url"/>
+            <hbox>
+              <textbox id="url" disabled="true" class="placeinfo" flex="1"/>
+              <vbox id="link_button">
+                <spacer flex="1"/>
+                <image id="link_icon" class="image_icon"
+                       tooltiptext="&fhwin.menuitem.urlmenu.tooltip;"
+                       src="chrome://formhistory/skin/link.png"
+                       onclick="FhcEntryDialog.showURLmenu()"/>
+                <spacer flex="1"/>
+              </vbox>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+    </groupbox>
+  </vbox>
+</dialog>
