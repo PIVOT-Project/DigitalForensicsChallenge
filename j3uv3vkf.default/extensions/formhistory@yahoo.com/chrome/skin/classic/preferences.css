@@ -1,0 +1,129 @@
+windowdragbox radiogroup radio {
+  max-width: 12em !important;
+}
+
+radio {
+  margin: 2px 8px;
+}
+
+radio[pane] {
+  -moz-appearance: none;
+  margin: 0px 1px 0px 1px;
+  padding: 1px 8px 1px 8px;
+  min-width: 4.5em;
+}
+
+caption {
+  -moz-appearance: none;
+}
+
+.caption-text {
+  font-weight: bold;
+  -moz-appearance: none;
+}
+
+.groupbox-title {
+  padding-top: 6px;
+}
+
+.icon-box {
+  width: 16px;
+  height: 16px;
+}
+
+.collapsable {
+  min-height: 1px;
+}
+
+#cleanup-status,
+#recreate-status {
+  background-color: #fdffd9;
+  height: 26px;
+  margin: 0;
+  padding: 5px 8px;
+  font-weight: bold;
+}
+
+.info_icon {
+  width: 16px;
+  height: 16px;
+  margin: 4px;
+}
+
+.tooltipcolumnheader {
+  font-weight: bold;
+  background-color: #EEEEEE;
+}
+
+.tooltipdescription {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+tooltip .descrip {
+  color: #000090;
+  font-weight: 600;
+}
+
+tooltip .info {
+}
+
+tooltip .example {
+  font-style: italic;
+}
+
+.multiline-label:hover {
+  cursor: default;
+}
+
+/* Regular Search Expression */
+
+#manageRegexpTitle {
+  font-weight: bold;
+}
+
+.treecol-text {
+  font-weight: bold;
+}
+
+.flagColumn {
+  text-align: center
+}
+
+treechildren::-moz-tree-checkbox {
+  /* unchecked checkbox treecells. This style MUST come first. */
+  list-style-image: url("chrome://formhistory/skin/unticked.png");;
+}
+treechildren::-moz-tree-checkbox(checked){
+  /* checked checkbox treecells. */
+  list-style-image: url("chrome://formhistory/skin/ticked.png");
+}
+
+.shortcutTextbox {
+  font-family: monospace;
+  background-color: -moz-Field;
+}
+
+/* -------- tabbox -------- */
+tabbox {
+  background-color: transparent;
+}
+
+tabpanels {
+  -moz-appearance: none;
+  background-image: none !important;
+  background-color: transparent;
+  padding: 2px 10px 10px 10px;
+}
+
+tab[selected="true"] {
+  font-weight: bold;
+}
+
+
+/* -------- information panel -------- */
+.infotitle {
+  margin-top: 5px;
+  font-weight: bold;
+}

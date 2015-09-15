@@ -1,0 +1,48 @@
+
+#titleBox {
+  background-color: #FFFFFF;
+  border: 2px inset #eeeeee;
+  padding: 10px 20px 15px 20px;
+  margin: 5px;
+  -moz-border-radius: 5px;
+}
+
+.caption-text {
+  font-weight: bold;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.groupbox-title {
+  padding-top: 6px;
+}
+
+.groupbox-body {
+  padding-top: 8px;
+}
+
+#extensionName {
+  font-size: large;
+  font-weight: bold;
+  padding-top: 5px;
+  text-align: left;
+}
+
+#extensionVersion {
+  font-weight: bold;
+  color: #909090;
+  text-align: left;
+}
+
+#extensionContributors, #extensionTranslators {
+  color: #606060;
+}
+
+.text-link {
+  color: #0000FF;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}

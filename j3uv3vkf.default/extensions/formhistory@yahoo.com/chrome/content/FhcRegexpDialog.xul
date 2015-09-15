@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="regexpDialog"
+        title="&fhcregexpdlg.windowtitle;"
+        buttons="cancel,accept"
+        style="width:48em; height:16em"
+        ondialogaccept="return FhcRegexpDialog.onOkay();"
+        onload="FhcRegexpDialog.init();"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcRegexpDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js"/>
+
+  <vbox class="box-padded">
+    <tooltip id="regexp-tip" orient="vertical" class="tooltip-regexstatus">
+      <label value="RegExp Status:" class="tooltip-regexstatus-label"/>
+      <label id="regexp-errmsg" class="tooltip-regexmessage-label"/>
+    </tooltip>
+
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+        <column/>
+        <column/>
+      </columns>
+      <rows>
+        <description id="descriptionAdd" style="display:none" class="description">
+            &fhcregexpdlg.add.description;</description>
+        <description id="descriptionEdit" style="display:none" class="description">
+            &fhcregexpdlg.edit.description;</description>
+        <hbox>
+          <label id="errorMessageBlank" hidden="true" class="errormessage"
+                 value="&fhcregexpdlg.emptyerror.label;"/>
+          <label id="errorMessageExist" hidden="true" class="errormessage"
+                 value="&fhcregexpdlg.existerror.label;"/>
+          <label value=""/>
+        </hbox>
+        <row align="center">
+          <label    control="description"
+                    value="&fhcregexpdlg.description.label;"/>
+          <textbox  id="description" tabindex="1"/>
+        </row>
+        <row align="center">
+          <label         control="category"
+                         value="&fhcregexpdlg.category.label;"/>
+          <hbox          flex="1">
+            <menulist    id="category" editable="true" tabindex="2"
+                         disableautoselect="true" sizetopopup="always">
+              <menupopup id="menuPopupCatList"/>
+            </menulist>
+          </hbox>
+        </row>
+        <row align="center">
+          <label    control="regexp"
+                    value="&fhcregexpdlg.regexp.label;"/>
+          <textbox  id="regexp" tooltip="" tabindex="3"
+                    oninput="FhcRegexpDialog.onInput(this);"/>
+          <label    id="regexp-state" value="" tooltip="regexp-tip" class="invalidregexp"/>
+          <checkbox id="caseSens" checked="false" tabindex="4"
+                    label="&fhcregexpdlg.matchcase.label;"/>
+        </row>
+        <row align="center">
+          <label    control="useFor"
+                    value="&fhcregexpdlg.usefor.label;"/>
+          <radiogroup id="useforGroup" orient="horizontal">
+            <radio id="radioName" label="&fhcregexpdlg.useforname.radiolabel;"/>
+            <radio id="radioValue" label="&fhcregexpdlg.useforvalue.radiolabel;" selected="true"/>
+            <radio id="radioBoth" label="&fhcregexpdlg.useforboth.radiolabel;"/>
+          </radiogroup>
+        </row>
+      </rows>
+    </grid>
+  </vbox>
+</dialog>

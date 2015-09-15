@@ -1,0 +1,1261 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/tree.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/treerows.css" type="text/css"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="formhistoryWindow"
+        title="&fhwin.window.title;"
+        onload="HistoryWindowControl.init();"
+        onunload="HistoryWindowControl.destroy();"
+        persist="width height screenX screenY">
+  
+  <script type="application/x-javascript" src="chrome://formhistory/content/HistoryWindowControl.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/HistoryTreeView.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/CleanupWindowControl.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/CleanupProtectView.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/MultilineWindowControl.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcAlignFieldsHistoryWindowControl.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcCleanupFilter.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDateHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcXmlHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBrowserListener.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcRdfExtensionHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPredefinedRegexp.js" />
+  
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle"
+                  src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <tooltip id="adv_fieldname-regex-tip" orient="vertical" class="tooltip-regexstatus">
+    <label value="RegExp Status:" class="tooltip-regexstatus-label"/>
+    <label id="adv_fieldname-regex-errmsg" class="tooltip-regexmessage-label"/>
+  </tooltip>
+  <tooltip id="adv_fieldvalue-regex-tip" orient="vertical" class="tooltip-regexstatus">
+    <label value="RegExp Status:" class="tooltip-regexstatus-label"/>
+    <label id="adv_fieldvalue-regex-errmsg" class="tooltip-regexmessage-label"/>
+  </tooltip>
+
+  <keyset>
+    <key id="selectall-key"
+         key="&fhwin.menuitem.selectall.accelkey;"
+         modifiers="accel"
+         oncommand="HistoryWindowControl.selectAllKey();"/>
+    <key id="selectnone-key"
+         key="-" modifiers="accel"
+         oncommand="HistoryWindowControl.selectNoneKey();"/>
+    <key id="selectinvert-key"
+         key="*" modifiers="accel"
+         oncommand="HistoryWindowControl.selectInvertKey();"/>
+    <key id="insert-key"
+         key="&fhwin.menuitem.insert.accelkey;" modifiers="accel"
+         oncommand="HistoryWindowControl.editKeyAction('Insert');"/>
+    <key id="edit-key"
+         key="&fhwin.menuitem.edit.accelkey;" modifiers="accel"
+         oncommand="HistoryWindowControl.editKeyAction('Edit');"/>
+    <key id="delete-key"
+         keycode="VK_DELETE" modifiers=""
+         oncommand="HistoryWindowControl.editKeyAction('Delete');"/>
+    <key id="reloadview-key"
+         key="R" modifiers="accel"
+         oncommand="HistoryWindowControl.reloadView();"/>
+    <key id="options-key"
+         key="&fhwin.menuitem.options.accelkey;" modifiers="accel"
+         oncommand="FhcShowDialog.doShowFhcOptions();"/>
+    <key id="help-key"
+         keycode="VK_F1" modifiers=""
+         oncommand="FhcUtil.showHelp();"/>
+  </keyset>
+
+  <menupopup id="formHistoryPopup">
+    <menuitem label="&fhwin.menuitem.insert.label;"
+              id="mnInsert" disabled="false"
+              class="menuitem-iconic fh_menuitem_insert"
+              oncommand="HistoryWindowControl.editAction('Insert');"/>
+    <menuitem label="&fhwin.menuitem.edit.label;"
+              id="mnEdit" disabled="true"
+              class="menuitem-iconic fh_menuitem_edit"
+              oncommand="HistoryWindowControl.editAction('Edit');"/>
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDelete" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="HistoryWindowControl.editAction('Delete');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.deleteallname.label;"
+              id="mnDeleteName" disabled="true"
+              class="menuitem-iconic fh_menuitem_deletename"
+              oncommand="HistoryWindowControl.editAction('DeleteName');"/>
+    <menuitem label="&fhwin.menuitem.deleteallvalue.label;"
+              id="mnDeleteValue" disabled="true"
+              class="menuitem-iconic fh_menuitem_deletevalue"
+              oncommand="HistoryWindowControl.editAction('DeleteValue');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.addcleanup.label;"
+              id="mnAddCleanup"
+              class="menuitem-iconic fh_menuitem_addcleanup"
+              oncommand="HistoryWindowControl.addToCleanup();"/>
+    <menuitem label="&fhwin.menuitem.addprotect.label;"
+              id="mnAddProtect"
+              class="menuitem-iconic fh_menuitem_addcleanup"
+              oncommand="HistoryWindowControl.addToProtect();"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="HistoryWindowControl.selectAll();"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="HistoryWindowControl.selectNone();"/>
+    <menuitem label="&fhwin.menuitem.selectinvert.label;"
+              id="mnSelectInvert"
+              class="menuitem-iconic fh_menuitem_selectinvert"
+              oncommand="HistoryWindowControl.selectInvert();"/>
+  </menupopup>
+
+  <menupopup id="criteriaPopup">
+    <menuitem label="&fhwin.menuitem.insert.label;"
+              id="mnInsertCriteria" disabled="false"
+              class="menuitem-iconic fh_menuitem_insert"
+              oncommand="CleanupWindowControl.editAction('Insert');"/>
+    <menuitem label="&fhwin.menuitem.edit.label;"
+              id="mnEditCriteria" disabled="true"
+              class="menuitem-iconic fh_menuitem_edit"
+              oncommand="CleanupWindowControl.editAction('Edit');"/>
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDeleteCriteria" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="CleanupWindowControl.editAction('Delete');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="CleanupWindowControl.selectAll();"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="CleanupWindowControl.selectNone();"/>
+  </menupopup>
+  
+  <menupopup id="protectPopup">
+    <menuitem label="&fhwin.menuitem.insert.label;"
+              id="mnInsertProtCriteria" disabled="false"
+              class="menuitem-iconic fh_menuitem_insert"
+              oncommand="CleanupProtectView.editAction('Insert');"/>
+    <menuitem label="&fhwin.menuitem.edit.label;"
+              id="mnEditProtCriteria" disabled="true"
+              class="menuitem-iconic fh_menuitem_edit"
+              oncommand="CleanupProtectView.editAction('Edit');"/>
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDeleteProtCriteria" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="CleanupProtectView.editAction('Delete');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnProtSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="CleanupProtectView.selectAll();"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnProtSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="CleanupProtectView.selectNone();"/>
+  </menupopup>
+
+  <menupopup id="multilinePopup">
+    <menuitem id="mnCopyMultilineToClipboard" class="menuitem-iconic fh_menuitem_copyclip"
+              label="&fhcmultilinedlg.button.copytoclipboard;"
+              oncommand="MultilineWindowControl.copyToClipboardAction()"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDeleteMultiline" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="MultilineWindowControl.editAction('Delete');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="MultilineWindowControl.selectAll();"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="MultilineWindowControl.selectNone();"/>
+  </menupopup>
+
+  <menupopup id="regexp-namelist-menu">
+    <menuitem id="regexp-title-item" class="menuitem-iconic fh_menuitem_regexp_title"
+              tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+              label="&fhwin.menuitem.regexpsearch.title;:" disabled="true"/>
+    <menuseparator id="s1"/>
+    <menuseparator id="s2"/>
+    <menuitem id="manageRegexName" class="menuitem-iconic fh_menuitem_manageregexp"
+              label="&fhwin.menuitem.regexpsearch.manage;" oncommand="FhcShowDialog.doShowFhcOptions('names')"/>
+  </menupopup>
+
+  <menupopup id="regexp-list-menu">
+    <menuitem id="regexp-title-item" class="menuitem-iconic fh_menuitem_regexp_title"
+              tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+              label="&fhwin.menuitem.regexpsearch.title;:" disabled="true"/>
+    <menuseparator id="s3"/>
+    <menuseparator id="s4"/>
+    <menuitem id="manageRegexValue" class="menuitem-iconic fh_menuitem_manageregexp"
+              label="&fhwin.menuitem.regexpsearch.manage;" oncommand="FhcShowDialog.doShowFhcOptions('values')"/>
+  </menupopup>
+
+  <menupopup id="open-url-menu">
+    <menuitem id="open-url" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurl;"
+              oncommand="HistoryWindowControl.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-noparam" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlnoparam;"
+              oncommand="HistoryWindowControl.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-host" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlhost;"
+              oncommand="HistoryWindowControl.openURLMenu(this, 'url')"/>
+    <menuseparator id="url-sep"/>
+    <menuitem id="copy-url" class="menuitem-iconic fh_menuitem_copy"
+              label="&fhwin.menuitem.urlmenu.openurlcopy;"
+              oncommand="HistoryWindowControl.openURLMenu(this, 'copy')"/>
+  </menupopup>
+
+
+  <menubar id="formhistory-menubar"
+           onpopupshowing="HistoryWindowControl.menubarPopup(event)">
+    <menu id="file-menu"
+          label="&fhwin.menu.file.label;"
+          accesskey="&fhwin.menu.file.accesskey;">
+      <menupopup id="file-popup">
+        <menuitem label="&fhwin.menuitem.importmanager.label;"
+                  id="mnbarImport"
+                  class="menuitem-iconic fh_menuitem_import"
+                  oncommand="HistoryWindowControl.importAction();"/>
+        <menuitem label="&fhwin.menuitem.exportmanager.label;"
+                  id="mnbarExportAll"
+                  class="menuitem-iconic fh_menuitem_export"
+                  oncommand="HistoryWindowControl.exportActionAll();"/>
+        <menuseparator/>
+        <menuitem label="&fhwin.menuitem.exportcsv.label;"
+                  id="mnbarExportCSV"
+                  class="menuitem-iconic fh_menuitem_export"
+                  oncommand="HistoryWindowControl.exportActionCSV();"/>
+        <menuseparator/>
+        <menuitem label="&fhwin.menuitem.close.label;" 
+                  id="mnbarClose" class="menuitem-iconic fh_menuitem_close"
+                  oncommand="window.close();return;"/>
+      </menupopup>
+    </menu>
+    <menu id="edit-menu"
+          label="&fhwin.menu.edit.label;"
+          accesskey="&fhwin.menu.edit.accesskey;">
+      <menupopup id="edit-popup">
+        <!-- History menu-items -->
+        <menuitem label="&fhwin.menuitem.insert.label;"
+                  id="mnbarFhInsert" disabled="false" key="insert-key"
+                  class="menuitem-iconic fh_menuitem_insert"
+                  oncommand="HistoryWindowControl.editAction('Insert');"/>
+        <menuitem label="&fhwin.menuitem.edit.label;"
+                  id="mnbarFhEdit" disabled="true" key="edit-key"
+                  class="menuitem-iconic fh_menuitem_edit"
+                  oncommand="HistoryWindowControl.editAction('Edit');"/>
+        <menuitem label="&fhwin.menuitem.delete.label;"
+                  id="mnbarFhDelete" disabled="true" key="delete-key"
+                  class="menuitem-iconic fh_menuitem_delete"
+                  oncommand="HistoryWindowControl.editAction('Delete');"/>
+        <menuseparator id="mnbarFhSep1"/>
+        <menuitem label="&fhwin.menuitem.deleteallname.label;"
+                  id="mnbarFhDeleteName" disabled="true"
+                  class="menuitem-iconic fh_menuitem_deletename"
+                  oncommand="HistoryWindowControl.editAction('DeleteName');"/>
+        <menuitem label="&fhwin.menuitem.deleteallvalue.label;"
+                  id="mnbarFhDeleteValue" disabled="true"
+                  class="menuitem-iconic fh_menuitem_deletevalue"
+                  oncommand="HistoryWindowControl.editAction('DeleteValue');"/>
+        <menuseparator id="mnbarFhSep2"/>
+        <menuitem label="&fhwin.menuitem.addcleanup.label;"
+                  id="mnbarFhAddCleanup"
+                  class="menuitem-iconic fh_menuitem_addcleanup"
+                  oncommand="HistoryWindowControl.addToCleanup();"/>
+        <menuitem label="&fhwin.menuitem.addprotect.label;"
+                  id="mnbarFhAddProtect"
+                  class="menuitem-iconic fh_menuitem_addcleanup"
+                  oncommand="HistoryWindowControl.addToProtect();"/>
+        <menuseparator id="mnbarFhSep3"/>
+        <menuitem label="&fhwin.menuitem.selectall.label;"
+                  id="mnbarFhSelectAll" key="selectall-key"
+                  class="menuitem-iconic fh_menuitem_selectall"
+                  oncommand="HistoryWindowControl.selectAll();"/>
+        <menuitem label="&fhwin.menuitem.selectnone.label;"
+                  id="mnbarFhSelectNone" key="selectnone-key"
+                  class="menuitem-iconic fh_menuitem_selectnone"
+                  oncommand="HistoryWindowControl.selectNone();"/>
+        <menuitem label="&fhwin.menuitem.selectinvert.label;"
+                  id="mnbarFhSelectInvert" key="selectinvert-key"
+                  class="menuitem-iconic fh_menuitem_selectinvert"
+                  oncommand="HistoryWindowControl.selectInvert();"/>
+        <!-- Cleanup menu-items, initially hidden -->
+        <menuitem label="&fhwin.menuitem.insert.label;"
+                  id="mnbarCuInsertCriteria" disabled="false" key="insert-key"
+                  class="menuitem-iconic fh_menuitem_insert"
+                  oncommand="HistoryWindowControl.editCleanupAction('Insert');"
+                  hidden='true'/>
+        <menuitem label="&fhwin.menuitem.edit.label;"
+                  id="mnbarCuEditCriteria" disabled="true" key="edit-key"
+                  class="menuitem-iconic fh_menuitem_edit"
+                  oncommand="HistoryWindowControl.editCleanupAction('Edit');"
+                  hidden='true'/>
+        <menuitem label="&fhwin.menuitem.delete.label;"
+                  id="mnbarCuDeleteCriteria" disabled="true" key="delete-key"
+                  class="menuitem-iconic fh_menuitem_delete"
+                  oncommand="HistoryWindowControl.editCleanupAction('Delete');"
+                  hidden='true'/>
+        <menuseparator id="mnbarCuSep" hidden='true'/>
+        <menuitem label="&fhwin.menuitem.selectall.label;"
+                  id="mnbarCuSelectAll" key="selectall-key"
+                  class="menuitem-iconic fh_menuitem_selectall"
+                  oncommand="HistoryWindowControl.selectCleanupAll();"
+                  hidden='true'/>
+        <menuitem label="&fhwin.menuitem.selectnone.label;"
+                  id="mnbarCuSelectNone" key="selectnone-key"
+                  class="menuitem-iconic fh_menuitem_selectnone"
+                  oncommand="HistoryWindowControl.selectCleanupNone();"
+                  hidden='true'/>
+        <!-- Multiline menu-items, initially hidden -->
+        <menuitem label="&fhwin.menuitem.delete.label;"
+                  id="mnbarMlDelete" disabled="true" key="delete-key"
+                  class="menuitem-iconic fh_menuitem_delete"
+                  oncommand="MultilineWindowControl.editAction('Delete');"
+                  hidden='true'/>
+        <menuseparator id="mnbarMlSep" hidden='true'/>
+        <menuitem label="&fhwin.menuitem.selectall.label;"
+                  id="mnbarMlSelectAll" key="selectall-key"
+                  class="menuitem-iconic fh_menuitem_selectall"
+                  oncommand="MultilineWindowControl.selectAll();"
+                  hidden='true'/>
+        <menuitem label="&fhwin.menuitem.selectnone.label;"
+                  id="mnbarMlSelectNone" key="selectnone-key"
+                  class="menuitem-iconic fh_menuitem_selectnone"
+                  oncommand="MultilineWindowControl.selectNone();"
+                  hidden='true'/>
+      </menupopup>
+    </menu>
+    <menu id="view-menu"
+          label="&fhwin.menu.view.label;"
+          accesskey="&fhwin.menu.view.accesskey;">
+      <menupopup id="view-popup">
+        <menuitem label="&fhwin.menuitem.reloadview.label;"
+                  id="formhistctrl_menuitem_reloadview"
+                  class="menuitem-iconic fh_menuitem_reload"
+                  key="reloadview-key"
+                  oncommand="HistoryWindowControl.reloadView();"/>
+      </menupopup>
+    </menu>
+    <menu id="tools-menu"
+          label="&fhwin.menu.tools.label;"
+          accesskey="&fhwin.menu.tools.accesskey;">
+      <menupopup id="tools-popup">
+        <menuitem label="&fhwin.menuitem.options.label;"
+                  id="formhistctrl_menuitem_options"
+                  class="menuitem-iconic fh_menuitem_options"
+                  key="options-key"
+                  oncommand="FhcShowDialog.doShowFhcOptions();"/>
+      </menupopup>
+    </menu>
+    <menu id="help-menu"
+          label="&fhwin.menu.help.label;"
+          accesskey="&fhwin.menu.help.accesskey;">
+      <menupopup id="help-popup">
+        <menuitem label="&fhwin.menuitem.help.label;"
+                  id="help" class="menuitem-iconic fh_menuitem_help"
+                  key="help-key"
+                  oncommand="FhcUtil.showHelp();" />
+        <menuitem label="&fhwin.menuitem.releasenotes.label;"
+                  id="releasenotes" class="menuitem-iconic fh_menuitem_releasenotes"
+                  key=""
+                  oncommand="FhcUtil.showReleaseNotes();" />
+        <menuseparator/>
+        <menuitem label="&fhwin.menuitem.about.label;"
+                  id="about" class="menuitem-iconic fh_menuitem_about"
+                  key=""
+                  oncommand="FhcShowDialog.doShowFhcAbout();" />
+      </menupopup>
+    </menu>
+  </menubar>
+
+  <tooltip id="preview-close-tip" orient="vertical">
+    <label id="preview-close-tip-label" value="&fhwin.treeview.closecleanuppreview.tooltip;"/>
+  </tooltip>
+
+  <tooltip id="multilinetree-tooltip"
+           onpopupshowing="MultilineWindowControl.showTooltip(event, this)"
+           onpopuphidden="MultilineWindowControl.hideTooltip(event, this)"/>
+
+  <tooltip id="notification-tip" orient="vertical"
+           onclick="HistoryWindowControl.hideNotificationHelp()">
+    <label id="notification-helptitle" value=""/>
+    <label id="notification-help1" value=""/>
+    <label id="notification-help2" value=""/>
+  </tooltip>
+  <hbox id="notification-box" class="collapsable" collapsed="true">
+    <image id="notification-icon-info"
+           src="chrome://formhistory/skin/information.png"
+           tooltip="notification-tip"
+           onclick="HistoryWindowControl.showNotificationHelp()"/>
+    <image id="notification-icon-warn" hidden="true"
+           src="chrome://formhistory/skin/exclamation.png"
+           tooltip="notification-tip"
+           onclick="HistoryWindowControl.showNotificationHelp()"/>
+    <image id="notification-icon-error" hidden="true"
+           src="chrome://formhistory/skin/error.png"
+           tooltip="notification-tip"
+           onclick="HistoryWindowControl.showNotificationHelp()"/>
+    <label id="notification-text"
+           tooltip="notification-tip"/>
+    <label id="notification-more"
+           value="&historywindow.notification.moreinfo;"
+           tooltip="notification-tip"
+           onclick="HistoryWindowControl.showNotificationHelp()"/>
+    <spacer flex="1" />
+    <image src="chrome://formhistory/skin/cancel.png"
+           onclick="HistoryWindowControl.hideNotificationBox()"/>
+  </hbox>
+
+  <tabbox style="margin: 10px 0 0 0" flex="1">
+    <tabs id="historyWindowTabs"
+          onselect="HistoryWindowControl.onSelectTab(this.selectedIndex);">
+      <tab label="&fhwin.historytab.formhistory;"
+           accesskey="&fhwin.historytab.formhistory.accesskey;"/>
+      <tab label="&fhwin.historytab.cleanup;"
+           accesskey="&fhwin.historytab.cleanup.accesskey;"/>
+      <tab label="&fhwin.historytab.multiline;" id="editorHistoryTab"/>
+    </tabs>
+    <tabpanels id="mainTabPanels" flex="1">
+      
+      <tabpanel>
+        <vbox id="formHistory" flex="1" style="padding: 9px 10px 7px 10px">
+
+          <!-- simple search -->
+          <hbox align="center" id="simple-search" persist="hidden">
+            <label    control="filterText"
+                      value="&fhwin.filter.label;"
+                      tooltiptext="&fhwin.filter.tooltip;"
+                      accesskey="&fhwin.filter.accesskey;"/>
+            <textbox  id="filterText" flex="1"
+                      type="search" timeout="500"
+                      oncommand="HistoryWindowControl.filterChanged(this);"/>
+            <checkbox id="filterMatchCase" label="&fhwin.checkbox.matchcase.label;"
+                      accesskey="&fhwin.checkbox.matchcase.accesskey;"
+                      oncommand="HistoryWindowControl.filterMatchCaseChanged(this.checked);"/>
+            <spacer width="30"/>
+            <hbox     align="center">
+              <label control="showadvancedsearch"
+                     value="&fhwin.filter.advancedsearch;"/>
+              <vbox>
+                <spacer/>
+                <button id="showadvancedsearch" class="expander-down searchtype-button"
+                        oncommand="HistoryWindowControl.toggleSearch()"
+                        tooltiptext="&fhwin.filter.advancedsearch;"/>
+                <spacer/>
+              </vbox>
+            </hbox>
+          </hbox>
+
+          <!-- Advanced search -->
+          <vbox id="advanced-search" hidden="true" persist="hidden">
+            <hbox>
+              <vbox flex="1">
+                <grid flex="1">
+                  <columns>
+                    <column flex="0"/>
+                    <column flex="10"/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows flex="1">
+                    <row flex="1">
+                      <label id="adv_fieldname_label" class="searchlabel leftcol"
+                             control="adv_fieldname"
+                             value="&fhwin.treeview.column.name.label;"/>
+                      <hbox flex="2">
+                        <textbox id="adv_fieldname"
+                                 type="search" flex="1"
+                                 oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <label   id="adv_fieldname-regex-state" value="*" class="invalidregexp"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/regexp.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+                                 onclick="HistoryWindowControl.showRegExpMenu('adv_fieldname')"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                      <hbox flex="1">
+                        <checkbox id="adv_fieldname_case" persist="checked" flex="1"
+                                  label="&fhwin.checkbox.matchcase.label;"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <checkbox id="adv_fieldname_exact" persist="checked" flex="1"
+                                  label="&fhcriteriadlg.matchexact.label;"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <checkbox id="adv_fieldname_regexp" persist="checked" flex="1"
+                                  label="RegExp"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                      </hbox>
+                    </row>
+                    <row flex="1">
+                      <label id="adv_fieldvalue_label" class="searchlabel leftcol"
+                             control="adv_fieldvalue"
+                             value="&fhwin.treeview.column.value.label;"/>
+                      <hbox flex="2">
+                        <textbox id="adv_fieldvalue"
+                                 type="search" timeout="500" flex="1"
+                                 oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <label   id="adv_fieldvalue-regex-state" value="*" class="invalidregexp"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/regexp.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.menuitem.regexpsearch.tooltip;"
+                                 onclick="HistoryWindowControl.showRegExpMenu('adv_fieldvalue')"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                      <hbox flex="1">
+                        <checkbox id="adv_fieldvalue_case" persist="checked" flex="1"
+                                  label="&fhwin.checkbox.matchcase.label;"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <checkbox id="adv_fieldvalue_exact" persist="checked" flex="1"
+                                  label="&fhcriteriadlg.matchexact.label;"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                        <checkbox id="adv_fieldvalue_regexp" persist="checked" flex="1"
+                                  label="RegExp"
+                                  oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                      </hbox>
+                    </row>
+                  </rows>
+                </grid>
+                <hbox>
+                  <label id="adv_times_from_label" class="searchlabel leftcol"
+                         control="adv_times_from"
+                         value="&fhwin.treeview.column.used.label; &fhwin.advancedfilter.fromto.from.label;"/>
+                  <textbox id="adv_times_from" class="searchdatetext" flex="1"
+                           type="search" timeout="500" maxwidth="70"
+                           oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                  <label control="adv_times_to" class="searchlabel"
+                         value="&fhwin.advancedfilter.fromto.to.label;"/>
+                  <textbox id="adv_times_to" class="searchdatetext" flex="1"
+                           type="search" timeout="500" maxwidth="70"
+                           oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                  <spacer flex="1"/>
+                  <label id="host_label" class="searchlabel" control="host_search"
+                         value="&fhwin.advancedfilter.host.label;"/>
+                  <textbox id="host_search" class="searchdatetext" flex="1"
+                           type="search" timeout="500" maxwidth="190"
+                           oncommand="HistoryWindowControl.advancedFilterChanged()"/>
+                  <hbox class="image_icon"/>
+                </hbox>
+                <grid flex="1">
+                  <columns>
+                    <column flex="0"/>
+                    <column flex="1"/>
+                    <column flex="0"/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows>
+                    <row flex="1">
+                      <label id="adv_usedfirst_from_label" class="searchlabel leftcol"
+                             control="adv_usedfirst_from"
+                             value="&fhwin.treeview.column.first.label; &fhwin.advancedfilter.fromto.from.label;"/>
+                      <hbox flex="1">
+                        <textbox id="adv_usedfirst_from" class="searchdatetext"
+                                 type="search" flex="1"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_from')"
+                                 oninput="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_from')"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/calendar.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.advancedfilter.enterdatetime.tooltip;"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_from')"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                      <label control="adv_usedfirst_to" class="searchlabel"
+                             value="&fhwin.advancedfilter.fromto.to.label;"/>
+                      <hbox flex="1">
+                        <textbox id="adv_usedfirst_to" class="searchdatetext"
+                                 type="search" flex="1"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_to')"
+                                 oninput="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_to')"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/calendar.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.advancedfilter.enterdatetime.tooltip;"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedfirst_to');"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                    </row>
+                    <row flex="1">
+                      <label id="adv_usedlast_from_label" class="searchlabel leftcol"
+                             control="adv_usedlast_from"
+                             value="&fhwin.treeview.column.last.label; &fhwin.advancedfilter.fromto.from.label;" />
+                      <hbox flex="1">
+                        <textbox id="adv_usedlast_from" class="searchdatetext"
+                                 type="search" flex="1"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_from')"
+                                 oninput="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_from')"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/calendar.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.advancedfilter.enterdatetime.tooltip;"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_from');"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                      <label control="adv_usedlast_to" class="searchlabel"
+                             value="&fhwin.advancedfilter.fromto.to.label;"/>
+                      <hbox flex="1">
+                        <textbox id="adv_usedlast_to" class="searchdatetext"
+                                 type="search" flex="1"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_to')"
+                                 oninput="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_to')"/>
+                        <vbox>
+                          <spacer flex="1"/>
+                          <image src="chrome://formhistory/skin/calendar.png"
+                                 class="image_icon"
+                                 tooltiptext="&fhwin.advancedfilter.enterdatetime.tooltip;"
+                                 onclick="HistoryWindowControl.enterDateTime(event, 'adv_usedlast_to');"/>
+                          <spacer flex="1"/>
+                        </vbox>
+                      </hbox>
+                    </row>
+                  </rows>
+                </grid>
+              </vbox>
+              <spacer flex="1"/>
+              <vbox align="right">
+                <hbox align="center">
+                  <label control="filterText"
+                         value="&fhwin.filter.simplesearch;" />
+                  <vbox>
+                    <spacer/>
+                    <button id="showsimplesearch" class="expander-up searchtype-button"
+                            oncommand="HistoryWindowControl.toggleSearch()"
+                            tooltiptext="&fhwin.filter.simplesearch;"/>
+                    <spacer/>
+                  </vbox>
+                </hbox>
+                <spacer flex="1"/>
+                <button id="advanced_clear" disabled="true" style="margin-right: 4px"
+                        label="&fhwin.button.clear.label;"
+                        accesskey="&fhwin.button.clear.accesskey;"
+                        oncommand="HistoryWindowControl.advancedFilterClear()"/>
+              </vbox>
+            </hbox>
+            <hbox>
+              <separator class="groove" orient="horizontal" flex="1" height="2px"/>
+            </hbox>
+          </vbox>
+
+          <separator class="thin"/>
+          <label id="formHistoryTreeLabel" value="&fhwin.treeview.label;:"/>
+
+          <hbox id="preview-box-top" class="collapsable preview-box" collapsed="true">
+            <image src="chrome://formhistory/skin/close_grey.png"
+                   tooltip="preview-close-tip"
+                   onclick="HistoryWindowControl.closeCleanupPreview()"/>
+            <spacer flex="1"/>
+            <label id="preview-text-top" value="&fhwin.treeview.cleanuppreview.label;"/>
+            <spacer flex="1"/>
+            <image src="chrome://formhistory/skin/close_grey.png"
+                   tooltip="preview-close-tip"
+                   onclick="HistoryWindowControl.closeCleanupPreview()"/>
+          </hbox>
+
+          <separator class="thin"/>
+          <tree id="formHistoryTree" alternatingbackground="true"
+                flex="1" style="width:55em;height:24em;"
+                editable="true"
+                hidecolumnpicker="false" enableColumnDrag="true"
+                onselect="HistoryWindowControl.treeSelect(event);"
+                context="formHistoryPopup"
+                oncontextmenu="HistoryWindowControl.menuPopup(event);"
+                onclick="HistoryWindowControl.treeClick(event);"
+                ondblclick="HistoryWindowControl.treeDblclick(event);">
+            <treecols>
+              <treecol id="nameCol" flex="3"
+                       label="&fhwin.treeview.column.name.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="valueCol" flex="5"
+                       label="&fhwin.treeview.column.value.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="timesusedCol" flex="1" class="numericColumn"
+                       label="&fhwin.treeview.column.used.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="firstusedCol" flex="3"
+                       label="&fhwin.treeview.column.first.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="lastusedCol" flex="3"
+                       label="&fhwin.treeview.column.last.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="ageFirstCol" flex="1" hidden="true" class="fuzzyColumn"
+                       label="&fhwin.treeview.column.agefirst.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="ageCol" flex="1" class="fuzzyColumn"
+                       label="&fhwin.treeview.column.agelast.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="hostCol" flex="1"
+                       label="&fhwin.treeview.column.guessedhost.label;"
+                       tooltiptext="&fhwin.treeview.column.guessed.tooltip;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="urlCol" flex="1" hidden="true"
+                       label="&fhwin.treeview.column.guessedurl.label;"
+                       tooltiptext="&fhwin.treeview.column.guessed.tooltip;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="pagetitleCol" flex="1" hidden="true"
+                       label="&fhwin.treeview.column.guessedpagetitle.label;"
+                       tooltiptext="&fhwin.treeview.column.guessed.tooltip;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="indexCol" hidden="true" class="numericColumn"
+                       ignoreincolumnpicker="true"
+                       label="&fhwin.treeview.column.index.label;"
+                       onclick="HistoryWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+            </treecols>
+            <treechildren/>
+          </tree>
+
+          <hbox id="preview-box-bottom" class="collapsable preview-box" collapsed="true">
+            <image src="chrome://formhistory/skin/close_grey.png"
+                   tooltip="preview-close-tip"
+                   onclick="HistoryWindowControl.closeCleanupPreview()"/>
+            <spacer flex="1"/>
+            <label id="preview-text-bottom" value="&fhwin.treeview.cleanuppreview.label;"/>
+            <spacer flex="1"/>
+            <image src="chrome://formhistory/skin/close_grey.png"
+                   tooltip="preview-close-tip"
+                   onclick="HistoryWindowControl.closeCleanupPreview()"/>
+          </hbox>
+
+          <hbox>
+            <hbox flex="1">
+              <checkbox id="searchpageonly" flex="2" disabled="false" crop="end"
+                        label="&fhwin.checkbox.searchpageonly.label;"
+                        tooltiptext="&fhwin.checkbox.searchpageonly.tooltip;"
+                        oncommand="HistoryWindowControl.searchOnlyPageChanged(this.checked);"
+                        accesskey="&fhwin.checkbox.searchpageonly.accesskey;"/>
+              <checkbox id="searchfieldonly" flex="2" disabled="true" crop="end"
+                        label="&fhwin.checkbox.searchfieldonly.label;"
+                        tooltiptext="&fhwin.checkbox.searchfieldonly.tooltip;"
+                        oncommand="HistoryWindowControl.searchOnlyFieldChanged(this.checked);"
+                        accesskey="&fhwin.checkbox.searchfieldonly.accesskey;"/>
+
+              <checkbox id="searchcleanuponly" flex="2" disabled="false" crop="end"
+                        hidden="true"
+                        label="&fhwin.checkbox.searchcleanuponly.label;"
+                        tooltiptext="&fhwin.checkbox.searchcleanuponly.tooltip;"
+                        oncommand="HistoryWindowControl.searchOnlyCleanupChanged(this.checked);"
+                        accesskey="&fhwin.checkbox.searchcleanuponly.accesskey;"/>
+            </hbox>
+            <!-- Move to statusbar? -->
+            <spacer flex="10"/>
+            <label id="selectCount" value="" style="margin-top:4px;"/>
+            <spacer flex="1"/>
+            <label id="itemCount" value="0" style="margin-top:4px;"/>
+            <!-- -->
+          </hbox>
+
+          <separator class="thin"/>
+          <hbox>
+            <button id="closePreview" hidden="true"
+                    label="&fhwin.button.closepreview.label;" disabled="false"
+                    accesskey=""
+                    oncommand="HistoryWindowControl.closeCleanupPreview();"/>
+            <button id="removeSelected" disabled="true"
+                    label="&fhwin.button.remove.label;"
+                    accesskey="&fhwin.button.remove.accesskey;"
+                    oncommand="HistoryWindowControl.removeSelected();"/>
+            <!-- replaced by cleanup
+            <button id="removeAll"
+                    label="&fhwin.button.removeall.label;"
+                    accesskey="&fhwin.button.removeall.accesskey;"
+                    oncommand="HistoryWindowControl.removeAll();"/>
+                    -->
+            <button id="removeAll" disabled="false"
+                    label="&fhwin.button.cleanup.label;"
+                    accesskey="&fhwin.button.cleanup.accesskey;"
+                    oncommand="CleanupWindowControl.cleanup();"/>
+            <button id="editEntry"
+                    label="&fhwin.button.edit.label;" disabled="true"
+                    accesskey="&fhwin.button.edit.accesskey;"
+                    oncommand="HistoryWindowControl.editEntry();"/>
+            <button id="insertEntry"
+                    label="&fhwin.button.add.label;" disabled="false"
+                    accesskey="&fhwin.button.add.accesskey;"
+                    oncommand="HistoryWindowControl.insertEntry();"/>
+            <spacer flex="1"/>
+            <button id="close" icon="close"
+                    label="&fhwin.button.close.label;"
+                    accesskey="&fhwin.button.close.accesskey;"
+                    oncommand="window.close();return;"/>
+          </hbox>
+        </vbox>
+      </tabpanel>
+
+
+
+      <tabpanel>
+        <vbox id="blacklist" flex="1" style="padding: 9px 10px 7px 10px">
+
+          <!-- Options expanded -->
+          <vbox id="cleanupoptions-visible" hidden="false" persist="hidden">
+            <hbox align="center">
+              <label value="&fhwin.cleanup.label;:" class="description"/>
+              <spacer flex="1"/>
+              <label control="hidecleanupoptions" value="&fhwin.cleanup.hideoptions;"/>
+              <vbox>
+                <spacer/>
+                <button id="hidecleanupoptions" class="expander-up searchtype-button"
+                        oncommand="CleanupWindowControl.toggleOptions()"
+                        tooltiptext="&fhwin.cleanup.hideoptions;"/>
+                <spacer/>
+              </vbox>
+            </hbox>
+
+            <hbox>
+              <groupbox flex="1">
+                <caption label="&fhwin.cleanup.timeusage.group.caption;:"/>
+                <hbox>
+                  <checkbox id="lastUsedCheck"
+                            label="&fhwin.cleanup.checkbox.daysused.label;"
+                            accesskey="&fhwin.cleanup.checkbox.daysused.accesskey;"
+                            oncommand="CleanupWindowControl.prefsChanged(this);"
+                            checked="false"
+                            style="margin-right:0; padding-right:0"/>
+                  <textbox  id="lastUsedDaysLimit"
+                            disabled="true"
+                            width="30"
+                            onchange="CleanupWindowControl.prefsChanged(this);"/>
+                  <label    value="&fhwin.cleanup.checkbox.daysused.label2;"
+                            style="padding-bottom:0; padding-top:4px; margin:0" />
+                </hbox>
+                <hbox>
+                  <checkbox id="timesUsedCheck"
+                            label="&fhwin.cleanup.checkbox.timesused.label;"
+                            accesskey="&fhwin.cleanup.checkbox.timesused.accesskey;"
+                            oncommand="CleanupWindowControl.prefsChanged(this);"
+                            checked="false"
+                            style="margin-right:0; padding-right:0"/>
+                  <textbox  id="timesUsedLimit"
+                            disabled="true"
+                            width="30"
+                            onchange="CleanupWindowControl.prefsChanged(this);"/>
+                  <label    value="&fhwin.cleanup.checkbox.timesused.label2;"
+                            style="padding-bottom:0; padding-top:4px; margin:0" />
+                </hbox>
+              </groupbox>
+              <groupbox flex="1">
+                 <caption label="&fhwin.cleanup.automaticcleanup.group.caption;:"/>
+                 <checkbox id="cleanupOnShutdown"
+                           label="&fhprefs.checkbox.cleanupshutdown.label;"
+                           oncommand="CleanupWindowControl.prefsChanged(this);"/>
+                 <checkbox id="cleanupOnTabclose"
+                           label="&fhprefs.checkbox.cleanuptabclose.label;"
+                           oncommand="CleanupWindowControl.prefsChanged(this);"/>
+              </groupbox>
+            </hbox>
+          </vbox>
+
+          <!-- Options collapsed -->
+          <vbox id="cleanupoptions-hidden" hidden="true" persist="hidden">
+            <hbox align="center">
+              <label value="&fhwin.cleanup.label;:" class="description"/>
+              <spacer flex="1"/>
+              <label control="showcleanupoptions" value="&fhwin.cleanup.showoptions;"/>
+              <vbox>
+                <spacer/>
+                <button id="showcleanupoptions" class="expander-down searchtype-button"
+                        oncommand="CleanupWindowControl.toggleOptions()"
+                        tooltiptext="&fhwin.cleanup.showoptions;"/>
+                <spacer/>
+              </vbox>
+            </hbox>  
+          </vbox>
+          
+          <separator class="thin"/>
+          <groupbox flex="1">
+            <caption label="&fhwin.cleanup.namevalue.group.caption;:"/>
+
+            <!-- tabbox style="margin: 10px 0 0 6px; border-bottom: 1px solid ThreeDShadow" -->
+            <tabbox style="margin: 10px" flex="1">
+              <tabs id="historyWindowCleanupTabs"
+                    onselect="HistoryWindowControl.onSelectCleanupTab(this.selectedIndex);">
+                <tab label="&fhwin.cleanup.tab.cleanup.label;"
+                     accesskey="&fhwin.cleanup.tab.cleanup.accesskey;"/>
+                <tab label="&fhwin.cleanup.tab.protect.label;"
+                     accesskey="&fhwin.cleanup.tab.protect.accesskey;"/>
+              </tabs>
+              <tabpanels flex="1">
+
+                <tabpanel>
+                  <vbox id="cleanupcriteria" flex="1">
+                    <spacer height="10px"/>
+                    <label value="&fhwin.cleanup.treeview.label;:"/>
+                    <separator class="thin"/>
+                    <tree id="blacklistTree" alternatingbackground="true"
+                          flex="1" style="width:50em;height:24em;"
+                          class="cleanuptree" editable="true"
+                          hidecolumnpicker="false" enableColumnDrag="true"
+                          onselect="CleanupWindowControl.treeSelect(event);"
+                          context="criteriaPopup"
+                          oncontextmenu="CleanupWindowControl.menuPopup(event);"
+                          ondblclick="CleanupWindowControl.treeDblclick(event);">
+                      <treecols>
+                        <treecol id="descriptionColCriteria" flex="3"
+                                 label="&fhwin.treeview.column.description.label;"
+                                 onclick="CleanupWindowControl.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameColCriteria" flex="3"
+                                 label="&fhwin.treeview.column.name.label;"
+                                 onclick="CleanupWindowControl.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameExactColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.nameexact.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameCaseColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.namecase.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameRegexColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.nameregexp.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueColCriteria" flex="5"
+                                 label="&fhwin.treeview.column.value.label;"
+                                 onclick="CleanupWindowControl.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueExactColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valueexact.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueCaseColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valuecase.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <treecol id="valueRegexColCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valueregexp.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="indexColCriteria" hidden="true" class="numericColumn"
+                                 ignoreincolumnpicker="true"
+                                 label="&fhwin.treeview.column.index.label;"
+                                 onclick="CleanupWindowControl.sort(this);"
+                                 persist="width ordinal hidden"/>
+                      </treecols>
+                      <treechildren/>
+                    </tree>
+                  </vbox>
+                </tabpanel>
+
+
+                <tabpanel>
+                  <vbox id="protectcriteria" flex="1">
+                    <spacer height="10px"/>
+                    <label value="&fhwin.cleanup.treeviewprotect.label;:"/>
+                    <separator class="thin"/>
+                    <tree id="protectTree" alternatingbackground="true"
+                          flex="1" style="width:50em;height:24em;"
+                          class="cleanuptree" editable="true"
+                          hidecolumnpicker="false" enableColumnDrag="true"
+                          onselect="CleanupProtectView.treeSelect(event);"
+                          context="protectPopup"
+                          oncontextmenu="CleanupProtectView.menuPopup(event);"
+                          ondblclick="CleanupProtectView.treeDblclick(event);">
+                      <treecols>
+                        <treecol id="descriptionColProtCriteria" flex="3"
+                                 label="&fhwin.treeview.column.description.label;"
+                                 onclick="CleanupProtectView.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameColProtCriteria" flex="3"
+                                 label="&fhwin.treeview.column.name.label;"
+                                 onclick="CleanupProtectView.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameExactColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.nameexact.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameCaseColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.namecase.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="nameRegexColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.nameregexp.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueColProtCriteria" flex="5"
+                                 label="&fhwin.treeview.column.value.label;"
+                                 onclick="CleanupProtectView.sort(this);"
+                                 persist="width ordinal hidden sortDirection"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueExactColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valueexact.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueCaseColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valuecase.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="valueRegexColProtCriteria" flex="1" class="flagColumn"
+                                 label="&fhwin.cleanup.treeview.column.valueregexp.label;"
+                                 type="checkbox" editable="true"
+                                 onclick=""
+                                 persist="width ordinal hidden"/>
+                        <splitter class="tree-splitter"/>
+                        <treecol id="indexColProtCriteria" hidden="true" class="numericColumn"
+                                 ignoreincolumnpicker="true"
+                                 label="&fhwin.treeview.column.index.label;"
+                                 onclick="CleanupProtectView.sort(this);"
+                                 persist="width ordinal hidden"/>
+                      </treecols>
+                      <treechildren/>
+                    </tree>
+                  </vbox>
+                </tabpanel>
+              </tabpanels>
+            </tabbox>
+
+            <hbox>
+              <hbox>
+                <button id="removeSelectedCriteria" disabled="true"
+                        label="&fhwin.button.remove.label;"
+                        accesskey="&fhwin.button.remove.accesskey;"
+                        oncommand="HistoryWindowControl.editCleanupAction('Delete');"/>
+                <button id="editCriteria" disabled="true"
+                        label="&fhwin.button.edit.label;"
+                        accesskey="&fhwin.button.edit.accesskey;"
+                        oncommand="HistoryWindowControl.editCleanupAction('Edit');"/>
+                <button id="insertCriteria" disabled="false"
+                        label="&fhwin.button.add.label;"
+                        accesskey="&fhwin.button.add.accesskey;"
+                        oncommand="HistoryWindowControl.editCleanupAction('Insert');"/>
+              </hbox>
+              <spacer flex="10"/>
+              <hbox id="cleanupCountLabels">
+                <label id="cleanupSelectCount" value=""/>
+                <spacer flex="1"/>
+                <label id="cleanupItemCount" value="" style="margin-right: 10px;"/>
+              </hbox>
+              <hbox id="protectCountLabels" hidden="true">
+                <label id="protectSelectCount" value=""/>
+                <spacer flex="1"/>
+                <label id="protectItemCount" value="" style="margin-right: 10px;"/>
+              </hbox>
+            </hbox>
+            <spacer height="8"/>
+          </groupbox>
+
+          <separator class="thin"/>
+          <hbox>
+            <button id="removeBlacklisted" disabled="false"
+                    label="&fhwin.cleanup.button.cleanupall.label;"
+                    accesskey="&fhwin.cleanup.button.cleanupall.accesskey;"
+                    oncommand="CleanupWindowControl.cleanup();"/>
+            <button id="previewBlacklisted" disabled="false"
+                    label="&fhwin.cleanup.button.preview.label;"
+                    accesskey="&fhwin.cleanup.button.preview.accesskey;"
+                    oncommand="CleanupWindowControl.showMatching();"/>
+            <spacer flex="1"/>
+            <button id="close2" icon="close"
+                    label="&fhwin.button.close.label;"
+                    accesskey="&fhwin.button.close.accesskey;"
+                    oncommand="window.close();return;"/>
+          </hbox>
+        </vbox>
+      </tabpanel>
+                
+      <tabpanel id="editorHistoryTabPanel">
+        <vbox id="editorHistory" flex="1" style="padding: 9px 10px 7px 10px">
+          
+          <hbox align="center" id="simple-mlsearch" persist="hidden">
+            <label    control="filterMLText"
+                      value="&fhwin.filter.label;"
+                      accesskey="&fhwin.filter.accesskey;"/>
+            <textbox  id="filterMLText" flex="1"
+                      type="search" timeout="500"
+                      oncommand="MultilineWindowControl.filterChanged();"/>
+            <checkbox id="filterMlMatchCase" label="&fhwin.checkbox.matchcase.label;"
+                      accesskey="&fhwin.checkbox.matchcase.accesskey;"
+                      oncommand="MultilineWindowControl.prefsChanged(this);"/>
+          </hbox>
+          
+          <separator class="thin"/>
+          <label id="multilineTreeLabel" value="&fhwin.multiline.label;:"/>
+
+          <separator class="thin"/>
+          <tree id="multilineHistoryTree" alternatingbackground="true"
+                flex="1" style="width:55em;height:24em;"
+                editable="false"
+                hidecolumnpicker="false" enableColumnDrag="true"
+                onselect="MultilineWindowControl.treeSelect(event);"
+                context="multilinePopup"
+                oncontextmenu="MultilineWindowControl.menuPopup(event);"
+                onclick="MultilineWindowControl.treeClick(event);"
+                ondblclick="MultilineWindowControl.treeDblclick(event);">
+            <treecols>
+              <treecol id="firstsavedCol" hidden="true" flex="1"
+                       label="&fhwin.multiline.treeview.column.firstsaved.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="agefirstsavedCol" hidden="true" flex="1"
+                       label="&fhwin.multiline.treeview.column.agefirstsaved.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="lastsavedCol" flex="1"
+                       label="&fhwin.multiline.treeview.column.lastsaved.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="agelastsavedCol" flex="1"
+                       label="&fhwin.multiline.treeview.column.agelastsaved.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="contentCol" flex="6"
+                       label="&fhwin.multiline.treeview.column.content.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="mlidCol" flex="1" hidden="true"
+                       label="&fhwin.multiline.treeview.column.fieldid.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="mlformidCol" flex="1" hidden="true"
+                       label="&fhwin.multiline.treeview.column.fieldformid.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="mlnameCol" flex="1"
+                       label="&fhwin.multiline.treeview.column.fieldname.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="typeCol" hidden="true" flex="1"
+                       label="&fhwin.multiline.treeview.column.type.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="mlhostCol" flex="1"
+                       label="&fhwin.multiline.treeview.column.host.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="mlurlCol" hidden="true" flex="5"
+                       label="&fhwin.multiline.treeview.column.url.label;"
+                       onclick="MultilineWindowControl.sort(this);"
+                       persist="width ordinal hidden sortDirection"/>
+            </treecols>
+            <treechildren tooltip="multilinetree-tooltip"/>
+          </tree>
+          
+          <hbox>
+            <hbox flex="1">
+              <checkbox id="displayhostonly" flex="2" disabled="false" crop="end"
+                        label="&fhwin.multiline.checkbox.searchhostonly.label;"
+                        tooltiptext=""
+                        oncommand="MultilineWindowControl.filterChanged();"
+                        accesskey=""/>
+            </hbox>
+            <spacer flex="10"/>
+            <label id="multilineSelectCount" value="" style="margin-top:4px;"/>
+            <spacer flex="1"/>
+            <label id="multilineItemCount" value="0" style="margin-top:4px;"/>
+          </hbox>
+
+          <separator class="thin"/>
+          <hbox>
+            <button id="removeMultiline" disabled="true"
+                    label="&fhwin.button.remove.label;"
+                    accesskey="&fhwin.button.remove.accesskey;"
+                    oncommand="MultilineWindowControl.editAction('Delete')"/>
+            <button id="viewMultiline" disabled="true"
+                    label="&fhwin.button.view.label;"
+                    accesskey=""
+                    oncommand="MultilineWindowControl.editAction('View')"/>
+            <spacer flex="1"/>
+            <button id="close3" icon="close"
+                    label="&fhwin.button.close.label;"
+                    accesskey="&fhwin.button.close.accesskey;"
+                    oncommand="window.close();return;"/>
+          </hbox>
+        </vbox>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+
+  <script type="application/x-javascript">
+  <![CDATA[
+    window.addEventListener("DOMContentLoaded", FhcAlignFieldsHistoryWindowControl.alignSearchLabelsAdvancedSearch, true);
+  // ]]>
+  </script>
+</window>

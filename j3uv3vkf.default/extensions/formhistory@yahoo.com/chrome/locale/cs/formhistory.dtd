@@ -1,0 +1,411 @@
+<!ENTITY fhwin.window.title "Form History Control">
+<!ENTITY historywindow.notification.moreinfo "(více)">
+<!ENTITY fhwin.historytab.formhistory "Historie">
+<!ENTITY fhwin.historytab.formhistory.accesskey "H">
+<!ENTITY fhwin.historytab.cleanup "Čištění">
+<!ENTITY fhwin.historytab.cleanup.accesskey "t">
+<!ENTITY fhwin.historytab.multiline "Historie editoru">
+<!ENTITY fhwin.filter.label "Hledat">
+<!ENTITY fhwin.filter.tooltip "Hledat v historii položky, jejichž název pole či hodnota odpovídá zadanému textu">
+<!ENTITY fhwin.filter.accesskey "d">
+<!ENTITY fhwin.filter.advancedsearch "Pokročilé vyhledávání">
+<!ENTITY fhwin.filter.simplesearch "Jednoduché vyhledávání">
+<!ENTITY fhwin.advancedfilter.fromto.from.label "od">
+<!ENTITY fhwin.advancedfilter.fromto.to.label "do">
+<!ENTITY fhwin.advancedfilter.enterdatetime.tooltip "Zadejte datum a čas">
+<!ENTITY fhwin.advancedfilter.host.label "Server">
+<!ENTITY fhwin.menuitem.regexpsearch.title "Regulární výrazy">
+<!ENTITY fhwin.menuitem.regexpsearch.tooltip "Výběr ze seznamu přednastavených regulárních výrazů">
+<!ENTITY fhwin.menuitem.regexpsearch.manage "Správa...">
+<!ENTITY fhwin.menuitem.urlmenu.tooltip "Nabídka pro odkaz">
+<!ENTITY fhwin.menuitem.urlmenu.openurl "Otevřít odkaz">
+<!ENTITY fhwin.menuitem.urlmenu.openurlnoparam "Otevřít odkaz bez parametrů">
+<!ENTITY fhwin.menuitem.urlmenu.openurlhost "Otevřít adresu serveru">
+<!ENTITY fhwin.menuitem.urlmenu.openurlcopy "Kopírovat adresu odkazu">
+<!ENTITY fhwin.checkbox.matchcase.label "Rozlišovat velikost">
+<!ENTITY fhwin.checkbox.matchcase.accesskey "k">
+<!ENTITY fhwin.treeview.label "Na tomto počítači jsou uchovávány následující položky z historie formulářů">
+<!ENTITY fhwin.treeview.column.description.label "Popis">
+<!ENTITY fhwin.treeview.column.name.label "Název pole">
+<!ENTITY fhwin.treeview.column.value.label "Hodnota">
+<!ENTITY fhwin.treeview.column.used.label "Počet použití">
+<!ENTITY fhwin.treeview.column.first.label "Poprvé použito">
+<!ENTITY fhwin.treeview.column.last.label "Naposled použito">
+<!ENTITY fhwin.treeview.column.agefirst.label "Doba od prvního použití">
+<!ENTITY fhwin.treeview.column.agelast.label "Doba od posledního použití">
+<!ENTITY fhwin.treeview.column.guessed.tooltip "Údaj byl získán z křížových odkazů v historii prohlížení, proto může být nesprávný">
+<!ENTITY fhwin.treeview.column.guessedhost.label "Server (nejlepší odhad)">
+<!ENTITY fhwin.treeview.column.guessedurl.label "URL (nejlepší odhad)">
+<!ENTITY fhwin.treeview.column.guessedpagetitle.label "Název stránky (nejlepší odhad)">
+<!ENTITY fhwin.treeview.column.index.label "Index">
+<!ENTITY fhwin.treeview.cleanuppreview.label "Náhled položek splňujících kritéria pro čištění">
+<!ENTITY fhwin.treeview.closecleanuppreview.tooltip "Zavře náhled">
+<!ENTITY fhwin.checkbox.searchpageonly.label "Ukázat jen aktuální stránku">
+<!ENTITY fhwin.checkbox.searchpageonly.tooltip "Ukázat jen položky historie formulářů na aktuálně zobrazené HTML stránce">
+<!ENTITY fhwin.checkbox.searchpageonly.accesskey "s">
+<!ENTITY fhwin.checkbox.searchfieldonly.label "Ukázat jen aktuální pole">
+<!ENTITY fhwin.checkbox.searchfieldonly.tooltip "Ukázat jen položky historie pro právě aktivní pole formuláře">
+<!ENTITY fhwin.checkbox.searchfieldonly.accesskey "p">
+<!ENTITY fhwin.checkbox.searchcleanuponly.label "Ukázat jen splňující kritéria pro čištění">
+<!ENTITY fhwin.checkbox.searchcleanuponly.tooltip "Ukázat jen položky historie splňující kritéria pro čištění">
+<!ENTITY fhwin.checkbox.searchcleanuponly.accesskey "k">
+<!ENTITY fhwin.button.clear.label "Vymazat">
+<!ENTITY fhwin.button.clear.accesskey "m">
+<!ENTITY fhwin.button.remove.label "Odstranit">
+<!ENTITY fhwin.button.remove.accesskey "O">
+<!ENTITY fhwin.button.removeall.label "Odstranit vše">
+<!ENTITY fhwin.button.removeall.accesskey "v">
+<!ENTITY fhwin.button.cleanup.label "Vyčistit">
+<!ENTITY fhwin.button.cleanup.accesskey "v">
+<!ENTITY fhwin.button.add.label "Vložit">
+<!ENTITY fhwin.button.add.accesskey "l">
+<!ENTITY fhwin.button.edit.label "Upravit">
+<!ENTITY fhwin.button.edit.accesskey "U">
+<!ENTITY fhwin.button.view.label "Zobrazit">
+<!ENTITY fhwin.button.closepreview.label "Zavřít náhled">
+<!ENTITY fhwin.button.close.label "Zavřít">
+<!ENTITY fhwin.button.close.accesskey "Z">
+<!ENTITY fhwin.menu.file.label "Soubor">
+<!ENTITY fhwin.menu.file.accesskey "b">
+<!ENTITY fhwin.menu.edit.label "Upravit">
+<!ENTITY fhwin.menu.edit.accesskey "a">
+<!ENTITY fhwin.menu.view.label "Zobrazení">
+<!ENTITY fhwin.menu.view.accesskey "e">
+<!ENTITY fhwin.menu.tools.label "Nástroje">
+<!ENTITY fhwin.menu.tools.accesskey "r">
+<!ENTITY fhwin.menu.help.label "Nápověda">
+<!ENTITY fhwin.menu.help.accesskey "N">
+<!ENTITY fhwin.menuitem.insert.label "Vložit novou">
+<!ENTITY fhwin.menuitem.insert.accelkey "n">
+<!ENTITY fhwin.menuitem.edit.label "Upravit">
+<!ENTITY fhwin.menuitem.edit.accelkey "U">
+<!ENTITY fhwin.menuitem.delete.label "Smazat">
+<!ENTITY fhwin.menuitem.deleteallname.label "Smazat všechno se stejným názvem">
+<!ENTITY fhwin.menuitem.deleteallvalue.label "Smazat všechno se stejnou hodnotou">
+<!ENTITY fhwin.menuitem.selectall.label "Vybrat vše">
+<!ENTITY fhwin.menuitem.selectall.accelkey "v">
+<!ENTITY fhwin.menuitem.selectnone.label "Zrušit výběr">
+<!ENTITY fhwin.menuitem.selectinvert.label "Převrátit výběr">
+<!ENTITY fhwin.menuitem.addcleanup.label "Přidat ke kritériím pro čištění">
+<!ENTITY fhwin.menuitem.addprotect.label "Přidat ke kritériím pro výjimky z čištění">
+<!ENTITY fhwin.menuitem.exportmanager.label "Exportovat">
+<!ENTITY fhwin.menuitem.importmanager.label "Importovat">
+<!ENTITY fhwin.menuitem.exportcsv.label "Exportovat celou historii jako CSV">
+<!ENTITY fhwin.menuitem.reloadview.label "Obnovit">
+<!ENTITY fhwin.menuitem.close.label "Zavřít">
+<!ENTITY fhwin.menuitem.options.label "Možnosti">
+<!ENTITY fhwin.menuitem.options.accelkey "M">
+<!ENTITY fhwin.menuitem.help.label "Obsah nápovědy">
+<!ENTITY fhwin.menuitem.releasenotes.label "Poznámky k vydání">
+<!ENTITY fhwin.menuitem.about.label "O Form History Control">
+<!ENTITY fhwin.cleanup.menuitem.exportcfg.label "Exportovat nastavení">
+<!ENTITY fhwin.cleanup.menuitem.importcfg.label "Importovat nastavení">
+<!ENTITY fhwin.cleanup.label "Kritéria pro odstranění nežádoucích položek historie formulářů">
+<!ENTITY fhwin.cleanup.showoptions "Zobrazit možnosti">
+<!ENTITY fhwin.cleanup.hideoptions "Skrýt možnosti">
+<!ENTITY fhwin.cleanup.timeusage.group.caption "Podle času/použití">
+<!ENTITY fhwin.cleanup.checkbox.daysused.label "Odstranit všechny položky historie formulářů, které nebyly použity v posledních">
+<!ENTITY fhwin.cleanup.checkbox.daysused.label2 "dnech">
+<!ENTITY fhwin.cleanup.checkbox.daysused.accesskey "p">
+<!ENTITY fhwin.cleanup.checkbox.timesused.label "Odstranit všechny položky historie formulářů, které byly použity méně než">
+<!ENTITY fhwin.cleanup.checkbox.timesused.label2 "krát">
+<!ENTITY fhwin.cleanup.checkbox.timesused.accesskey "m">
+<!ENTITY fhwin.cleanup.automaticcleanup.group.caption "Automatické čištění">
+<!ENTITY fhwin.cleanup.namevalue.group.caption "Podle názvu/hodnoty">
+<!ENTITY fhwin.cleanup.tab.cleanup.label "Čištění">
+<!ENTITY fhwin.cleanup.tab.cleanup.accesskey "C">
+<!ENTITY fhwin.cleanup.tab.protect.label "Nebude čištěno">
+<!ENTITY fhwin.cleanup.tab.protect.accesskey "d">
+<!ENTITY fhwin.cleanup.treeviewprotect.label "Nikdy neodstraňovat položky historie formulářů odpovídající dvojicím název/hodnota">
+<!ENTITY fhwin.cleanup.treeview.label "Odstranit položky historie formulářů odpovídající dvojicím název/hodnota">
+<!ENTITY fhwin.cleanup.treeview.column.nameexact.label "Přesný název">
+<!ENTITY fhwin.cleanup.treeview.column.namecase.label "Rozlišovat velikost písmen">
+<!ENTITY fhwin.cleanup.treeview.column.nameregexp.label "Název regulárního výrazu">
+<!ENTITY fhwin.cleanup.treeview.column.valueexact.label "Přesná hodnota">
+<!ENTITY fhwin.cleanup.treeview.column.valuecase.label "Rozlišovat velikost písmen">
+<!ENTITY fhwin.cleanup.treeview.column.valueregexp.label "Hodnota regulárního výrazu">
+<!ENTITY fhwin.cleanup.button.cleanupall.label "Vyčistit všechny položky splňující kritéria">
+<!ENTITY fhwin.cleanup.button.cleanupall.accesskey "V">
+<!ENTITY fhwin.cleanup.button.preview.label "Náhled položek splňujících kritéria">
+<!ENTITY fhwin.cleanup.button.preview.accesskey "k">
+<!ENTITY fhwin.multiline.label "Záloha automaticky uložených polí s editorem">
+<!ENTITY fhwin.multiline.treeview.column.firstsaved.label "Poprvé uloženo">
+<!ENTITY fhwin.multiline.treeview.column.agefirstsaved.label "Doba od prvního uložení">
+<!ENTITY fhwin.multiline.treeview.column.lastsaved.label "Naposledy uloženo">
+<!ENTITY fhwin.multiline.treeview.column.agelastsaved.label "Doba od posledního uložení">
+<!ENTITY fhwin.multiline.treeview.column.fieldid.label "Číslo pole">
+<!ENTITY fhwin.multiline.treeview.column.fieldformid.label "Číslo formuláře">
+<!ENTITY fhwin.multiline.treeview.column.fieldname.label "Název pole">
+<!ENTITY fhwin.multiline.treeview.column.content.label "Obsah">
+<!ENTITY fhwin.multiline.treeview.column.type.label "Typ">
+<!ENTITY fhwin.multiline.treeview.column.host.label "Server">
+<!ENTITY fhwin.multiline.treeview.column.url.label "URL">
+<!ENTITY fhwin.multiline.checkbox.searchhostonly.label "Ukázat jenom aktuální server">
+<!ENTITY fhmnuovl.menu.main.manager.label "Historie formulářů">
+<!ENTITY fhmnuovl.menuitem.manager.label "Správce historie formulářů">
+<!ENTITY fhmnuovl.menuitem.deletevaluethis.label "Smazat aktuální hodnotu pro toto pole">
+<!ENTITY fhmnuovl.menuitem.deletethis.label "Smazat veškerou historii pro toto pole">
+<!ENTITY fhmnuovl.menuitem.restorethis.label "Obnovit pole editoru">
+<!ENTITY fhmnuovl.menuitem.managethis.label "Spravovat položky pro toto pole">
+<!ENTITY fhmnuovl.menuitem.fillmostrecent.label "Vyplnit pole nejnovějšími položkami">
+<!ENTITY fhmnuovl.menuitem.fillmostused.label "Vyplnit pole nejčastěji používanými položkami">
+<!ENTITY fhmnuovl.menuitem.clearfields.label "Vymazat vyplněná pole">
+<!ENTITY fhmnuovl.menuitem.showformfields.label "Zobrazit na této stránce názvy polí">
+<!ENTITY fhmnuovl.menuitem.savethisfield.label "Uložit pro toto pole aktuální hodnotu">
+<!ENTITY fhmnuovl.menuitem.savethispage.label "Uložit hodnoty pro všechna pole">
+<!ENTITY fhmnuovl.menuitem.cleanupnow.label "Vyčistit nyní historii formuláře">
+<!ENTITY fhmnuovl.menuitem.options.label "Možnosti">
+<!ENTITY fhentrydlg.windowtitle "Upravit historii formuláře">
+<!ENTITY fhentrydlg.edit.description "Upravit existující položku historie formulářů">
+<!ENTITY fhentrydlg.editmultiple.description "Upravit více položek historie formulářů">
+<!ENTITY fhentrydlg.add.description "Vložit novou položku historie formulářů">
+<!ENTITY fhentrydlg.fieldname.label "Název pole">
+<!ENTITY fhentrydlg.value.label "Hodnota">
+<!ENTITY fhentrydlg.timesused.label "Počet použití">
+<!ENTITY fhentrydlg.firstused.label "Poprvé použito">
+<!ENTITY fhentrydlg.firstusedhistory.img.tooltip "Zobrazí historii kolem času, kdy byl formulář poprvé vyplněn">
+<!ENTITY fhentrydlg.lastused.label "Naposled použito">
+<!ENTITY fhentrydlg.lastusedhistory.img.tooltip "Zobrazí historii kolem času, kdy byl formulář naposled vyplněn">
+<!ENTITY fhentrydlg.place.group.caption "Naposledy navštívená stránka">
+<!ENTITY fhentrydlg.pagetitle.label "Název">
+<!ENTITY fhentrydlg.host.label "Server">
+<!ENTITY fhentrydlg.url.label "URL">
+<!ENTITY fhentrydlg.blankfielderror.label "Nelze ponechat žádné pole prázdné">
+<!ENTITY fhentrydlg.existerror.label "Položka historie formuláře s tímto názvem a hodnotou už existuje">
+<!ENTITY fhentrydlg.timesusederror.label "Počet použití musí být číselná hodnota">
+<!ENTITY fhcriteriadlg.windowtitle "Upravit kritéria pro čištění">
+<!ENTITY fhcriteriadlg.edit.description "Upravit existující kritéria pro čištění">
+<!ENTITY fhcriteriadlg.add.description "Vložit nová kritéria pro čištění">
+<!ENTITY fhcriteriapdlg.windowtitle "Upravit kritéria pro výjimky">
+<!ENTITY fhcriteriapdlg.edit.description "Upravit stávájící kritéria pro výjimky">
+<!ENTITY fhcriteriapdlg.add.description "Vložit nové kritérium pro výjimky">
+<!ENTITY fhcriteriadlg.description.label "Popis">
+<!ENTITY fhcriteriadlg.fieldname.label "Název pole">
+<!ENTITY fhcriteriadlg.value.label "Hodnota">
+<!ENTITY fhcriteriadlg.matchexact.label "Přesná shoda">
+<!ENTITY fhcriteriadlg.matchcase.label "Rozlišovat velikost písmen">
+<!ENTITY fhcriteriadlg.namevaluefieldsemptyerror.label "Nenechávejte název pole a hodnotu prázdné">
+<!ENTITY fhcriteriadlg.existerror.label "Kritéria s těmito vlastnostmi už existují">
+<!ENTITY fhcregexpdlg.windowtitle "Správa regulárního výrazu">
+<!ENTITY fhcregexpdlg.edit.description "Upravit">
+<!ENTITY fhcregexpdlg.add.description "Přidat regulární výraz">
+<!ENTITY fhcregexpdlg.description.label "Popis">
+<!ENTITY fhcregexpdlg.category.label "Kategorie">
+<!ENTITY fhcregexpdlg.regexp.label "Regulární výraz">
+<!ENTITY fhcregexpdlg.matchcase.label "Rozlišovat velikost písmen">
+<!ENTITY fhcregexpdlg.usefor.label "Použít výraz pro">
+<!ENTITY fhcregexpdlg.useforname.radiolabel "Názvy polí">
+<!ENTITY fhcregexpdlg.useforvalue.radiolabel "Hodnoty polí">
+<!ENTITY fhcregexpdlg.useforboth.radiolabel "Oboje">
+<!ENTITY fhcregexpdlg.emptyerror.label "Nenechávejte popis regulárního výrazu prázdný">
+<!ENTITY fhcregexpdlg.existerror.label "Výraz s těmito vlastnostmi již existuje">
+<!ENTITY fhdatetimedlg.windowtitle "Datum a čas">
+<!ENTITY fhdatetimedlg.description "Nastavit datum a čas">
+<!ENTITY fhdatetimedlg.date.label "Datum">
+<!ENTITY fhdatetimedlg.time.label "Čas">
+<!ENTITY fhdatetimedlg.setzerotime.tooltip "Nastavit čas na 0:00:00">
+<!ENTITY fhbrowsehistorydlg.windowtitle "Procházet historii pro pole formuláře">
+<!ENTITY fhbrowsehistorydlg.older.label "Starší">
+<!ENTITY fhbrowsehistorydlg.older.tooltip "Získá další starší historii">
+<!ENTITY fhbrowsehistorydlg.newer.label "Novější">
+<!ENTITY fhbrowsehistorydlg.newer.tooltip "Získá další novější historii">
+<!ENTITY fhcmultilinedlg.windowtitle "Uložený text editoru">
+<!ENTITY fhcmultilinedlg.button.copytoclipboard "Kopírovat do schránky">
+<!ENTITY fhcmultilinedlg.viewtab.htmlview "HTML zobrazení">
+<!ENTITY fhcmultilinedlg.viewtab.textview "Prostý text">
+<!ENTITY fhcmultilinedlg.button.showdetails "Podrobnosti">
+<!ENTITY fhcmultilinedlg.button.hidedetails "Skrýt podrobnosti">
+<!ENTITY fhcmultilinedlg.checkbox.hideimages "Skrýt obrázky">
+<!ENTITY fhcmultilinelistdlg.windowtitle "Upravit seznam výjimek">
+<!ENTITY fhcmultilinelistdlg.label.blacklist "Nepamatovat si historii polí s editorem pro níže uvedené servery">
+<!ENTITY fhcmultilinelistdlg.label.whitelist "Pamatovat si historii polí s editorem pro níže uvedené servery">
+<!ENTITY fhcmultilinelistdlg.button.addcurrenthost "Přidat aktuální server">
+<!ENTITY fhcmanagefhclistdlg.windowtitle "Upravit pamatování historie formulářů">
+<!ENTITY fhcmanagefhclistdlg.label.blacklist "Nepamatovat si historii formulářů pro stránky splňující následující kritéria">
+<!ENTITY fhcmanagefhclistdlg.label.whitelist "Pamatovat si historii formulářů pouze pro stránky splňující následující kritéria">
+<!ENTITY fhcmanagefhclistdlg.treeview.column.page.label "Filtr stránek">
+<!ENTITY fhcmanagefhclistdlg.button.addcurrentpage "Přidat aktuální stránku">
+<!ENTITY fhprefs.window.title "Předvolby Form History Control">
+<!ENTITY fhprefs.prefpane.multiline.label "Pole s editorem">
+<!ENTITY fhprefs.multilineinfo.tooltip "Form History Control umí průběžně ukládat pole s editorem, ve kterém píšete, a pokud se něco stane, umožní spolehlivě data obnovit.">
+<!ENTITY fhprefs.checkbox.multilineenable "Povolit automatickou obnovu polí s editorem a víceřádkových textových polí">
+<!ENTITY fhprefs.tab.multiline.configuration "Nastavení">
+<!ENTITY fhprefs.tab.multiline.exceptions "Výjimky">
+<!ENTITY fhprefs.tab.multiline.privacy "Soukromí">
+<!ENTITY fhprefs.group.multilineversion.caption "Správa verzí">
+<!ENTITY fhprefs.group.multilinecleanup.caption "Čištění">
+<!ENTITY fhprefs.group.multilineexceptions.caption "Výjimky">
+<!ENTITY fhprefs.label.multilinesaveolder "Uložit novou verzi, pokud je naposledy uložená verze starší než">
+<!ENTITY fhprefs.label.multilinesavelength "Uložit novou verzi, pokud je změna obsahu větší než">
+<!ENTITY fhprefs.label.multilinecleanup "Mazat automaticky verze starší než">
+<!ENTITY fhprefs.multilinesavewarning.tooltip "Upozornění: ukládání mnoha verzí bez pravidelného čištění může způsobit značný nárůst velikosti databáze!">
+<!ENTITY fhprefs.label.multilinelist.never "nikdy">
+<!ENTITY fhprefs.label.multilinelist.minute "minuta">
+<!ENTITY fhprefs.label.multilinelist.minutes "minut">
+<!ENTITY fhprefs.label.multilinelist.hour "hodina">
+<!ENTITY fhprefs.label.multilinelist.hours "hodin">
+<!ENTITY fhprefs.label.multilinelist.day "den">
+<!ENTITY fhprefs.label.multilinelist.days "dní">
+<!ENTITY fhprefs.label.multilinelist.week "týden">
+<!ENTITY fhprefs.label.multilinelist.weeks "týdnů">
+<!ENTITY fhprefs.label.multilinelist.month "měsíc">
+<!ENTITY fhprefs.label.multilinelist.months "měsíců">
+<!ENTITY fhprefs.label.multilinelist.characters "znaků">
+<!ENTITY fhprefs.radio.multilinenoexception "Bez výjimek">
+<!ENTITY fhprefs.radio.multilinewhitelist "Povolit jenom pro servery v seznamu">
+<!ENTITY fhprefs.radio.multilineblacklist "Povolit vždy s výjimkou serverů v seznamu">
+<!ENTITY fhprefs.button.managelist "Upravit seznam výjimek">
+<!ENTITY fhprefs.checkbox.multilinesavealways "Uložit zálohu pole s editorem během psaní, dokonce i v režimu anonymního prohlížení">
+<!ENTITY fhprefs.checkbox.multilinesanitizehtmlpreview "Nestahovat automaticky obrázky pro náhled HTML">
+<!ENTITY fhprefs.checkbox.multilinesaveencrypted "Zašifrovat obsah pole s editorem v databázi">
+<!ENTITY fhprefs.prefpane.manageformhistory.label "Správa historie">
+<!ENTITY fhprefs.group.managefhc.caption "Kdy ukládat historii formulářů">
+<!ENTITY fhprefs.manageformhistory.tooltip "Form History Control umožňuje pro určité stránky přizpůsobit to, zda se bude pamatovat historie formulářů; toto přizpůsobení bude automaticky platit při návštěvě dané stránky.">
+<!ENTITY fhprefs.manageformhistory.global.tooltip "Dostupné pouze tehdy, je-li v globálním nastavení soukromí povolena volba „Pamatovat si historii formulářů“.">
+<!ENTITY fhprefs.radio.managefhcnoexception "Použít globální nastavení (vždy ukládat)">
+<!ENTITY fhprefs.radio.managefhcwhitelist "Ukládat historii pouze pro stránky na seznamu výjimek">
+<!ENTITY fhprefs.radio.managefhcblacklist "Ukládat historii kromě stránek na seznamu výjimek">
+<!ENTITY fhprefs.prefpane.miscellaneous.label "Různé">
+<!ENTITY fhprefs.group.preferences.caption "Předvolby">
+<!ENTITY fhprefs.checkbox.searchCaseSensitive.label "Při hledání záleží na velikosti písmen">
+<!ENTITY fhprefs.checkbox.hideLoginmanagedFields.label "Skrývat položky historie spravované Správcem hesel Firefoxu">
+<!ENTITY fhprefs.checkbox.hideLoginmanagedFields.tooltip "Skryje názvy polí uložené pro aktuální pole/stránku ve Správci hesel. Při zobrazení celé historie budou skryty všechny (může jich být mnoho) názvy polí ze Správce hesel.">
+<!ENTITY fhprefs.group.warnings.caption "Zobrazení varování">
+<!ENTITY fhprefs.checkbox.warnOnDeleteOne.label "Varovat před smazáním jedné položky">
+<!ENTITY fhprefs.checkbox.warnOnDeleteMultiple.label "Varovat před smazáním více položek">
+<!ENTITY fhprefs.group.historyview.caption "Zobrazení historie">
+<!ENTITY fhprefs.textbox.exclusions.label "Nezobrazovat pro pole formulářů">
+<!ENTITY fhprefs.textbox.exclusions.tooltip "Seznam názvů polí oddělený čárkami">
+<!ENTITY fhprefs.prefpane.manualsave.label "Ruční ukládání">
+<!ENTITY fhprefs.label.manualsaveinfoicon.label "Použijte tuto možnost, pokud máte vypnuto „Pamatovat si historii formulářů“ a přejete si ukládat historii formulářů ručně.">
+<!ENTITY fhprefs.checkbox.manualsave.label "Povolit ukládat historii formulářů ručně">
+<!ENTITY fhprefs.checkbox.manualsave.tooltip "Povolení této možnosti přidá klávesové zkratky a položky v nabídce, aby bylo možno ručně ukládat historii formulářů pro jedno nebo více polí.">
+<!ENTITY fhprefs.prefpane.keybindings.label "Klávesové zkratky">
+<!ENTITY fhprefs.keybindinginfo.label "Vyberte činnost, pro kterou chcete zkratku změnit, a zadejte požadovanou kombinaci kláves. Změny se projeví okamžitě.">
+<!ENTITY fhprefs.keybindinginfo.tooltip "Dejte pozor, abyste nezvolili kombinaci používanou prohlížečem nebo jinými rozšířeními, v tom případě nová klávesová zkratka nejspíš nebude fungovat nebo bude spouštět nechtěné činnosti.">
+<!ENTITY fhprefs.button.keybindingdisable.label "vypnout">
+<!ENTITY fhprefs.prefpane.display.label "Zobrazení">
+<!ENTITY fhprefs.group.formhistoryitemsview.caption "Pohled na položky historie formulářů">
+<!ENTITY fhprefs.checkbox.useCustomDateTimeFormat.label "Použít vlastní formát data/času">
+<!ENTITY fhprefs.checkbox.defaultSearchCurrentPageChecked.label "Volba 'Prohledávat jen aktuální stránku' jako výchozí">
+<!ENTITY fhprefs.group.taskbar.caption "Pruh úloh">
+<!ENTITY fhprefs.checkbox.showtaskbaricon.label "Zobrazovat ikonu na liště úloh">
+<!ENTITY fhprefs.group.toolbar.caption "Nástrojová lišta">
+<!ENTITY fhprefs.label.showtoolbaricon.label "Pomocí volby Vlastní z nabídky pro nástrojovou lištu lze přidat ikonu rozšíření FormHistory.">
+<!ENTITY fhprefs.image.showtoolbaricon.tooltiptext "Klepněte pravým tlačítkem na nástrojovou lištu a zvolte Vlastní. Pak můžete přetáhnout ikonu FormHistory na nástrojovou lištu.">
+<!ENTITY fhprefs.group.showmenu.caption "Nabídky">
+<!ENTITY fhprefs.checkbox.hidetoolsmenuitem.label "Skrýt položku v nabídce Nástroje">
+<!ENTITY fhprefs.checkbox.hideappmenuitem.label "Skrýt položku v nabídce Aplikace">
+<!ENTITY fhprefs.checkbox.hidecontextmenuitem.label "Skrýt položku v místní nabídce">
+<!ENTITY fhprefs.group.treeskin.caption "Barva pozadí seznamů">
+<!ENTITY fhprefs.label.treeskin.label "Zlepší čitelnost seznamů">
+<!ENTITY fhprefs.image.treeskin.tooltiptext "Volbou můžete zlepšit čitelnost (zpravidla užitečné pro tmavé motivy OS)">
+<!ENTITY fhprefs.radio.treeskin.auto.label "Automatická">
+<!ENTITY fhprefs.radio.treeskin.light.label "Světlá">
+<!ENTITY fhprefs.radio.treeskin.dark.label "Tmavá">
+<!ENTITY fhprefs.radio.treeskin.none.label "Žádná">
+<!ENTITY fhprefs.prefpane.quickfill.label "Rychlé vyplnění">
+<!ENTITY fhprefs.quickfillinfo.label "Volitelně označí všechna vstupní pole, která byla vyplněna nejnovější nebo nejčastěji používanou hodnotou.">
+<!ENTITY fhprefs.group.quickfill.caption "Odlišovat pole formuláře zadaná rychlým vyplněním">
+<!ENTITY fhprefs.checkbox.quickfillbgcolor.label "Změnit barvu pozadí">
+<!ENTITY fhprefs.checkbox.quickfillbordercolor.label "Změnit barvu okraje">
+<!ENTITY fhprefs.checkbox.quickfillborderwidth.label "Změnit tloušťku okraje">
+<!ENTITY fhprefs.textbox.quickfillpreviewtest.label "Test">
+<!ENTITY fhprefs.textbox.quickfillpreviewtext "Náhled">
+<!ENTITY fhprefs.prefpane.importexport.label "Import/Export">
+<!ENTITY fhprefs.group.csvexport.caption "Export do CSV">
+<!ENTITY fhprefs.textbox.csvexportseparator.label "Oddělovač hodnot">
+<!ENTITY fhprefs.textbox.csvexportquote.label "Hodnoty vypsat mezi znak">
+<!ENTITY fhprefs.textbox.csvexportescape.label "escape znak">
+<!ENTITY fhprefs.group.configexport.caption "Nastavení importu/exportu">
+<!ENTITY fhprefs.checkbox.configexportXmlIsoDate.label "Exportovat datum ve formátu ISO">
+<!ENTITY fhprefs.prefpane.cleanup.label "Čištění">
+<!ENTITY fhprefs.checkbox.cleanupshutdown.label "Vyčistit při zavření prohlížeče">
+<!ENTITY fhprefs.checkbox.cleanuptabclose.label "Vyčistit při zavření panelu prohlížeče">
+<!ENTITY fhprefs.button.cleanupnow.label "Vyčistit nyní">
+<!ENTITY fhprefs.prefpane.search.label "Hledání">
+<!ENTITY fhprefs.label.search.manage "Upravit regulární výraz použitý v pokročilém vyhledávání">
+<!ENTITY fhprefs.checkbox.names.label "Názvy">
+<!ENTITY fhprefs.checkbox.names.tooltip "Ukázat regulární výrazy pro vyhledávání pro názvy polí">
+<!ENTITY fhprefs.checkbox.values.label "Hodnoty">
+<!ENTITY fhprefs.checkbox.values.tooltip "Ukázat regulární výrazy pro vyhledávání pro hodnoty polí">
+<!ENTITY fhprefs.treeview.column.description.label "Popis">
+<!ENTITY fhprefs.treeview.column.category.label "Kategorie">
+<!ENTITY fhprefs.treeview.column.regexp.label "Výraz">
+<!ENTITY fhprefs.treeview.column.case.label "Velikost">
+<!ENTITY fhprefs.treeview.column.usefor.label "Název/Hodnota">
+<!ENTITY fhprefs.treeview.column.index.label "Index">
+<!ENTITY fhprefs.prefpane.information.label "Informace">
+<!ENTITY fhprefs.group.information.fhdatabase.caption "Databáze historie formulářů">
+<!ENTITY fhprefs.group.information.cudatabase.caption "Databáze pro čištění">
+<!ENTITY fhprefs.textbox.information.filepath.label "Cesta">
+<!ENTITY fhprefs.textbox.information.filesize.label "Velikost">
+<!ENTITY fhprefs.textbox.information.databaserows.label "Řádků">
+<!ENTITY fhprefs.button.information.createnew.label "Vytvořit novou">
+<!ENTITY fhprefs.button.information.createnew.tooltip "Vytvoří novou prázdnou databázi s nastavení, všechna data budou ztracena">
+<!ENTITY fhprefs.button.information.recover.label "Vytvořit a obnovit">
+<!ENTITY fhprefs.button.information.recover.tooltip "Vytvoří novou databázi s nastavením, stávající data budou pokud možno zachována">
+<!ENTITY fhprefs.button.information.restoreregexp.label "Obnovit regulární výrazy">
+<!ENTITY fhprefs.button.information.restoreregexp.tooltip "Obnoví přednastavené regulární výrazy (pro pokročilé vyhledávání)">
+<!ENTITY fhpref.tooltiplabel.dateformat.showhelp "Pro více informací klepněte sem">
+<!ENTITY fhpref.tooltiplabel.dateformat.description "Dostupné popisy data/času:">
+<!ENTITY fhpref.tooltiplabel.dateformat.descriptorcolumn "Popis data">
+<!ENTITY fhpref.tooltiplabel.dateformat.descriptioncolumn "Popis">
+<!ENTITY fhpref.tooltiplabel.dateformat.examplescolumn "Příklady">
+<!ENTITY fhpref.tooltiplabel.dateformat.year "Rok">
+<!ENTITY fhpref.tooltiplabel.dateformat.month "Měsíc v roce">
+<!ENTITY fhpref.tooltiplabel.dateformat.day "Den v měsíci">
+<!ENTITY fhpref.tooltiplabel.dateformat.hour24 "Hodina ve dni">
+<!ENTITY fhpref.tooltiplabel.dateformat.hour12 "Hodina jako am/pm">
+<!ENTITY fhpref.tooltiplabel.dateformat.ampm "označení am/pm">
+<!ENTITY fhpref.tooltiplabel.dateformat.minute "Minuta v hodině">
+<!ENTITY fhpref.tooltiplabel.dateformat.second "Sekunda v minutě">
+<!ENTITY fhpref.tooltiplabel.dateformat.millisec "Milisekunda">
+<!ENTITY fhprefovl.privacy.button.showhistory.label "Zobrazit historii">
+<!ENTITY fhprefovl.privacy.button.showhistory.accesskey "h">
+<!ENTITY fhprefovl.privacy.checkbox.managebyfhc.label "Nechat rozšíření Form History Control spravovat historii formulářů">
+<!ENTITY fhprefovl.privacy.checkbox.managebyfhc.tooltip "To, zda se bude, nebo nebude ukládat historie formulářů, určuje rozšíření Form History Control">
+<!ENTITY fhprefovl.privacy.button.rememberoptions.label "Nastavení">
+<!ENTITY fhabout.label.description "Popis">
+<!ENTITY fhabout.label.creator "Vytvořil">
+<!ENTITY fhabout.label.homepage "Navštívit domovskou stránku">
+<!ENTITY fhabout.label.contributors "Přispěvatelé">
+<!ENTITY fhabout.label.translators "Překladatelé">
+<!ENTITY browsehistorywindow.report.gocurrent "Aktuální">
+<!ENTITY browsehistorywindow.report.showurl "Ukázat URL">
+<!ENTITY browsehistorywindow.report.showtitle "Ukázat název">
+<!ENTITY browsehistorywindow.report.showhost "Ukázat server">
+<!ENTITY browsehistorywindow.report.fieldnamelabel "Název pole">
+<!ENTITY browsehistorywindow.report.valuelabel "Hodnota">
+<!ENTITY browsehistorywindow.report.titlelabel "Název">
+<!ENTITY browsehistorywindow.report.hostlabel "Server">
+<!ENTITY browsehistorywindow.report.urllabel "URL">
+<!ENTITY fhexportcsvdlg.description "Exportovat úplnou historii formuláře jako CSV (data oddělená čárkou)">
+<!ENTITY fhexportcsvdlg.alert "Varování: Data exportovaná jako CSV nelze importovat!">
+<!ENTITY fhexportdlg.title "Správce exportu">
+<!ENTITY fhexportdlg.description "Vyberte typ dat pro export">
+<!ENTITY fhexportdlg.button.export "Exportovat">
+<!ENTITY fhexportdlg.label.exporterrornone "Nebylo nic vybráno, nic se nebude exportovat.">
+<!ENTITY fhimportdlg.title "Správce importu">
+<!ENTITY fhimportdlg.description "Vyberte typ dat pro import">
+<!ENTITY fhimportdlg.button.import "Importovat">
+<!ENTITY fhimportdlg.label.importerrornone "Nebylo nic vybráno, nic se nebude importovat.">
+<!ENTITY fhimportexportdlg.checkbox.entries "Položky historie formulářů">
+<!ENTITY fhimportexportdlg.label.items "položky">
+<!ENTITY fhimportexportdlg.radio.entries.all "Všechno">
+<!ENTITY fhimportexportdlg.radio.entries.selected "Vybrané">
+<!ENTITY fhimportexportdlg.radio.entries.search "Výsledek hledání">
+<!ENTITY fhimportexportdlg.checkbox.editorhistory "Historie editoru">
+<!ENTITY fhimportexportdlg.checkbox.editorhistoryprefs "Předvolby historie editoru">
+<!ENTITY fhimportexportdlg.checkbox.editorhistoryexceptions "Seznam výjimek historie editoru">
+<!ENTITY fhimportexportdlg.checkbox.customsaveprefs "Uložit předvolby historie">
+<!ENTITY fhimportexportdlg.checkbox.customsaveexceptions "Uložit seznam výjimek historie">
+<!ENTITY fhimportexportdlg.checkbox.regularexpressions "Regulární výrazy">
+<!ENTITY fhimportexportdlg.checkbox.keybordshortcuts "Klávesové zkratky">
+<!ENTITY fhimportexportdlg.checkbox.cleanupconfig "Vyčistit nastavení">
+<!ENTITY fhimportstatusdlg.title "Stav importu">
+<!ENTITY fhimportstatusdlg.label.total "Celkem">
+<!ENTITY fhimportstatusdlg.label.imported "Importováno">
+<!ENTITY fhimportstatusdlg.label.identical "Stejných">
+<!ENTITY fhimportstatusdlg.label.error "Chyba">
+<!ENTITY fhcnotimplemented.label "není ještě implementováno!">

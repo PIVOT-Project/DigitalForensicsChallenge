@@ -1,0 +1,121 @@
+
+.errormessage {
+  color:       red;
+  font-weight: bold;
+}
+
+.description {
+  font-weight: bold;
+}
+
+/*
+ * Keep dropmarker visible in Noia theme (datepicker)
+ */
+datepicker dropmarker {
+  height: 16px;
+  width: 16px;
+  -moz-appearance: menulist-button;
+}
+
+.image_icon {
+  width: 16px;
+  height: 16px;
+  margin: 4px 4px 4px 0px;
+}
+
+.image_icon:hover {
+  width: 18px;
+  height: 18px;
+  margin: 3px 2px 3px 0px;
+}
+
+.invalidregexp {
+  width: 6px;
+  color: red;
+  font-weight: bold;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.tooltip-regexstatus {
+}
+
+.tooltip-regexstatus-label {
+  color: red;
+  font-weight: bold;
+}
+
+.tooltip-regexmessage-label {
+  color: black;
+}
+
+/* Get the same left margin in Noia theme (in Noia menulist margin-left is 0) */
+menulist {
+  margin-left: 4px;
+}
+input {
+  margin-left: 4px;
+}
+
+/* Group for place information */
+#placegroup {
+  margin-top: 14px;
+}
+#placegroupcaption {
+  font-size: 12px;
+  font-style: italic;
+  color: #505050;
+}
+.placeinfo {
+  /* color: black; */
+}
+
+#browsereport {
+  -moz-appearance: none;
+  background-color: white !important;
+}
+
+.okay {
+  list-style-image: url("chrome://formhistory/skin/okay10.png");
+  max-height: 10px;
+  max-width: 10px;
+  margin-top: 3px;
+}
+
+.error {
+  list-style-image: url("chrome://formhistory/skin/error10.png");
+  max-height: 10px;
+  max-width: 10px;
+  margin-top: 3px;
+}
+
+/* -------- button (expand/collapse) with image -------- */
+.showhide-button {
+  height: 22px;
+  min-height: 22px;
+}
+
+#showdetails {
+  list-style-image: url("chrome://formhistory/skin/expand.png");
+  min-width: 30px;
+  margin-right: 0px;
+}
+
+#hidedetails {
+  list-style-image: url("chrome://formhistory/skin/collapse.png");
+  min-width: 30px;
+  margin-right: 0px;
+}
+
+/* -------- tabbox -------- */
+tabbox {
+  background-color: transparent;
+}
+
+tabpanels {
+  -moz-appearance: none;
+  background-image: none !important;
+  background-color: transparent;
+}

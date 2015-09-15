@@ -1,0 +1,228 @@
+/* -------- menubar -------- */
+#formhistory-menubar {
+  border-bottom: 1px solid ThreeDShadow;
+  -moz-appearance: none;
+}
+
+/* -------- notification-box -------- */
+#notification-box {
+  background-color: #fdffd9;
+  height: 26px;
+  margin: 0;
+  padding: 5px 8px;
+  font-weight: bold;
+}
+
+#notification-helptitle {
+  font-weight: bold;
+}
+
+#notification-more {
+  font-weight: normal;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+/* -------- preview-box -------- */
+.preview-box {
+  background-color: #fdffd9;
+  height: 20px;
+  margin: 0;
+  padding: 2px 8px;
+  color: #707070;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+/* -------- popupmenu regexp-list -------- */
+
+#regexp-list-menu {
+}
+
+#regexp-namelist-menu menuitem[disabled="true"],
+#regexp-list-menu menuitem[disabled="true"]{
+  color: #000090 !important;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
+/* -------- tabbox -------- */
+tabbox {
+  background-color: transparent;
+}
+
+tabpanels {
+  -moz-appearance: none;
+}
+
+tab[selected="true"] {
+  font-weight: bold;
+}
+
+#mainTabPanels {
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  background-image: none !important;
+  background-color: transparent;
+}
+
+
+/* -------- groupbox -------- */
+caption {
+  -moz-appearance: none;
+}
+
+.caption-text {
+  font-weight: bold;
+  -moz-appearance: none;
+}
+
+
+/* -------- tree -------- */
+.cleanuptree {
+  margin-bottom: 10px;
+}
+
+.treecol-text {
+  font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(placeColumn) {
+  font-style: italic;
+}
+
+treechildren::-moz-tree-cell-text(placeUrlColumn) {
+  font-style: italic;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+treechildren::-moz-tree-cell-text(urlColumn) {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+treechildren::-moz-tree-checkbox {
+  /* unchecked checkbox treecells. This style MUST come first. */
+  list-style-image: url("chrome://formhistory/skin/unticked.png");;
+}
+treechildren::-moz-tree-checkbox(checked){
+  /* checked checkbox treecells. */
+  list-style-image: url("chrome://formhistory/skin/ticked.png");
+}
+treechildren::-moz-tree-checkbox(na){
+  /* disabled (not applicable) checkbox treecells. */
+  list-style-image: url("chrome://formhistory/skin/tick_na.png");
+}
+
+/* -------- treecolumns alignment -------- */
+.numericColumn {
+  text-align: right
+}
+.fuzzyColumn {
+  text-align: left
+}
+.flagColumn {
+  text-align: center
+}
+.estimateColumn {
+  font-style: italic
+}
+
+
+/* -------- description label -------- */
+.description {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: gray;
+}
+
+
+/* -------- button (expand/collapse) with image -------- */
+.searchtype-button {
+  height: 22px;
+  min-height: 22px;
+}
+
+#showadvancedsearch,
+#showcleanupoptions {
+  list-style-image: url("chrome://formhistory/skin/expand.png");
+  min-width: 30px;
+  margin-right: 0px;
+}
+
+#showsimplesearch,
+#hidecleanupoptions {
+  list-style-image: url("chrome://formhistory/skin/collapse.png");
+  min-width: 30px;
+  margin-right: 0px;
+}
+
+/* -------- label next to (expand/collapse) button -------- */
+.searchlabel {
+  padding-top: 3px
+}
+
+/* -------- label left side -------- */
+.leftcol {
+  /* resized later in xul embedded script to align for all locales */
+  width: 7.3em
+}
+
+
+/* -------- textbox -------- */
+.searchdatetext {
+  max-width: 23em;
+}
+/*.searchdatetext[disabled="true"] {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
+  opacity: 1 !important;
+}*/
+
+
+/* -------- box -------- */
+.image_icon {
+  width: 16px;
+  height: 16px;
+  margin: 4px 4px 4px 0px;
+}
+
+.image_icon:hover {
+  width: 18px;
+  height: 18px;
+  margin: 3px 2px 3px 0px;
+}
+
+.iconbox {
+  width: 20px;
+}
+
+/* -------- label -------- */
+.invalidregexp {
+  text-align: left;
+  color: red;
+  font-weight: bold;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+/* -------- tooltip -------- */
+.tooltip-regexstatus {
+}
+
+.tooltip-regexstatus-label {
+  color: red;
+  font-weight: bold;
+}
+
+.tooltip-regexmessage-label {
+  color: black;
+}

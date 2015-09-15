@@ -1,0 +1,1216 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/preferences.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/treerows.css" type="text/css"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="formhistoryPrefs"
+            onload="FhcPreferences.init()"
+            onunload="FhcPreferences.destroy()"
+            title="&fhprefs.window.title;">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcPreferences.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcRegexpView.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPredefinedRegexp.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDbHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcRdfExtensionHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcCleanupFilter.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDateHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcXmlHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPredefinedRegexp.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcKeyBindings.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js" />
+  
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle"
+                  src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+
+  <stringbundleset id="stringbundlesetKeys">
+    <stringbundle id="formhistory.stringbundle.keys"
+                  src="chrome://formhistory/locale/keybinding.properties"/>
+  </stringbundleset>
+
+  <!-- Display -->
+  <prefpane id="gui" label="&fhprefs.prefpane.display.label;"
+            image="chrome://formhistory/skin/display_32.png">
+    <preferences>
+      <preference id="extensions.formhistory.defaultSearchCurrentPageChecked"
+                  name="extensions.formhistory.defaultSearchCurrentPageChecked"
+                  type="bool" />
+      <preference id="extensions.formhistory.useCustomDateTimeFormat"
+                  name="extensions.formhistory.useCustomDateTimeFormat"
+                  type="bool" />
+      <preference id="extensions.formhistory.customDateTimeFormat"
+                  name="extensions.formhistory.customDateTimeFormat"
+                  type="string" />
+      <preference id="extensions.formhistory.showStatusBarIcon"
+                  name="extensions.formhistory.showStatusBarIcon"
+                  type="bool" />
+      <preference id="extensions.formhistory.hideToolsMenuItem"
+                  name="extensions.formhistory.hideToolsMenuItem"
+                  type="bool" />
+      <preference id="extensions.formhistory.hideAppMenuItem"
+                  name="extensions.formhistory.hideAppMenuItem"
+                  type="bool" />
+      <preference id="extensions.formhistory.hideContextMenuItem"
+                  name="extensions.formhistory.hideContextMenuItem"
+                  type="bool" />
+    </preferences>
+    <groupbox>
+      <caption label="&fhprefs.group.formhistoryitemsview.caption;"/>
+      <hbox id ="customDateBox">
+        <checkbox id="useCustomDateTimeFormat"
+                  label="&fhprefs.checkbox.useCustomDateTimeFormat.label;"
+                  oncommand="FhcPreferences.toggleCustomDateFormatList()"
+                  preference="extensions.formhistory.useCustomDateTimeFormat" />
+        <menulist id="customDateTimeFormatList" editable="true"
+                  disableautoselect="true" sizetopopup="always"
+                  preference="extensions.formhistory.customDateTimeFormat">
+          <menupopup>
+            <menuitem label="dd-MM-yyyy HH:mm:ss"/>
+            <menuitem label="dd-MM-yy HH:mm:ss"/>
+            <menuitem label="MM/dd/yyyy HH:mm:ss"/>
+            <menuitem label="MM/dd/yyyy hh:mm:ss A"/>
+            <menuitem label="MM/dd/yy HH:mm:ss"/>
+            <menuitem label="MM/dd/yy hh:mm:ss A"/>
+            <menuitem label="dd-MM-yy"/>
+            <menuitem label="MM/dd/yy"/>
+            <menuitem label="ddd, MMM d yyyy hh:mm:ss A"/>
+            <menuitem label="dddd, dd MMMM yyyy HH:mm:ss.SSS"/>
+          </menupopup>
+        </menulist>
+        <vbox>
+          <spacer flex="1"/>
+          <image id="infoimage" class="info_icon" flex="0"
+                 src="chrome://formhistory/skin/information.png"
+                 tooltip="customDateFormatTip"
+                 onclick="FhcPreferences.showCustomDateFormatInfo()"/>
+          <spacer flex="1"/>
+        </vbox>
+      </hbox>
+      <checkbox label="&fhprefs.checkbox.defaultSearchCurrentPageChecked.label;"
+                preference="extensions.formhistory.defaultSearchCurrentPageChecked" />
+    </groupbox>
+    <groupbox>
+      <caption label="&fhprefs.group.taskbar.caption; / &fhprefs.group.toolbar.caption;"/>
+      <checkbox label="&fhprefs.checkbox.showtaskbaricon.label;"
+                preference="extensions.formhistory.showStatusBarIcon"
+                oncommand="FhcPreferences.showOrHideTaskbarIcon(this)"/>
+      <hbox>
+        <vbox style="margin-left: 5px">
+          <image class="info_icon" flex="0"
+                 src="chrome://formhistory/skin/information.png"
+                 tooltiptext="&fhprefs.image.showtoolbaricon.tooltiptext;"/>
+          <spacer flex="1"/>
+        </vbox>
+        <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                     tooltiptext="&fhprefs.image.showtoolbaricon.tooltiptext;">
+                     &fhprefs.label.showtoolbaricon.label;
+        </description>
+      </hbox>
+    </groupbox>
+    <hbox>
+      <groupbox>
+        <caption label="&fhprefs.group.showmenu.caption;"/>
+        <checkbox label="&fhprefs.checkbox.hidetoolsmenuitem.label;"
+                  preference="extensions.formhistory.hideToolsMenuItem" />
+        <checkbox id="hideAppMenuItemCheckbox"
+                  label="&fhprefs.checkbox.hideappmenuitem.label;"
+                  preference="extensions.formhistory.hideAppMenuItem" />
+        <checkbox label="&fhprefs.checkbox.hidecontextmenuitem.label;"
+                  preference="extensions.formhistory.hideContextMenuItem" />
+      </groupbox>
+      <spacer flex="1"/>
+      <groupbox>
+        <caption label="&fhprefs.group.treeskin.caption;"/>
+        <hbox>
+          <vbox style="margin-left: 8px">
+            <image class="info_icon" flex="0"
+                   src="chrome://formhistory/skin/information.png"
+                   tooltiptext="&fhprefs.image.treeskin.tooltiptext;"/>
+            <spacer flex="1"/>
+          </vbox>
+          <description style="width: 250px; margin-top: 5px; margin-left: 2px;"
+                       tooltiptext="&fhprefs.image.treeskin.tooltiptext;">
+                       &fhprefs.label.treeskin.label;
+          </description>
+        </hbox>
+        <radiogroup id="treeskinRadiogroup" orient="horizontal">
+          <radio id="auto" label="&fhprefs.radio.treeskin.auto.label;"
+                 oncommand="FhcPreferences.treeskinPrefChecked(this)"/>
+          <radio id="light" label="&fhprefs.radio.treeskin.light.label;"
+                 oncommand="FhcPreferences.treeskinPrefChecked(this)"/>
+          <radio id="dark" label="&fhprefs.radio.treeskin.dark.label;"
+                 oncommand="FhcPreferences.treeskinPrefChecked(this)"/>
+          <radio id="none" label="&fhprefs.radio.treeskin.none.label;"
+                 oncommand="FhcPreferences.treeskinPrefChecked(this)"/>
+        </radiogroup>
+      </groupbox>
+    </hbox>
+    <spacer height="5"/><!-- MacOS -->
+  </prefpane>
+
+  
+  
+  <!-- Custom manage form history -->
+  <prefpane id="managehistory" label="&fhprefs.prefpane.manageformhistory.label;"
+            image="chrome://formhistory/skin/folder_32.png">
+    <preferences>
+      <preference id="extensions.formhistory.manageFormhistoryByFHC"
+                  name="extensions.formhistory.manageFormhistoryByFHC"
+                  type="bool" />
+    </preferences>
+    <vbox>
+              
+      <hbox>
+        <vbox style="margin-left: 2px">
+          <image class="info_icon" flex="0"
+                 src="chrome://formhistory/skin/information.png"
+                 tooltiptext="&fhprefs.manageformhistory.tooltip;"/>
+          <spacer flex="1"/>
+        </vbox>
+        <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                     tooltiptext="&fhprefs.manageformhistory.tooltip;">
+                     &fhprefs.manageformhistory.tooltip;
+        </description>
+      </hbox>
+      <spacer height="5"/>
+      
+      
+      <groupbox>
+        <caption label="&fhprefs.group.preferences.caption;"/>
+        
+          <checkbox id="ismanagedbyfhc"
+                    preference="extensions.formhistory.manageFormhistoryByFHC"
+                    label="&fhprefovl.privacy.checkbox.managebyfhc.label;"
+                    tooltiptext="&fhprefovl.privacy.checkbox.managebyfhc.tooltip;"
+                    oncommand="FhcPreferences.mngByFhcChecked(this)"/>
+          <hbox>
+            <vbox style="margin-left: 2px">
+              <image class="info_icon" flex="0"
+                    src="chrome://formhistory/skin/warning16.png"
+                    tooltiptext="&fhprefs.manageformhistory.global.tooltip;"/>
+              <spacer flex="1"/>
+            </vbox>
+            <description style="width: 450px; margin-top: 5px; margin-left: 2px;"
+                        tooltiptext="&fhprefs.manageformhistory.global.tooltip;">
+                        &fhprefs.manageformhistory.global.tooltip;
+            </description>
+          </hbox>
+        
+      </groupbox>
+      
+      <groupbox>
+        <caption label="&fhprefs.group.managefhc.caption;"/>
+        <hbox align="end">
+          <radiogroup id="managefhcradioexceptions">
+            <radio id="managefhcnoexception"
+                   label="&fhprefs.radio.managefhcnoexception;"
+                   oncommand="FhcPreferences.mngexceptionPrefChecked(this)"/>
+            <radio id="managefhcwhitelist"
+                   label="&fhprefs.radio.managefhcwhitelist;"
+                   oncommand="FhcPreferences.mngexceptionPrefChecked(this)"/>
+            <radio id="managefhcblacklist"
+                   label="&fhprefs.radio.managefhcblacklist;"
+                   oncommand="FhcPreferences.mngexceptionPrefChecked(this)"/>
+          </radiogroup>
+          <spacer flex="1"/>
+          <button id="managefhcexceptionlist"
+                  label="&fhprefs.button.managelist;"
+                  oncommand="FhcShowDialog.doShowManageFhcExceptionList()"/>
+        </hbox>
+      </groupbox>
+      
+      
+    </vbox>   
+  </prefpane>
+
+
+
+  <!-- Editor backup -->
+  <prefpane id="multiline" label="&fhprefs.prefpane.multiline.label;"
+            image="chrome://formhistory/skin/text_32.png">
+    <preferences>
+      <preference id="extensions.formhistory.multiline.backupenabled"
+                  name="extensions.formhistory.multiline.backupenabled"
+                  type="bool" />
+      <preference id="extensions.formhistory.multiline.saveolder"
+                  name="extensions.formhistory.multiline.saveolder"
+                  type="string" />
+      <preference id="extensions.formhistory.multiline.savelength"
+                  name="extensions.formhistory.multiline.savelength"
+                  type="string" />
+      <preference id="extensions.formhistory.multiline.deleteolder"
+                  name="extensions.formhistory.multiline.deleteolder"
+                  type="string" />
+      <preference id="multiline-exception"
+                  name="extensions.formhistory.multiline.exception"
+                  type="string" />
+      <preference id="extensions.formhistory.multiline.savealways"
+                  name="extensions.formhistory.multiline.savealways"
+                  type="bool" />
+      <preference id="extensions.formhistory.multiline.saveencrypted"
+                  name="extensions.formhistory.multiline.saveencrypted"
+                  type="bool" />
+      <preference id="extensions.formhistory.multiline.sanitizehtmlpreview"
+                  name="extensions.formhistory.multiline.sanitizehtmlpreview"
+                  type="bool" />
+    </preferences>
+    <vbox>
+      <hbox>
+        <vbox style="margin-left: 2px">
+          <image class="info_icon" flex="0"
+                 src="chrome://formhistory/skin/information.png"
+                 tooltiptext="&fhprefs.multilineinfo.tooltip;"/>
+          <spacer flex="1"/>
+        </vbox>
+        <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                     tooltiptext="&fhprefs.multilineinfo.tooltip;">
+                     &fhprefs.multilineinfo.tooltip;
+        </description>
+      </hbox>
+      <spacer height="5"/>
+      <checkbox label="&fhprefs.checkbox.multilineenable;"
+                id="multilineenable"
+                oncommand="FhcPreferences.initMultilinePanel()"
+                preference="extensions.formhistory.multiline.backupenabled"/>
+      <spacer height="5"/>
+      <tabbox id="multilineconfigbox" selectedIndex="0" persist="selectedIndex" flex="1">
+        <tabs>
+          <tab label="&fhprefs.tab.multiline.configuration;"/>
+          <tab label="&fhprefs.tab.multiline.exceptions;"/>
+          <tab label="&fhprefs.tab.multiline.privacy;"/>
+        </tabs>
+        <tabpanels>
+          <tabpanel style="margin-top: 4px">
+            <!-- Configuration -->
+            <vbox flex="1">
+              <groupbox>
+                <caption label="&fhprefs.group.multilineversion.caption;"/>
+                <hbox align="baseline">
+                  <label value="&fhprefs.label.multilinesaveolder;"/>
+                  <menulist id="newVersionAfterTime" editable="false" sizetopopup="always"
+                            preference="extensions.formhistory.multiline.saveolder">
+                    <menupopup>
+                      <menuitem value="1" label="1 &fhprefs.label.multilinelist.minute;"/>
+                      <menuitem value="2" label="2 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="5" label="5 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="10" label="10 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="15" label="15 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="30" label="30 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="60" label="1 &fhprefs.label.multilinelist.hour;"/>
+                      <menuitem value="120" label="2 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="360" label="6 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="720" label="12 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="1440" label="1 &fhprefs.label.multilinelist.day;"/>
+                    </menupopup>
+                  </menulist>
+                </hbox>
+                <hbox align="baseline">
+                  <label value="&fhprefs.label.multilinesavelength;"/>
+                  <menulist id="newVersionAfterLength" editable="false" sizetopopup="always"
+                            preference="extensions.formhistory.multiline.savelength">
+                    <menupopup>
+                      <menuitem value="10" label="10 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="20" label="20 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="50" label="50 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="75" label="75 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="100" label="100 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="200" label="200 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="500" label="500 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="1000" label="1000 &fhprefs.label.multilinelist.characters;"/>
+                      <menuitem value="5000" label="5000 &fhprefs.label.multilinelist.characters;"/>
+                    </menupopup>
+                  </menulist>
+                </hbox>
+              </groupbox>
+              <groupbox>
+                <caption label="&fhprefs.group.multilinecleanup.caption;"/>
+                <hbox align="baseline">
+                  <label value="&fhprefs.label.multilinecleanup;"/>
+                  <menulist id="deleteAfter" editable="false" sizetopopup="always"
+                            preference="extensions.formhistory.multiline.deleteolder">
+                    <menupopup>
+                      <menuitem value="5" label="5 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="10" label="10 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="15" label="15 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="30" label="30 &fhprefs.label.multilinelist.minutes;"/>
+                      <menuitem value="60" label="1 &fhprefs.label.multilinelist.hour;"/>
+                      <menuitem value="120" label="2 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="360" label="6 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="720" label="12 &fhprefs.label.multilinelist.hours;"/>
+                      <menuitem value="1440" label="1 &fhprefs.label.multilinelist.day;"/>
+                      <menuitem value="2880" label="2 &fhprefs.label.multilinelist.days;"/>
+                      <menuitem value="5760" label="4 &fhprefs.label.multilinelist.days;"/>
+                      <menuitem value="10080" label="1 &fhprefs.label.multilinelist.week;"/>
+                      <menuitem value="20160" label="2 &fhprefs.label.multilinelist.weeks;"/>
+                      <menuitem value="44640" label="1 &fhprefs.label.multilinelist.month;"/>
+                      <menuitem value="89280" label="2 &fhprefs.label.multilinelist.months;"/>
+                      <menuitem value="267840" label="6 &fhprefs.label.multilinelist.months;"/>
+                      <menuitem value="0" label="&fhprefs.label.multilinelist.never;"/>
+                    </menupopup>
+                  </menulist>
+                </hbox>
+                <hbox>
+                  <vbox style="margin-left: 2px">
+                    <image class="info_icon" flex="0"
+                           src="chrome://formhistory/skin/warning16.png"
+                           tooltiptext="&fhprefs.multilinesavewarning.tooltip;"/>
+                    <spacer flex="1"/>
+                  </vbox>
+                  <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                               tooltiptext="&fhprefs.multilinesavewarning.tooltip;">
+                               &fhprefs.multilinesavewarning.tooltip;
+                  </description>
+                </hbox>
+              </groupbox>
+            </vbox>
+          </tabpanel>
+          <tabpanel style="margin-top: 4px">
+            <!-- Exclusions -->
+            <vbox flex="1">
+              <groupbox>
+                <caption label="&fhprefs.group.multilineexceptions.caption;"/>
+                <hbox align="end">
+                  <radiogroup id="multilineradioexceptions">
+                    <radio id="multilinenoexception"
+                           label="&fhprefs.radio.multilinenoexception;"
+                           oncommand="FhcPreferences.mlexceptionPrefChecked(this)"/>
+                    <radio id="multilinewhitelist"
+                           label="&fhprefs.radio.multilinewhitelist;"
+                           oncommand="FhcPreferences.mlexceptionPrefChecked(this)"/>
+                    <radio id="multilineblacklist"
+                           label="&fhprefs.radio.multilineblacklist;"
+                           oncommand="FhcPreferences.mlexceptionPrefChecked(this)"/>
+                  </radiogroup>
+                  <spacer flex="1"/>
+                  <button id="multilineexceptionlist"
+                          label="&fhprefs.button.managelist;"
+                          oncommand="FhcShowDialog.doShowMultilineExceptionList()"/>
+                </hbox>
+              </groupbox>
+            </vbox>
+          </tabpanel>
+          <tabpanel style="margin-top: 4px">
+            <!-- Privacy -->
+            <vbox flex="1">
+              <groupbox>
+                <caption label="&fhprefs.tab.multiline.privacy;"/>
+                <checkbox id="multilineprivacysavealways"
+                          label="&fhprefs.checkbox.multilinesavealways;"
+                          preference="extensions.formhistory.multiline.savealways"/>
+                <checkbox id="multilineprivacysanitizehtml"
+                          label="&fhprefs.checkbox.multilinesanitizehtmlpreview;"
+                          preference="extensions.formhistory.multiline.sanitizehtmlpreview"/>
+                <checkbox id="multilineprivacysaveencrypted" disabled="true"
+                          label="&fhprefs.checkbox.multilinesaveencrypted; (&fhcnotimplemented.label;)"
+                          preference="extensions.formhistory.multiline.saveencrypted"/>
+              </groupbox>
+            </vbox>
+          </tabpanel>
+        </tabpanels>
+      </tabbox>
+    </vbox>
+  </prefpane>
+
+  <!-- Miscellaneous -->
+  <prefpane id="misc" label="&fhprefs.prefpane.miscellaneous.label;"
+            image="chrome://formhistory/skin/preferences_32.png">
+    <preferences>
+      <!-- Miscellaneous -->
+      <preference id="extensions.formhistory.warnOnDeleteOne"
+                  name="extensions.formhistory.warnOnDeleteOne"
+                  type="bool" />
+      <preference id="extensions.formhistory.warnOnDeleteMultiple"
+                  name="extensions.formhistory.warnOnDeleteMultiple"
+                  type="bool" />
+      <preference id="extensions.formhistory.hideLoginmanagedFields"
+                  name="extensions.formhistory.hideLoginmanagedFields"
+                  type="bool" />
+      <preference id="extensions.formhistory.searchCaseSensitive"
+                  name="extensions.formhistory.searchCaseSensitive"
+                  type="bool" />
+      <preference id="extensions.formhistory.exclusions"
+                  name="extensions.formhistory.exclusions"
+                  type="string" />
+      <!-- Import/Export -->
+      <preference id="extensions.formhistory.exportCSV.separator"
+                  name="extensions.formhistory.exportCSV.separator"
+                  type="string" />
+      <preference id="extensions.formhistory.exportCSV.quote"
+                  name="extensions.formhistory.exportCSV.quote"
+                  type="string" />
+      <preference id="extensions.formhistory.exportCSV.escape"
+                  name="extensions.formhistory.exportCSV.escape"
+                  type="string" />
+      <preference id="extensions.formhistory.exportXML.ISOexportDateFormat"
+                  name="extensions.formhistory.exportXML.ISOexportDateFormat"
+                  type="bool" />
+      <!-- Manual Save -->
+      <preference id="extensions.formhistory.manualsave"
+                  name="extensions.formhistory.manualsave"
+                  type="bool" />
+      <!-- Quick Fill -->
+      <preference id="extensions.formhistory.quickfill.changebgcolor"
+                  name="extensions.formhistory.quickfill.changebgcolor"
+                  type="bool" />
+      <preference id="extensions.formhistory.quickfill.changebordrcolor"
+                  name="extensions.formhistory.quickfill.changebordrcolor"
+                  type="bool" />
+      <preference id="extensions.formhistory.quickfill.changebordrthickness"
+                  name="extensions.formhistory.quickfill.changebordrthickness"
+                  type="bool" />
+      <preference id="extensions.formhistory.quickfill.bgcolor"
+                  name="extensions.formhistory.quickfill.bgcolor"
+                  type="string" />
+      <preference id="extensions.formhistory.quickfill.bordrcolor"
+                  name="extensions.formhistory.quickfill.bordrcolor"
+                  type="string" />
+      <preference id="extensions.formhistory.quickfill.bordrthickness"
+                  name="extensions.formhistory.quickfill.bordrthickness"
+                  type="int" />
+    </preferences>
+    <tabbox id="myTabList" selectedIndex="0" persist="selectedIndex">
+      <tabs>
+        <tab label="&fhprefs.prefpane.miscellaneous.label;"/>
+        <tab label="&fhprefs.prefpane.importexport.label;"/>
+        <tab label="&fhprefs.prefpane.manualsave.label;"/>
+        <tab label="&fhprefs.prefpane.keybindings.label;"/>
+        <tab label="&fhprefs.prefpane.quickfill.label;"/>
+      </tabs>
+      <tabpanels>
+        <tabpanel style="margin-top: 4px">
+          <!-- Miscellaneous -->
+          <vbox flex="1">
+            <groupbox>
+              <caption label="&fhprefs.group.preferences.caption;"/>
+              <checkbox label="&fhprefs.checkbox.searchCaseSensitive.label;"
+                        preference="extensions.formhistory.searchCaseSensitive" />
+              <checkbox label="&fhprefs.checkbox.hideLoginmanagedFields.label;"
+                        preference="extensions.formhistory.hideLoginmanagedFields"
+                        tooltiptext="&fhprefs.checkbox.hideLoginmanagedFields.tooltip;"/>
+            </groupbox>
+            <groupbox>
+              <caption label="&fhprefs.group.warnings.caption;"/>
+              <checkbox label="&fhprefs.checkbox.warnOnDeleteOne.label;"
+                        preference="extensions.formhistory.warnOnDeleteOne" />
+              <checkbox label="&fhprefs.checkbox.warnOnDeleteMultiple.label;"
+                        preference="extensions.formhistory.warnOnDeleteMultiple" />
+            </groupbox>
+            <groupbox>
+              <caption label="&fhprefs.group.historyview.caption;"/>
+              <hbox align="baseline">
+                <label value="&fhprefs.textbox.exclusions.label;:"/>
+                <textbox id="exclusions" flex="1"
+                         preference="extensions.formhistory.exclusions"
+                         emptytext="&fhprefs.textbox.exclusions.tooltip;"
+                         tooltiptext="&fhprefs.textbox.exclusions.tooltip;"/>
+               </hbox>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+        <tabpanel style="margin-top: 4px">
+          <!-- Import/Export -->
+          <vbox flex="1">
+            <groupbox>
+              <caption label="&fhprefs.group.csvexport.caption;"/>
+              <grid>
+                <columns>
+                  <column/>
+                  <column/>
+                  <column/>
+                  <column/>
+                </columns>
+                <rows>
+                  <row align="baseline">
+                    <label control="separator" value="&fhprefs.textbox.csvexportseparator.label;"/>
+                    <textbox id="separator" size="4" preference="extensions.formhistory.exportCSV.separator"/>
+                  </row>
+                  <row align="baseline">
+                    <label control="quotes" value="&fhprefs.textbox.csvexportquote.label;"/>
+                    <textbox id="quotes" size="4" preference="extensions.formhistory.exportCSV.quote"/>
+
+                    <label control="escape" value="&fhprefs.textbox.csvexportescape.label;"/>
+                    <textbox id="escape" size="4" preference="extensions.formhistory.exportCSV.escape"/>
+                  </row>
+                </rows>
+              </grid>
+            </groupbox>
+            <groupbox>
+              <caption label="&fhprefs.group.configexport.caption;"/>
+              <checkbox id="exportISOdateFormat"
+                        label="&fhprefs.checkbox.configexportXmlIsoDate.label;"
+                        style="margin-right:0; padding-right:0"
+                        preference="extensions.formhistory.exportXML.ISOexportDateFormat"/>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+        <tabpanel style="margin-top: 4px">
+          <!-- Manual Save -->
+          <vbox flex="1">
+            <hbox style="margin-top: 5px">
+              <vbox style="margin-left: 5px">
+                <image class="info_icon" flex="0"
+                       src="chrome://formhistory/skin/information.png"
+                       tooltiptext="&fhprefs.label.manualsaveinfoicon.label;"/>
+                <spacer flex="1"/>
+              </vbox>
+              <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                     tooltiptext="&fhprefs.label.manualsaveinfoicon.label;">
+                     &fhprefs.label.manualsaveinfoicon.label;
+              </description>
+            </hbox>
+            <checkbox id="manualsave"
+                      label="&fhprefs.checkbox.manualsave.label;"
+                      tooltiptext="&fhprefs.checkbox.manualsave.tooltip;"
+                      preference="extensions.formhistory.manualsave"
+                      oncommand="FhcPreferences.manualsavePrefChecked(this)"/>
+          </vbox>
+        </tabpanel>
+        <tabpanel style="margin-top: 4px">
+          <!-- Keyboard shortcuts -->
+          <vbox flex="1" style="overflow: auto; height: 275px">
+            <spacer height="6"/>
+            <hbox>
+              <vbox style="margin-left: 0px">
+                <image class="info_icon" flex="0"
+                       src="chrome://formhistory/skin/information.png"
+                       tooltiptext="&fhprefs.keybindinginfo.tooltip;"/>
+                <spacer flex="1"/>
+              </vbox>
+              <description style="width: 485px; margin-top: 5px; margin-left: 2px;"
+                           tooltiptext="&fhprefs.keybindinginfo.tooltip;">
+                           &fhprefs.keybindinginfo.label;
+              </description>
+            </hbox>
+            <spacer height="6"/>
+            <grid flex="1">
+              <columns>
+                <column/>
+                <column flex="1"/>
+                <column/>
+              </columns>
+              <rows>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.manager.label;"/>
+                  <textbox id="shortcutManager" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutManager" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.managethis.label;"/>
+                  <textbox id="shortcutManageThis" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutManageThis" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.deletevaluethis.label;"/>
+                  <textbox id="shortcutDeleteValueThis" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutDeleteValueThis" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.deletethis.label;"/>
+                  <textbox id="shortcutDeleteThis" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutDeleteThis" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.fillmostrecent.label;"/>
+                  <textbox id="shortcutFillMostRecent" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutFillMostRecent" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.fillmostused.label;"/>
+                  <textbox id="shortcutFillMostUsed" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutFillMostUsed" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.clearfields.label;"/>
+                  <textbox id="shortcutClearFields" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutClearFields" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.showformfields.label;"/>
+                  <textbox id="shortcutShowFormFields" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutShowFormFields" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&fhmnuovl.menuitem.cleanupnow.label;"/>
+                  <textbox id="shortcutCleanupNow" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutCleanupNow" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row id="saveThisFieldBindingRow" align="center">
+                  <label value="&fhmnuovl.menuitem.savethisfield.label;"/>
+                  <textbox id="shortcutSaveThisField" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutSaveThisField" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+                <row id="saveAllFieldsBindingRow" align="center">
+                  <label value="&fhmnuovl.menuitem.savethispage.label;"/>
+                  <textbox id="shortcutSaveThisPage" flex="1"
+                           class="shortcutTextbox" readonly="true"
+                           onkeypress="FhcPreferences.createKeybinding(event, this)"/>
+                  <button id="btn_shortcutSaveThisPage" flex="0"
+                          label="&fhprefs.button.keybindingdisable.label;"
+                          oncommand="FhcPreferences.disableKeybinding(this)"/>
+                </row>
+              </rows>
+            </grid>
+          </vbox>
+        </tabpanel>
+        <tabpanel style="margin-top: 4px">
+          <!-- Quick Fill -->
+          <vbox flex="1">
+            <hbox style="margin-top: 5px">
+              <vbox style="margin-left: 5px">
+                <image class="info_icon" flex="0"
+                       src="chrome://formhistory/skin/information.png"
+                       tooltiptext="&fhprefs.quickfillinfo.label;"/>
+                <spacer flex="1"/>
+              </vbox>
+              <description style="width: 500px; margin-top: 5px; margin-left: 2px;"
+                           tooltiptext="&fhprefs.quickfillinfo.label;">
+                           &fhprefs.quickfillinfo.label;
+              </description>
+            </hbox>
+            <groupbox>
+              <caption label="&fhprefs.group.quickfill.caption;"/>
+              <hbox>
+                <grid>
+                  <columns>
+                    <column/>
+                    <column/>
+                  </columns>
+                  <rows>
+                    <row align="center">
+                      <checkbox id="changebgcolor"
+                                label="&fhprefs.checkbox.quickfillbgcolor.label;"
+                                preference="extensions.formhistory.quickfill.changebgcolor"
+                                oncommand="FhcPreferences.adjustQuickFillPreview()"/>
+                      <colorpicker id="bgcolor" type="button"
+                                   preference="extensions.formhistory.quickfill.bgcolor"
+                                   onchange="FhcPreferences.adjustQuickFillPreview()"/>
+                      <spacer/>
+                    </row>
+                    <row align="center">
+                      <checkbox id="changebordrcolor"
+                                label="&fhprefs.checkbox.quickfillbordercolor.label;"
+                                preference="extensions.formhistory.quickfill.changebordrcolor"
+                                oncommand="FhcPreferences.adjustQuickFillPreview()"/>
+                      <colorpicker id="brdcolor" type="button"
+                                   preference="extensions.formhistory.quickfill.bordrcolor"
+                                   onchange="FhcPreferences.adjustQuickFillPreview()"/>
+                    </row>
+                    <row align="center">
+                      <checkbox id="changebordrthickness"
+                                label="&fhprefs.checkbox.quickfillborderwidth.label;"
+                                preference="extensions.formhistory.quickfill.changebordrthickness"
+                                oncommand="FhcPreferences.adjustQuickFillPreview()"/>
+                      <textbox id="brdsize" maxlength="1" size="2" min="0" max="6" type="number"
+                               preference="extensions.formhistory.quickfill.bordrthickness"
+                               onchange="FhcPreferences.adjustQuickFillPreview()"/>
+                    </row>
+                  </rows>
+                </grid>
+                <spacer flex="1"/>
+                <vbox>
+                  <!-- use html for preview to avoid xul css -->
+                  <span style="background-color: #FFFFFF; padding: 20px 5px 20px 0px; border-width: 2px; border-color: #999999; border-style: inset;">
+                    <label value="&fhprefs.textbox.quickfillpreviewtest.label;:"/>
+                    <input type="text" id="preview" style="display: inline-block">&fhprefs.textbox.quickfillpreviewtext;</input>
+                  </span>
+                  <spacer/>
+                </vbox>
+              </hbox>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
+  </prefpane>
+
+  <!-- Clean Up -->
+  <prefpane id="cleanup" label="&fhprefs.prefpane.cleanup.label;"
+            image="chrome://formhistory/skin/cleanup_32.png">
+    <preferences>
+      <preference id="extensions.formhistory.cleanupOnShutdown"
+                  name="extensions.formhistory.cleanupOnShutdown"
+                  type="bool" />
+      <preference id="extensions.formhistory.cleanupOnTabClose"
+                  name="extensions.formhistory.cleanupOnTabClose"
+                  type="bool" />
+      <preference id="extensions.formhistory.cleanupDaysChecked"
+                  name="extensions.formhistory.cleanupDaysChecked"
+                  type="bool" />
+      <preference id="extensions.formhistory.cleanupDays"
+                  name="extensions.formhistory.cleanupDays"
+                  type="int" />
+      <preference id="extensions.formhistory.cleanupTimesChecked"
+                  name="extensions.formhistory.cleanupTimesChecked"
+                  type="bool" />
+      <preference id="extensions.formhistory.cleanupTimes"
+                  name="extensions.formhistory.cleanupTimes"
+                  type="int" />
+    </preferences>
+    <hbox id="cleanup-status" class="collapsable" collapsed="true">
+      <label id="status-text" class="collapsable" value="-" flex="1"/>
+      <spacer flex="1" />
+      <image src="chrome://formhistory/skin/cancel.png"
+             class="icon-box collapsable"
+             onclick="FhcPreferences.hideCleanupStatus()"/>
+    </hbox>
+
+    <groupbox>
+      <caption label="&fhwin.cleanup.timeusage.group.caption;"/>
+      <hbox>
+        <checkbox id="lastUsedCheck"
+                  label="&fhwin.cleanup.checkbox.daysused.label;"
+                  style="margin-right:0; padding-right:0"
+                  oncommand="FhcPreferences.cleanupPrefChecked(this)"
+                  preference="extensions.formhistory.cleanupDaysChecked"/>
+        <textbox  id="lastUsedDaysLimit" width="30"
+                  preference="extensions.formhistory.cleanupDays"/>
+        <label    value="&fhwin.cleanup.checkbox.daysused.label2;"
+                  style="padding-bottom:0; padding-top:4px; margin:0" />
+      </hbox>
+      <hbox>
+        <checkbox id="timesUsedCheck"
+                  label="&fhwin.cleanup.checkbox.timesused.label;"
+                  style="margin-right:0; padding-right:0"
+                  oncommand="FhcPreferences.cleanupPrefChecked(this)"
+                  preference="extensions.formhistory.cleanupTimesChecked"/>
+        <textbox  id="timesUsedLimit" width="30"
+                  preference="extensions.formhistory.cleanupTimes"/>
+        <label    value="&fhwin.cleanup.checkbox.timesused.label2;"
+                  style="padding-bottom:0; padding-top:4px; margin:0" />
+      </hbox>
+    </groupbox>
+    <groupbox>
+        <caption label="&fhwin.cleanup.automaticcleanup.group.caption;"/>
+        <checkbox label="&fhprefs.checkbox.cleanupshutdown.label;"
+                  preference="extensions.formhistory.cleanupOnShutdown" />
+        <checkbox label="&fhprefs.checkbox.cleanuptabclose.label;"
+                  preference="extensions.formhistory.cleanupOnTabClose" />
+    </groupbox>
+    <spacer height="10" />
+    <hbox>
+      <spacer flex="1"/>
+      <button id="button-now" flex="0"
+              label="&fhprefs.button.cleanupnow.label;"
+              oncommand="FhcPreferences.cleanupFormhistoryNow();"/>
+      <spacer flex="1"/>
+    </hbox>
+  </prefpane>
+
+  <!-- Regular Search Expressions -->
+  <keyset>
+    <key id="selectall-key"
+         key="&fhwin.menuitem.selectall.accelkey;"
+         modifiers="accel"
+         oncommand="FhcRegexpView.selectAll();"/>
+    <key id="selectnone-key"
+         key="-" modifiers="accel"
+         oncommand="FhcRegexpView.selectNone();"/>
+    <key id="insert-key"
+         keycode="VK_INSERT" modifiers=""
+         oncommand="FhcRegexpView.editAction('Insert');"/>
+    <key id="edit-key"
+         key="&fhwin.menuitem.edit.accelkey;" modifiers="accel"
+         oncommand="FhcRegexpView.editAction('Edit');"/>
+    <key id="delete-key"
+         keycode="VK_DELETE" modifiers=""
+         oncommand="FhcRegexpView.editAction('Delete');"/>
+  </keyset>
+
+  <menupopup id="regexpPopup">
+    <menuitem label="&fhwin.menuitem.insert.label;"
+              id="mnInsertRegexp" disabled="false"
+              class="menuitem-iconic fh_menuitem_insert"
+              oncommand="FhcRegexpView.editAction('Insert');"/>
+    <menuitem label="&fhwin.menuitem.edit.label;"
+              id="mnEditRegexp" disabled="true"
+              class="menuitem-iconic fh_menuitem_edit"
+              oncommand="FhcRegexpView.editAction('Edit');"/>
+    <menuitem label="&fhwin.menuitem.delete.label;"
+              id="mnDeleteRegexp" disabled="true"
+              class="menuitem-iconic fh_menuitem_delete"
+              oncommand="FhcRegexpView.editAction('Delete');"/>
+    <menuseparator/>
+    <menuitem label="&fhwin.menuitem.selectall.label;"
+              id="mnSelectAll"
+              class="menuitem-iconic fh_menuitem_selectall"
+              oncommand="FhcRegexpView.selectAll();"/>
+    <menuitem label="&fhwin.menuitem.selectnone.label;"
+              id="mnSelectNone"
+              class="menuitem-iconic fh_menuitem_selectnone"
+              oncommand="FhcRegexpView.selectNone();"/>
+  </menupopup>
+
+  <prefpane id="regexp" label="&fhprefs.prefpane.search.label;"
+            image="chrome://formhistory/skin/regexp_32.png">
+    <preferences>
+    </preferences>
+    <vbox flex="1">
+      <spacer height="10"/>
+      <hbox>
+        <label id="manageRegexpTitle" value="&fhprefs.label.search.manage;:"/>
+        <spacer flex="10"/>
+        <checkbox id="cbShowNames" checked="true"
+                  oncommand="FhcRegexpView.filterChanged(this);"
+                  label="&fhprefs.checkbox.names.label;"
+                  tooltiptext="&fhprefs.checkbox.names.tooltip;"/>
+        <checkbox id="cbShowValues" checked="true"
+                  oncommand="FhcRegexpView.filterChanged(this);"
+                  label="&fhprefs.checkbox.values.label;"
+                  tooltiptext="&fhprefs.checkbox.values.tooltip;"/>
+      </hbox>
+      <tree id="regexpTree" alternatingbackground="true"
+            flex="1" style="width:50em;height:19em;"
+            class="cleanuptree" editable="true"
+            hidecolumnpicker="false" enableColumnDrag="true"
+            onselect="FhcRegexpView.treeSelect(event);"
+            context="regexpPopup"
+            oncontextmenu="FhcRegexpView.menuPopup(event);"
+            ondblclick="FhcRegexpView.treeDblclick(event);">
+        <treecols>
+          <treecol id="descriptionCol" flex="4"
+                   label="&fhprefs.treeview.column.description.label;"
+                   onclick="FhcRegexpView.sort(this);"
+                   persist="width ordinal hidden sortDirection"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="categoryCol" flex="3"
+                   label="&fhprefs.treeview.column.category.label;"
+                   onclick="FhcRegexpView.sort(this);"
+                   persist="width ordinal hidden sortDirection"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="regexpCol" flex="3"
+                   label="&fhprefs.treeview.column.regexp.label;"
+                   onclick="FhcRegexpView.sort(this);"
+                   persist="width ordinal hidden sortDirection"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="caseCol" flex="1" class="flagColumn"
+                   label="&fhprefs.treeview.column.case.label;"
+                   type="checkbox" editable="true"
+                   onclick=""
+                   persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="useforCol" flex="2" class="flagColumn"
+                   label="&fhprefs.treeview.column.usefor.label;"
+                   onclick="FhcRegexpView.sort(this);"
+                   persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="indexCol" hidden="true" class="numericColumn"
+                   ignoreincolumnpicker="true"
+                   label="&fhprefs.treeview.column.index.label;"
+                   onclick=""
+                   persist="width ordinal hidden"/>
+        </treecols>
+        <treechildren/>
+      </tree>
+      <separator class="thin"/>
+    </vbox>
+    <hbox>
+      <hbox>
+        <button id="removeSelected" disabled="true"
+                label="&fhwin.button.remove.label;"
+                accesskey="&fhwin.button.remove.accesskey;"
+                oncommand="FhcRegexpView.editAction('Delete');"/>
+        <button id="edit" disabled="true"
+                label="&fhwin.button.edit.label;"
+                accesskey="&fhwin.button.edit.accesskey;"
+                oncommand="FhcRegexpView.editAction('Edit');"/>
+        <button id="insert" disabled="false"
+                label="&fhwin.button.add.label;"
+                accesskey="&fhwin.button.add.accesskey;"
+                oncommand="FhcRegexpView.editAction('Insert');"/>
+      </hbox>
+      <spacer flex="10"/>
+      <hbox id="countLabels">
+        <label id="selectCount" value=""/>
+        <spacer flex="1"/>
+        <label id="itemCount" value="" style="margin-right: 10px;"/>
+      </hbox>
+    </hbox>
+  </prefpane>
+
+
+  <!-- Information -->
+  <prefpane id="info" label="&fhprefs.prefpane.information.label;"
+            image="chrome://formhistory/skin/information_32.png">
+    <preferences>
+    </preferences>
+    <hbox id="recreate-status" class="collapsable" collapsed="true">
+      <label id="recreate-status-text" class="collapsable" value="-" flex="1"/>
+      <spacer flex="1" />
+      <image src="chrome://formhistory/skin/cancel.png"
+             class="icon-box collapsable"
+             onclick="FhcPreferences.hideRecreateStatus()"/>
+    </hbox>
+    <tabbox id="infoTabList" selectedIndex="0" persist="selectedIndex">
+      <tabs>
+        <tab label="&fhwin.menuitem.about.label;"/>
+        <tab label="&fhprefs.group.information.fhdatabase.caption;"/>
+        <tab label="&fhprefs.group.information.cudatabase.caption;"/>
+      </tabs>
+      <tabpanels style="height: 294px; margin-bottom: 0">
+        <tabpanel>
+          <vbox flex="1">
+            <spacer height="5"/>
+            <grid flex="1">
+              <columns>
+                <column flex="0"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <!-- Extension info -->
+                <row align="baseline">
+                  <label class="infotitle" value="Extension"/>
+                </row>
+                <row align="baseline">
+                  <label value="Name"/>
+                  <label id="appname"/>
+                </row>
+                <row align="baseline">
+                  <label value="Version"/>
+                  <label id="appversion"/>
+                </row>
+                <row align="baseline">
+                  <label value="Created by"/>
+                  <label id="appcreator"/>
+                </row>
+                <!-- Browser info -->
+                <row align="baseline">
+                  <label class="infotitle" value="Browser"/>
+                </row>
+                <row align="baseline">
+                  <label value="Name"/>
+                  <label id="browsername"/>
+                </row>
+                <row align="baseline">
+                  <label value="Version"/>
+                  <label id="browserversion"/>
+                </row>
+                <row align="baseline">
+                  <label value="Gecko version"/>
+                  <label id="geckoversion"/>
+                </row>
+                <row align="baseline">
+                  <label value="Locale"/>
+                  <label id="currentlocale"/>
+                </row>
+              </rows>
+            </grid>
+          </vbox>
+        </tabpanel>
+        <tabpanel>
+          <vbox flex="1">
+            <groupbox>
+              <caption label="&fhprefs.group.information.fhdatabase.caption;"/>
+                <grid>
+                  <columns>
+                    <column flex="0"/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.filepath.label;"/>
+                      <textbox id="moz-location" readonly="true" multiline="true" rows="1"/>
+                    </row>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.filesize.label;"/>
+                      <textbox id="moz-size" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.databaserows.label;"/>
+                      <textbox id="moz-datacount" readonly="true"/>
+                    </row>
+                  </rows>
+                </grid>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+        <tabpanel>
+          <vbox flex="1">
+            <groupbox>
+              <caption label="&fhprefs.group.information.cudatabase.caption;"/>
+                <grid flex="1">
+                  <columns>
+                    <column flex="0"/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.filepath.label;"/>
+                      <textbox id="fhc-location" readonly="true" multiline="true" rows="1"/>
+                    </row>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.filesize.label;"/>
+                      <textbox id="fhc-size" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value="&fhprefs.textbox.information.databaserows.label;"/>
+                      <textbox id="fhc-datacount1" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value=""/>
+                      <textbox id="fhc-datacount2" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value=""/>
+                      <textbox id="fhc-datacount3" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value=""/>
+                      <textbox id="fhc-datacount4" readonly="true"/>
+                    </row>
+                    <row align="baseline">
+                      <label value=""/>
+                      <textbox id="fhc-datacount5" readonly="true"/>
+                    </row>
+                    <row>
+                      <spacer height="10"/>
+                    </row>
+                    <row align="baseline">
+                      <spacer/>
+                      <hbox>
+                        <spacer flex="1"/>
+                        <button id="recoverCleanupDb" flex="0"
+                                label="&fhprefs.button.information.recover.label;"
+                                tooltiptext="&fhprefs.button.information.recover.tooltip;"
+                                oncommand="FhcPreferences.recreateCleanupDb(true)"/>
+                        <button id="cleanCleanupDb" flex="0"
+                                label="&fhprefs.button.information.createnew.label;"
+                                tooltiptext="&fhprefs.button.information.createnew.tooltip;"
+                                oncommand="FhcPreferences.recreateCleanupDb(false)"/>
+                        <button id="restoreRegexp" flex="0"
+                                label="&fhprefs.button.information.restoreregexp.label;"
+                                tooltiptext="&fhprefs.button.information.restoreregexp.tooltip;"
+                                oncommand="FhcPreferences.restoreRegexp()"/>
+                        <spacer flex="1"/>
+                      </hbox>
+                    </row>
+                  </rows>
+                </grid>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
+  </prefpane>
+
+  <!-- Tooltips: CustomDateFormat information -->
+  <tooltip id="customDateFormatTip" orient="vertical">
+    <label value="&fhpref.tooltiplabel.dateformat.showhelp;"/>
+  </tooltip>
+  <tooltip id="customDateFormatHelp" orient="vertical" onclick="FhcPreferences.hideTooltipPopup()">
+    <label value="&fhpref.tooltiplabel.dateformat.description;" class="tooltipdescription"/>
+    <grid>
+      <columns>
+        <column/><column/><column/>
+      </columns>
+      <rows>
+        <row class="tooltipcolumnheader">
+          <label value="&fhpref.tooltiplabel.dateformat.descriptorcolumn;"/>
+          <label value="&fhpref.tooltiplabel.dateformat.descriptioncolumn;"/>
+          <label value="&fhpref.tooltiplabel.dateformat.examplescolumn;"/>
+        </row><row>
+          <label class="descrip" value="yy, yyyy"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.year;"/>
+          <label class="example" value="(96; 1996)"/>
+        </row><row>
+          <label class="descrip" value="M, MM, MMM, MMMM"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.month;"/>
+          <label class="example" value="(7; 07; Jul; July)"/>
+        </row><row>
+          <label class="descrip" value="d, dd, ddd, dddd"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.day;"/>
+          <label class="example" value="{1; 01; Sun; Sunday)"/>
+        </row><row>
+          <label class="descrip" value="H, HH"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.hour24; (0-23)"/>
+          <label class="example" value="(6; 06)"/>
+        </row><row>
+          <label class="descrip" value="h, hh"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.hour12; (1-12)"/>
+          <label class="example" value="(7; 07)"/>
+        </row><row>
+          <label class="descrip" value="a, A"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.ampm;"/>
+          <label class="example" value="(am; AM)"/>
+        </row><row>
+          <label class="descrip" value="m, mm"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.minute;"/>
+          <label class="example" value="(3; 03)"/>
+        </row><row>
+          <label class="descrip" value="s, ss"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.second;"/>
+          <label class="example" value="(5; 05)"/>
+        </row><row>
+          <label class="descrip" value="SSS"/>
+          <label class="info"    value="&fhpref.tooltiplabel.dateformat.millisec;"/>
+          <label class="example" value="(078)"/>
+        </row>
+      </rows>
+    </grid>
+  </tooltip>
+
+  <script type="application/x-javascript">
+  <![CDATA[
+    // Getter injections to modify behaviour of prefwindow
+    function loadHandler(event) {
+      // Animation causes erratic behaviour! This is the default on Mac and
+      // destroys the layout (heigth) of the prefpane.
+      // Disable it here once and for all!
+      document.documentElement.__defineGetter__(
+        "_shouldAnimate", function() { return false; }
+      );
+    }
+    window.addEventListener("DOMContentLoaded", loadHandler, true);
+  // ]]>
+  </script>
+
+</prefwindow>

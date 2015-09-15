@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+
+<!DOCTYPE frmhistDTD SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<overlay id="FhcSearchbarOverlayOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcShowDialog.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/overlay/FhcSearchbarOverlay.js" />
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="formhistory.stringbundle"
+                  src="chrome://formhistory/locale/formhistory.properties"/>
+  </stringbundleset>
+  
+  <!-- For now: the searchbarmenu is extended dynamically using javascript (should use XBL in the future) -->
+</overlay>

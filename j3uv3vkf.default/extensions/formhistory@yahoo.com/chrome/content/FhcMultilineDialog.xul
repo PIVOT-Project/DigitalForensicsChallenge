@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://formhistory/locale/formhistory.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/menu.css" type="text/css"?>
+<?xml-stylesheet href="chrome://formhistory/skin/editDialog.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="multilineDialog"
+        title="&fhcmultilinedlg.windowtitle;"
+        style="width:48em; height:40em"
+        buttons="extra1,cancel"
+        buttonlabelextra1="&fhcmultilinedlg.button.copytoclipboard;"
+        ondialogextra1="return FhcMultilineDialog.onCopyToClipboard()"
+        onload="FhcMultilineDialog.init()"
+        persist="width height screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://formhistory/content/FhcMultilineDialog.js"/>
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcUtil.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcBundle.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcDateHandler.js" />
+  <script type="application/x-javascript" src="chrome://formhistory/content/utils/FhcPreferenceHandler.js" />
+  
+  <menupopup id="open-url-menu">
+    <!-- Re-use labels also used in HistoryWindowControl -->
+    <menuitem id="open-url" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurl;"
+              oncommand="FhcMultilineDialog.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-noparam" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlnoparam;"
+              oncommand="FhcMultilineDialog.openURLMenu(this, 'url')"/>
+    <menuitem id="open-url-host" class="menuitem-iconic fh_menuitem_link"
+              label="&fhwin.menuitem.urlmenu.openurlhost;"
+              oncommand="FhcMultilineDialog.openURLMenu(this, 'url')"/>
+    <menuseparator/>
+    <menuitem id="copy-url" class="menuitem-iconic fh_menuitem_copy"
+              label="&fhwin.menuitem.urlmenu.openurlcopy;"
+              oncommand="FhcMultilineDialog.openURLMenu(this, 'copy')"/>
+  </menupopup>
+  
+  <!-- Details hidden -->
+  <hbox id="details-hidden" persist="hidden">
+    <spacer flex="1"/>
+    <hbox align="center">
+      <label control="showdetails"
+             value="&fhcmultilinedlg.button.showdetails;"/>
+      <vbox>
+        <spacer/>
+        <button id="showdetails" class="expander-down showhide-button"
+                oncommand="FhcMultilineDialog.toggleDetails()"
+                tooltiptext="&fhcmultilinedlg.button.showdetails;"/>
+        <spacer/>
+      </vbox>
+    </hbox>
+  </hbox>
+
+  <!-- details shown -->
+  <vbox id="details-shown" hidden="true" persist="hidden">
+    <hbox>
+      <vbox flex="1">
+        <grid flex="1">
+          <columns>
+            <column/>
+            <column flex="1"/>
+            <column/>
+            <column flex="1"/>
+          </columns>
+          <rows flex="1">
+            <row align="baseline">
+              <label value="&fhwin.multiline.treeview.column.firstsaved.label;"/>
+              <textbox id="firstsaved" disabled="true"/>
+              <label value="&fhwin.multiline.treeview.column.lastsaved.label;"/>
+              <textbox id="lastsaved" disabled="true"/>
+            </row>
+            <row align="baseline">
+              <label value="&fhwin.multiline.treeview.column.fieldid.label;"/>
+              <textbox id="fieldid" disabled="true"/>
+              <label value="&fhwin.multiline.treeview.column.fieldformid.label;"/>
+              <textbox id="formid" disabled="true"/>
+            </row>
+            <row align="baseline">
+              <label value="&fhwin.multiline.treeview.column.fieldname.label;"/>
+              <textbox id="fieldname" disabled="true"/>
+              <label value="&fhwin.multiline.treeview.column.type.label;"/>
+              <textbox id="type" disabled="true"/>
+            </row>
+            <!-- row align="baseline">
+              <label value="&fhwin.multiline.treeview.column.host.label;"/>
+              <textbox id="host" disabled="true"/>
+            </row -->
+            <!-- row align="baseline" -->
+            <!-- /row -->
+          </rows>
+        </grid>
+      </vbox>
+      <vbox align="right">
+        <hbox align="center">
+          <label control="hidedetails"
+                 value="&fhcmultilinedlg.button.hidedetails;"/>
+          <vbox>
+            <spacer/>
+            <button id="hidedetails" class="expander-up showhide-button"
+                    oncommand="FhcMultilineDialog.toggleDetails()"
+                    tooltiptext="&fhcmultilinedlg.button.hidedetails;"/>
+            <spacer/>
+          </vbox>
+        </hbox>
+      </vbox>
+    </hbox>
+    <hbox align="center" flex="1">
+      <label value="&fhwin.multiline.treeview.column.url.label;"/>
+      <textbox id="url" disabled="true" flex="1"/>
+      <vbox id="link_button">
+        <spacer flex="1"/>
+        <image id="link_icon" class="image_icon"
+               tooltiptext="&fhwin.menuitem.urlmenu.tooltip;"
+               src="chrome://formhistory/skin/link.png"
+               onclick="FhcMultilineDialog.showURLmenu()"/>
+        <spacer flex="1"/>
+      </vbox>
+    </hbox>
+  </vbox>
+  
+  <spacer height="5"/>
+
+  <tabbox id="tabbox" flex="1">
+    <tabs id="tabs">
+      <tab id="tab-html" label="&fhcmultilinedlg.viewtab.htmlview;" />
+      <tab id="tab-text" label="&fhcmultilinedlg.viewtab.textview;" />
+    </tabs>
+    <tabpanels flex="1">
+      <tabpanel flex="1">
+        <vbox flex="1">
+          <iframe id="iframeContent" flex="1"
+                  type="content"
+                  src="about:blank"/>
+          <hbox>
+            <checkbox id ="hideimages"
+                      hidden="true" style="margin-bottom: 0; padding-bottom: 0"
+                      label="&fhcmultilinedlg.checkbox.hideimages;"
+                      oncommand="FhcMultilineDialog.showPreviewImages()"/>
+            <spacer flex="1"/>
+          </hbox>
+        </vbox>
+      </tabpanel>
+      <tabpanel>
+        <textbox id="textContent" flex="1"
+                 readonly="true"
+                 multiline="true"/>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+</dialog>
